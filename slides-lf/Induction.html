@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="common/css/sf.css" rel="stylesheet" type="text/css" />
+<title>Induction: Proof by Induction</title>
+<link href="common/jquery-ui/jquery-ui.css" rel="stylesheet">
+<script src="common/jquery-ui/external/jquery/jquery.js"></script>
+<script src="common/jquery-ui/jquery-ui.js"></script>
+<script src="common/toggleproofs.js"></script>
+<link href="common/css/lf.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="common/slides.js"></script>
+<link href="common/css/slides.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+<div id='logoinheader'><a href='https://softwarefoundations.cis.upenn.edu'>
+<img src='common/media/image/sf_logo_sm.png' alt='Software Foundations Logo'></a></div>
+<div class='booktitleinheader'><a href='index.html'>Volume 1: Logical Foundations</a></div>
+<ul id='menu'>
+   <li class='section_name'><a href='toc.html'>Table of Contents</a></li>
+   <li class='section_name'><a href='coqindex.html'>Index</a></li>
+   <li class='section_name'><a href='deps.html'>Roadmap</a></li>
+</ul>
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Induction<span class="subtitle">Proof by Induction</span></h1>
+
+
+
+<div class="doc">
+<a id="lab62"></a><h1 class="section">Review</h1>
+
+</div>
+<div class="quiz">
+
+
+<div class="doc">
+To prove the following theorem, which tactics will we need besides
+    <span class="inlinecode"><span class="id" title="tactic">intros</span></span> and <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span>?  (1) none, (2) <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span>, (3)
+    <span class="inlinecode"><span class="id" title="tactic">destruct</span></span>, (4) both <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> and <span class="inlinecode"><span class="id" title="tactic">destruct</span></span>, or (5) can't be
+    done with the tactics we've seen.
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Theorem</span> <span class="id" title="var">review1</span>: (<span class="id" title="var">orb</span> <span class="id" title="var">true</span> <span class="id" title="var">false</span>) = <span class="id" title="var">true</span>.
+</span>
+</div>
+</div> <!-- /quiz -->
+<div class="quiz">
+
+
+<div class="doc">
+What about the next one?
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Theorem</span> <span class="id" title="var">review2</span>: <span class="id" title="keyword">∀</span> <span class="id" title="var">b</span>, (<span class="id" title="var">orb</span> <span class="id" title="var">true</span> <span class="id" title="var">b</span>) = <span class="id" title="var">true</span>.
+</span>    Which tactics do we need besides <span class="inlinecode"><span class="id" title="tactic">intros</span></span> and <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span>?  (1)
+    none (2) <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span>, (3) <span class="inlinecode"><span class="id" title="tactic">destruct</span></span>, (4) both <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> and
+    <span class="inlinecode"><span class="id" title="tactic">destruct</span></span>, or (5) can't be done with the tactics we've seen.
+
+</div>
+</div> <!-- /quiz -->
+<div class="quiz">
+
+
+<div class="doc">
+What if we change the order of the arguments of <span class="inlinecode"><span class="id" title="var">orb</span></span>?
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Theorem</span> <span class="id" title="var">review3</span>: <span class="id" title="keyword">∀</span> <span class="id" title="var">b</span>, (<span class="id" title="var">orb</span> <span class="id" title="var">b</span> <span class="id" title="var">true</span>) = <span class="id" title="var">true</span>.
+</span>    Which tactics do we need besides <span class="inlinecode"><span class="id" title="tactic">intros</span></span> and <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span>?  (1)
+    none (2) <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span>, (3) <span class="inlinecode"><span class="id" title="tactic">destruct</span></span>, (4) both <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> and
+    <span class="inlinecode"><span class="id" title="tactic">destruct</span></span>, or (5) can't be done with the tactics we've seen.
+
+</div>
+</div> <!-- /quiz -->
+<div class="quiz">
+
+
+<div class="doc">
+What about this one?
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Theorem</span> <span class="id" title="var">review4</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">n</span> = 0 + <span class="id" title="var">n</span>.
+</span>    (1) none, (2) <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span>, (3) <span class="inlinecode"><span class="id" title="tactic">destruct</span></span>, (4) both <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> and
+    <span class="inlinecode"><span class="id" title="tactic">destruct</span></span>, or (5) can't be done with the tactics we've seen.
+
+</div>
+</div> <!-- /quiz -->
+<div class="quiz">
+
+
+<div class="doc">
+What about this?
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Theorem</span> <span class="id" title="var">review5</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">n</span> = <span class="id" title="var">n</span> + 0.
+</span>    (1) none, (2) <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span>, (3) <span class="inlinecode"><span class="id" title="tactic">destruct</span></span>, (4) both <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> and
+    <span class="inlinecode"><span class="id" title="tactic">destruct</span></span>, or (5) can't be done with the tactics we've seen.
+
+</div>
+</div> <!-- /quiz -->
+
+<div class="doc">
+<a id="lab63"></a><h1 class="section">Separate Compilation</h1>
+
+<div class="paragraph"> </div>
+
+ Coq will first need to compile <span class="inlinecode"><span class="id" title="var">Basics.v</span></span> into <span class="inlinecode"><span class="id" title="var">Basics.vo</span></span>
+    so it can be imported here -- detailed instructions are in the
+    full version of this chapter... 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">From</span> <span class="id" title="var">LF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <span class="id" title="var">Basics</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab64"></a><h1 class="section">Proof by Induction</h1>
+
+<div class="paragraph"> </div>
+
+ We can prove that <span class="inlinecode">0</span> is a neutral element for <span class="inlinecode">+</span> on the <i>left</i>
+    using just <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span>.  But the proof that it is also a neutral
+    element on the <i>right</i> ... 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">add_0_r_firsttry</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span>:<span class="id" title="var">nat</span>,<br/>
+&nbsp;&nbsp;<span class="id" title="var">n</span> + 0 = <span class="id" title="var">n</span>.<br/>
+</div>
+
+<div class="doc">
+... gets stuck. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>. <span class="comment">(*&nbsp;Does&nbsp;nothing!&nbsp;*)</span><br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab65"></a><h3 class="section"> </h3>
+
+<div class="paragraph"> </div>
+
+ And reasoning by cases using <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> doesn't get us much
+    further: the branch of the case analysis where we assume <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode">0</span>
+    goes through fine, but in the branch where <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n'</span></span> for some <span class="inlinecode"><span class="id" title="var">n'</span></span> we
+    get stuck in exactly the same way. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">add_0_r_secondtry</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span>:<span class="id" title="var">nat</span>,<br/>
+&nbsp;&nbsp;<span class="id" title="var">n</span> + 0 = <span class="id" title="var">n</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">n</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">n'</span>] <span class="id" title="var">eqn</span>:<span class="id" title="var">E</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;n&nbsp;=&nbsp;0&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>. <span class="comment">(*&nbsp;so&nbsp;far&nbsp;so&nbsp;good...&nbsp;*)</span><br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;n&nbsp;=&nbsp;S&nbsp;n'&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>. <span class="comment">(*&nbsp;...but&nbsp;here&nbsp;we&nbsp;are&nbsp;stuck&nbsp;again&nbsp;*)</span><br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab66"></a><h3 class="section"> </h3>
+
+<div class="paragraph"> </div>
+
+ We need a bigger hammer: the <i>principle of induction</i> over
+    natural numbers...
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> If <span class="inlinecode"><span class="id" title="var">P</span>(<span class="id" title="var">n</span>)</span> is some proposition involving a natural number <span class="inlinecode"><span class="id" title="var">n</span></span>,
+        and we want to show that <span class="inlinecode"><span class="id" title="var">P</span></span> holds for <i>all</i> numbers, we can
+        reason like this:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> show that <span class="inlinecode"><span class="id" title="var">P</span>(<span class="id" title="var">O</span>)</span> holds
+
+</li>
+<li> show that, if <span class="inlinecode"><span class="id" title="var">P</span>(<span class="id" title="var">n'</span>)</span> holds, then so does <span class="inlinecode"><span class="id" title="var">P</span>(<span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n'</span>)</span>
+
+</li>
+<li> conclude that <span class="inlinecode"><span class="id" title="var">P</span>(<span class="id" title="var">n</span>)</span> holds for all <span class="inlinecode"><span class="id" title="var">n</span></span>.
+
+</li>
+</ul>
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+    For example... 
+<div class="paragraph"> </div>
+
+<a id="lab67"></a><h3 class="section"> </h3>
+
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">add_0_r</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span>:<span class="id" title="var">nat</span>, <span class="id" title="var">n</span> + 0 = <span class="id" title="var">n</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">n</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">n'</span> <span class="id" title="var">IHn'</span>].<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;n&nbsp;=&nbsp;0&nbsp;*)</span>    <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;n&nbsp;=&nbsp;S&nbsp;n'&nbsp;*)</span> <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">rewrite</span> → <span class="id" title="var">IHn'</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab68"></a><h3 class="section"> </h3>
+ Let's try this one together: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">minus_n_n</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span>,<br/>
+&nbsp;&nbsp;<span class="id" title="var">minus</span> <span class="id" title="var">n</span> <span class="id" title="var">n</span> = 0.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;WORK&nbsp;IN&nbsp;CLASS&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab69"></a><h3 class="section"> </h3>
+ Here's another related fact about addition, which we'll
+    need later.  (The proof is left as an exercise.) 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">add_comm</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>,<br/>
+&nbsp;&nbsp;<span class="id" title="var">n</span> + <span class="id" title="var">m</span> = <span class="id" title="var">m</span> + <span class="id" title="var">n</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab70"></a><h3 class="section"> </h3>
+<a id="lab71"></a><h4 class="section">Exercise: 2 stars, standard (eqb_refl)</h4>
+ The following theorem relates the computational equality <span class="inlinecode">=?</span> on
+    <span class="inlinecode"><span class="id" title="var">nat</span></span> with the definitional equality <span class="inlinecode">=</span> on <span class="inlinecode"><span class="id" title="var">bool</span></span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">eqb_refl</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span> : <span class="id" title="var">nat</span>,<br/>
+&nbsp;&nbsp;(<span class="id" title="var">n</span> =? <span class="id" title="var">n</span>) = <span class="id" title="var">true</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+
+<div class="doc">
+<a id="lab72"></a><h1 class="section">Proofs Within Proofs</h1>
+
+<div class="paragraph"> </div>
+
+ Here's a way to use an in-line assertion instead of a separate
+    lemma.
+
+<div class="paragraph"> </div>
+
+    New tactic: <span class="inlinecode"><span class="id" title="tactic">assert</span></span>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">mult_0_plus'</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>,<br/>
+&nbsp;&nbsp;(<span class="id" title="var">n</span> + 0 + 0) × <span class="id" title="var">m</span> = <span class="id" title="var">n</span> × <span class="id" title="var">m</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">H</span>: <span class="id" title="var">n</span> + 0 + 0 = <span class="id" title="var">n</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="tactic">rewrite</span> <span class="id" title="var">add_comm</span>. <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">add_comm</span>. <span class="id" title="tactic">reflexivity</span>. }<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> → <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab73"></a><h3 class="section"> </h3>
+
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">plus_rearrange_firsttry</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> <span class="id" title="var">p</span> <span class="id" title="var">q</span> : <span class="id" title="var">nat</span>,<br/>
+&nbsp;&nbsp;(<span class="id" title="var">n</span> + <span class="id" title="var">m</span>) + (<span class="id" title="var">p</span> + <span class="id" title="var">q</span>) = (<span class="id" title="var">m</span> + <span class="id" title="var">n</span>) + (<span class="id" title="var">p</span> + <span class="id" title="var">q</span>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> <span class="id" title="var">p</span> <span class="id" title="var">q</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;We&nbsp;just&nbsp;need&nbsp;to&nbsp;swap&nbsp;(n&nbsp;+&nbsp;m)&nbsp;for&nbsp;(m&nbsp;+&nbsp;n)...&nbsp;seems<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;like&nbsp;add_comm&nbsp;should&nbsp;do&nbsp;the&nbsp;trick!&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">add_comm</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Doesn't&nbsp;work...&nbsp;Coq&nbsp;rewrites&nbsp;the&nbsp;wrong&nbsp;plus!&nbsp;:-(&nbsp;*)</span><br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab74"></a><h3 class="section"> </h3>
+ To use <span class="inlinecode"><span class="id" title="var">add_comm</span></span> at the point where we need it, we can introduce
+    a local lemma stating that <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">m</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">m</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">n</span></span> (for the <i>particular</i> <span class="inlinecode"><span class="id" title="var">m</span></span>
+    and <span class="inlinecode"><span class="id" title="var">n</span></span> that we are talking about here), prove this lemma using
+    <span class="inlinecode"><span class="id" title="var">add_comm</span></span>, and then use it to do the desired rewrite. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">plus_rearrange</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> <span class="id" title="var">p</span> <span class="id" title="var">q</span> : <span class="id" title="var">nat</span>,<br/>
+&nbsp;&nbsp;(<span class="id" title="var">n</span> + <span class="id" title="var">m</span>) + (<span class="id" title="var">p</span> + <span class="id" title="var">q</span>) = (<span class="id" title="var">m</span> + <span class="id" title="var">n</span>) + (<span class="id" title="var">p</span> + <span class="id" title="var">q</span>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> <span class="id" title="var">p</span> <span class="id" title="var">q</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">H</span>: <span class="id" title="var">n</span> + <span class="id" title="var">m</span> = <span class="id" title="var">m</span> + <span class="id" title="var">n</span>).<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">rewrite</span> <span class="id" title="var">add_comm</span>. <span class="id" title="tactic">reflexivity</span>. }<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

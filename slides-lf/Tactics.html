@@ -1,0 +1,1035 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="common/css/sf.css" rel="stylesheet" type="text/css" />
+<title>Tactics: More Basic Tactics</title>
+<link href="common/jquery-ui/jquery-ui.css" rel="stylesheet">
+<script src="common/jquery-ui/external/jquery/jquery.js"></script>
+<script src="common/jquery-ui/jquery-ui.js"></script>
+<script src="common/toggleproofs.js"></script>
+<link href="common/css/lf.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="common/slides.js"></script>
+<link href="common/css/slides.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+<div id='logoinheader'><a href='https://softwarefoundations.cis.upenn.edu'>
+<img src='common/media/image/sf_logo_sm.png' alt='Software Foundations Logo'></a></div>
+<div class='booktitleinheader'><a href='index.html'>Volume 1: Logical Foundations</a></div>
+<ul id='menu'>
+   <li class='section_name'><a href='toc.html'>Table of Contents</a></li>
+   <li class='section_name'><a href='coqindex.html'>Index</a></li>
+   <li class='section_name'><a href='deps.html'>Roadmap</a></li>
+</ul>
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Tactics<span class="subtitle">More Basic Tactics</span></h1>
+
+
+
+<div class="doc">
+<a id="lab141"></a><h1 class="section">The <span class="inlinecode"><span class="id" title="tactic">apply</span></span> Tactic</h1>
+
+<div class="paragraph"> </div>
+
+ The <span class="inlinecode"><span class="id" title="tactic">apply</span></span> tactic is useful when some hypothesis or an
+    earlier lemma exactly matches the goal: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">silly1</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>),<br/>
+&nbsp;&nbsp;<span class="id" title="var">n</span> = <span class="id" title="var">m</span> →<br/>
+&nbsp;&nbsp;<span class="id" title="var">n</span> = <span class="id" title="var">m</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> <span class="id" title="var">eq</span>.<br/>
+</div>
+
+<div class="doc">
+Here, we could finish with "<span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">eq</span>.</span>  <span class="inlinecode"><span class="id" title="tactic">reflexivity</span>.</span>" as we
+    have done several times before.  Or we can finish in a single step
+    by using <span class="inlinecode"><span class="id" title="tactic">apply</span></span>: 
+</div>
+<div class="code">
+
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">eq</span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab142"></a><h3 class="section"> </h3>
+ <span class="inlinecode"><span class="id" title="tactic">apply</span></span> also works with <i>conditional</i> hypotheses: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">silly2</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span> <span class="id" title="var">o</span> <span class="id" title="var">p</span> : <span class="id" title="var">nat</span>),<br/>
+&nbsp;&nbsp;<span class="id" title="var">n</span> = <span class="id" title="var">m</span> →<br/>
+&nbsp;&nbsp;(<span class="id" title="var">n</span> = <span class="id" title="var">m</span> → [<span class="id" title="var">n</span>;<span class="id" title="var">o</span>] = [<span class="id" title="var">m</span>;<span class="id" title="var">p</span>]) →<br/>
+&nbsp;&nbsp;[<span class="id" title="var">n</span>;<span class="id" title="var">o</span>] = [<span class="id" title="var">m</span>;<span class="id" title="var">p</span>].<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> <span class="id" title="var">o</span> <span class="id" title="var">p</span> <span class="id" title="var">eq<sub>1</sub></span> <span class="id" title="var">eq<sub>2</sub></span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">eq<sub>2</sub></span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">eq<sub>1</sub></span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab143"></a><h3 class="section"> </h3>
+ Observe how Coq picks appropriate values for the
+    <span class="inlinecode"><span class="id" title="keyword">∀</span></span>-quantified variables of the hypothesis: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">silly2a</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>),<br/>
+&nbsp;&nbsp;(<span class="id" title="var">n</span>,<span class="id" title="var">n</span>) = (<span class="id" title="var">m</span>,<span class="id" title="var">m</span>)  →<br/>
+&nbsp;&nbsp;(<span class="id" title="keyword">∀</span> (<span class="id" title="var">q</span> <span class="id" title="var">r</span> : <span class="id" title="var">nat</span>), (<span class="id" title="var">q</span>,<span class="id" title="var">q</span>) = (<span class="id" title="var">r</span>,<span class="id" title="var">r</span>) → [<span class="id" title="var">q</span>] = [<span class="id" title="var">r</span>]) →<br/>
+&nbsp;&nbsp;[<span class="id" title="var">n</span>] = [<span class="id" title="var">m</span>].<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> <span class="id" title="var">eq<sub>1</sub></span> <span class="id" title="var">eq<sub>2</sub></span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">eq<sub>2</sub></span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">eq<sub>1</sub></span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab144"></a><h3 class="section"> </h3>
+ The goal must match the hypothesis <i>exactly</i> for <span class="inlinecode"><span class="id" title="tactic">apply</span></span> to
+    work: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">silly3</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>),<br/>
+&nbsp;&nbsp;<span class="id" title="var">n</span> = <span class="id" title="var">m</span> →<br/>
+&nbsp;&nbsp;<span class="id" title="var">m</span> = <span class="id" title="var">n</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> <span class="id" title="var">H</span>.<br/>
+</div>
+
+<div class="doc">
+Here we cannot use <span class="inlinecode"><span class="id" title="tactic">apply</span></span> directly... 
+</div>
+<div class="code">
+
+&nbsp;&nbsp;<span class="id" title="var">Fail</span> <span class="id" title="tactic">apply</span> <span class="id" title="var">H</span>.<br/>
+</div>
+
+<div class="doc">
+but we can use the <span class="inlinecode"><span class="id" title="tactic">symmetry</span></span> tactic, which switches the left
+      and right sides of an equality in the goal. 
+</div>
+<div class="code">
+
+&nbsp;&nbsp;<span class="id" title="tactic">symmetry</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">H</span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab145"></a><h1 class="section">The <span class="inlinecode"><span class="id" title="tactic">apply</span></span> <span class="inlinecode"><span class="id" title="keyword">with</span></span> Tactic</h1>
+
+<div class="paragraph"> </div>
+
+ The following silly example uses two rewrites in a row to
+    get from <span class="inlinecode">[<span class="id" title="var">a</span>;<span class="id" title="var">b</span>]</span> to <span class="inlinecode">[<span class="id" title="var">e</span>;<span class="id" title="var">f</span>]</span>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Example</span> <span class="id" title="var">trans_eq_example</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> <span class="id" title="var">d</span> <span class="id" title="var">e</span> <span class="id" title="var">f</span> : <span class="id" title="var">nat</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span class="id" title="var">a</span>;<span class="id" title="var">b</span>] = [<span class="id" title="var">c</span>;<span class="id" title="var">d</span>] →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span class="id" title="var">c</span>;<span class="id" title="var">d</span>] = [<span class="id" title="var">e</span>;<span class="id" title="var">f</span>] →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span class="id" title="var">a</span>;<span class="id" title="var">b</span>] = [<span class="id" title="var">e</span>;<span class="id" title="var">f</span>].<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> <span class="id" title="var">d</span> <span class="id" title="var">e</span> <span class="id" title="var">f</span> <span class="id" title="var">eq<sub>1</sub></span> <span class="id" title="var">eq<sub>2</sub></span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> → <span class="id" title="var">eq<sub>1</sub></span>. <span class="id" title="tactic">rewrite</span> → <span class="id" title="var">eq<sub>2</sub></span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab146"></a><h3 class="section"> </h3>
+ Since this is a common pattern, we might like to pull it out as a
+    lemma that records, once and for all, the fact that equality is
+    transitive. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">trans_eq</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">X</span>:<span class="id" title="keyword">Type</span>) (<span class="id" title="var">n</span> <span class="id" title="var">m</span> <span class="id" title="var">o</span> : <span class="id" title="var">X</span>),<br/>
+&nbsp;&nbsp;<span class="id" title="var">n</span> = <span class="id" title="var">m</span> → <span class="id" title="var">m</span> = <span class="id" title="var">o</span> → <span class="id" title="var">n</span> = <span class="id" title="var">o</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">X</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> <span class="id" title="var">o</span> <span class="id" title="var">eq<sub>1</sub></span> <span class="id" title="var">eq<sub>2</sub></span>. <span class="id" title="tactic">rewrite</span> → <span class="id" title="var">eq<sub>1</sub></span>. <span class="id" title="tactic">rewrite</span> → <span class="id" title="var">eq<sub>2</sub></span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab147"></a><h3 class="section"> </h3>
+ Applying this lemma to the example above requires a slight
+    refinement of <span class="inlinecode"><span class="id" title="tactic">apply</span></span>: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Example</span> <span class="id" title="var">trans_eq_example'</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> <span class="id" title="var">d</span> <span class="id" title="var">e</span> <span class="id" title="var">f</span> : <span class="id" title="var">nat</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span class="id" title="var">a</span>;<span class="id" title="var">b</span>] = [<span class="id" title="var">c</span>;<span class="id" title="var">d</span>] →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span class="id" title="var">c</span>;<span class="id" title="var">d</span>] = [<span class="id" title="var">e</span>;<span class="id" title="var">f</span>] →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span class="id" title="var">a</span>;<span class="id" title="var">b</span>] = [<span class="id" title="var">e</span>;<span class="id" title="var">f</span>].<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> <span class="id" title="var">d</span> <span class="id" title="var">e</span> <span class="id" title="var">f</span> <span class="id" title="var">eq<sub>1</sub></span> <span class="id" title="var">eq<sub>2</sub></span>.<br/>
+</div>
+
+<div class="doc">
+Doing <span class="inlinecode"><span class="id" title="tactic">apply</span></span> <span class="inlinecode"><span class="id" title="var">trans_eq</span></span> doesn't work!  But... 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">trans_eq</span> <span class="id" title="keyword">with</span> (<span class="id" title="var">m</span>:=[<span class="id" title="var">c</span>;<span class="id" title="var">d</span>]).<br/>
+</div>
+
+<div class="doc">
+does. 
+</div>
+<div class="code">
+
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">eq<sub>1</sub></span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">eq<sub>2</sub></span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab148"></a><h3 class="section"> </h3>
+
+<div class="paragraph"> </div>
+
+ <span class="inlinecode"><span class="id" title="tactic">transitivity</span></span> is also available as a tactic. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Example</span> <span class="id" title="var">trans_eq_example''</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> <span class="id" title="var">d</span> <span class="id" title="var">e</span> <span class="id" title="var">f</span> : <span class="id" title="var">nat</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span class="id" title="var">a</span>;<span class="id" title="var">b</span>] = [<span class="id" title="var">c</span>;<span class="id" title="var">d</span>] →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span class="id" title="var">c</span>;<span class="id" title="var">d</span>] = [<span class="id" title="var">e</span>;<span class="id" title="var">f</span>] →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span class="id" title="var">a</span>;<span class="id" title="var">b</span>] = [<span class="id" title="var">e</span>;<span class="id" title="var">f</span>].<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> <span class="id" title="var">d</span> <span class="id" title="var">e</span> <span class="id" title="var">f</span> <span class="id" title="var">eq<sub>1</sub></span> <span class="id" title="var">eq<sub>2</sub></span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">transitivity</span> [<span class="id" title="var">c</span>;<span class="id" title="var">d</span>].<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">eq<sub>1</sub></span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">eq<sub>2</sub></span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab149"></a><h1 class="section">The <span class="inlinecode"><span class="id" title="tactic">injection</span></span> and <span class="inlinecode"><span class="id" title="tactic">discriminate</span></span> Tactics</h1>
+
+<div class="paragraph"> </div>
+
+ The constructors of inductive types are <i>injective</i> (or
+    <i>one-to-one</i>) and <i>disjoint</i>.
+
+<div class="paragraph"> </div>
+
+    E.g., for <span class="inlinecode"><span class="id" title="var">nat</span></span>...
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> if <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">m</span></span> then it must be that <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">m</span></span>
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">O</span></span> is not equal to <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> for any <span class="inlinecode"><span class="id" title="var">n</span></span>
+
+</li>
+</ul>
+ 
+<div class="paragraph"> </div>
+
+<a id="lab150"></a><h3 class="section"> </h3>
+ We can <i>prove</i> the injectivity of <span class="inlinecode"><span class="id" title="var">S</span></span> by using the <span class="inlinecode"><span class="id" title="var">pred</span></span> function
+    defined in <span class="inlinecode"><span class="id" title="var">Basics.v</span></span>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">S_injective</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>),<br/>
+&nbsp;&nbsp;<span class="id" title="var">S</span> <span class="id" title="var">n</span> = <span class="id" title="var">S</span> <span class="id" title="var">m</span> →<br/>
+&nbsp;&nbsp;<span class="id" title="var">n</span> = <span class="id" title="var">m</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> <span class="id" title="var">H<sub>1</sub></span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">H<sub>2</sub></span>: <span class="id" title="var">n</span> = <span class="id" title="var">pred</span> (<span class="id" title="var">S</span> <span class="id" title="var">n</span>)). { <span class="id" title="tactic">reflexivity</span>. }<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H<sub>2</sub></span>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">H<sub>1</sub></span>. <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab151"></a><h3 class="section"> </h3>
+
+<div class="paragraph"> </div>
+
+ As a convenience, the <span class="inlinecode"><span class="id" title="tactic">injection</span></span> tactic allows us to
+    exploit injectivity of any constructor (not just <span class="inlinecode"><span class="id" title="var">S</span></span>). 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">S_injective'</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>),<br/>
+&nbsp;&nbsp;<span class="id" title="var">S</span> <span class="id" title="var">n</span> = <span class="id" title="var">S</span> <span class="id" title="var">m</span> →<br/>
+&nbsp;&nbsp;<span class="id" title="var">n</span> = <span class="id" title="var">m</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">injection</span> <span class="id" title="var">H</span> <span class="id" title="keyword">as</span> <span class="id" title="var">Hnm</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">Hnm</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab152"></a><h3 class="section"> </h3>
+ Here's a more interesting example that shows how <span class="inlinecode"><span class="id" title="tactic">injection</span></span> can
+    derive multiple equations at once. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">injection_ex<sub>1</sub></span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span> <span class="id" title="var">o</span> : <span class="id" title="var">nat</span>),<br/>
+&nbsp;&nbsp;[<span class="id" title="var">n</span>;<span class="id" title="var">m</span>] = [<span class="id" title="var">o</span>;<span class="id" title="var">o</span>] →<br/>
+&nbsp;&nbsp;<span class="id" title="var">n</span> = <span class="id" title="var">m</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> <span class="id" title="var">o</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;WORK&nbsp;IN&nbsp;CLASS&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab153"></a><h3 class="section"> </h3>
+
+<div class="paragraph"> </div>
+
+ So much for injectivity of constructors.  What about disjointness? 
+<div class="paragraph"> </div>
+
+ Two terms beginning with different constructors (like
+    <span class="inlinecode"><span class="id" title="var">O</span></span> and <span class="inlinecode"><span class="id" title="var">S</span></span>, or <span class="inlinecode"><span class="id" title="var">true</span></span> and <span class="inlinecode"><span class="id" title="var">false</span></span>) can never be equal! 
+<div class="paragraph"> </div>
+
+<a id="lab154"></a><h3 class="section"> </h3>
+
+<div class="paragraph"> </div>
+
+ The <span class="inlinecode"><span class="id" title="tactic">discriminate</span></span> tactic embodies this principle: It is used
+    on a hypothesis involving an equality between different
+    constructors (e.g., <span class="inlinecode"><span class="id" title="var">false</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">true</span></span>), and it solves the current
+    goal immediately.  Some examples: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">discriminate_ex<sub>1</sub></span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>),<br/>
+&nbsp;&nbsp;<span class="id" title="var">false</span> = <span class="id" title="var">true</span> →<br/>
+&nbsp;&nbsp;<span class="id" title="var">n</span> = <span class="id" title="var">m</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> <span class="id" title="var">contra</span>. <span class="id" title="tactic">discriminate</span> <span class="id" title="var">contra</span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">discriminate_ex<sub>2</sub></span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>),<br/>
+&nbsp;&nbsp;<span class="id" title="var">S</span> <span class="id" title="var">n</span> = <span class="id" title="var">O</span> →<br/>
+&nbsp;&nbsp;2 + 2 = 5.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">contra</span>. <span class="id" title="tactic">discriminate</span> <span class="id" title="var">contra</span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+These examples are instances of a logical principle known as the
+    <i>principle of explosion</i>, which asserts that a contradictory
+    hypothesis entails anything (even manifestly false things!). 
+<div class="paragraph"> </div>
+
+<a id="lab155"></a><h3 class="section"> </h3>
+
+<div class="paragraph"> </div>
+
+ For a more useful example, we can use <span class="inlinecode"><span class="id" title="tactic">discriminate</span></span> to make a
+    connection between the two different notions of equality (<span class="inlinecode">=</span> and
+    <span class="inlinecode">=?</span>) that we have seen for natural numbers. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">eqb_0_l</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span>,<br/>
+&nbsp;&nbsp;&nbsp;0 =? <span class="id" title="var">n</span> = <span class="id" title="var">true</span> → <span class="id" title="var">n</span> = 0.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span>.<br/><hr class='doublespaceincode'/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">n</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">n'</span>] <span class="id" title="var">eqn</span>:<span class="id" title="var">E</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;n&nbsp;=&nbsp;0&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">reflexivity</span>.<br/><hr class='doublespaceincode'/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;n&nbsp;=&nbsp;S&nbsp;n'&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>.<br/><hr class='doublespaceincode'/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">discriminate</span> <span class="id" title="var">H</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+ <!-- /quiz -->
+</div><div class="quiz">
+
+
+<div class="doc">
+Suppose Coq's proof state looks like
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">x</span> : <span class="id" title="var">bool</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">y</span> : <span class="id" title="var">bool</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">H</span> : <span class="id" title="var">negb</span> <span class="id" title="var">x</span> = <span class="id" title="var">negb</span> <span class="id" title="var">y</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;============================<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">y</span> = <span class="id" title="var">x</span>
+</span>    and we apply the tactic <span class="inlinecode"><span class="id" title="tactic">injection</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="keyword">as</span></span> <span class="inlinecode"><span class="id" title="var">Hxy</span></span>.  What will happen?
+
+<div class="paragraph"> </div>
+
+    (1) "No more subgoals."
+
+<div class="paragraph"> </div>
+
+    (2) The tactic fails.
+
+<div class="paragraph"> </div>
+
+    (3) Hypothesis <span class="inlinecode"><span class="id" title="var">H</span></span> becomes <span class="inlinecode"><span class="id" title="var">Hxy</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">y</span></span>.
+
+<div class="paragraph"> </div>
+
+    (4) None of the above.
+
+</div>
+</div> <!-- /quiz -->
+<div class="quiz">
+
+
+<div class="doc">
+Now suppose Coq's proof state looks like
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">x</span> : <span class="id" title="var">nat</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">y</span> : <span class="id" title="var">nat</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">H</span> : <span class="id" title="var">x</span> + 1 = <span class="id" title="var">y</span> + 1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;============================<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">y</span> = <span class="id" title="var">x</span>
+</span>    and we apply the tactic <span class="inlinecode"><span class="id" title="tactic">injection</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="keyword">as</span></span> <span class="inlinecode"><span class="id" title="var">Hxy</span></span>.  What will happen?
+
+<div class="paragraph"> </div>
+
+    (1) "No more subgoals."
+
+<div class="paragraph"> </div>
+
+    (2) The tactic fails.
+
+<div class="paragraph"> </div>
+
+    (3) Hypothesis <span class="inlinecode"><span class="id" title="var">H</span></span> becomes <span class="inlinecode"><span class="id" title="var">Hxy</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">y</span></span>.
+
+<div class="paragraph"> </div>
+
+    (4) None of the above.
+
+</div>
+</div> <!-- /quiz -->
+<div class="quiz">
+
+
+<div class="doc">
+Finally, suppose Coq's proof state looks like
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">x</span> : <span class="id" title="var">nat</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">y</span> : <span class="id" title="var">nat</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">H</span> : 1 + <span class="id" title="var">x</span> = 1 + <span class="id" title="var">y</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;============================<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">y</span> = <span class="id" title="var">x</span>
+</span>    and we apply the tactic <span class="inlinecode"><span class="id" title="tactic">injection</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="keyword">as</span></span> <span class="inlinecode"><span class="id" title="var">Hxy</span></span>.  What will happen?
+
+<div class="paragraph"> </div>
+
+    (1) "No more subgoals."
+
+<div class="paragraph"> </div>
+
+    (2) The tactic fails.
+
+<div class="paragraph"> </div>
+
+    (3) Hypothesis <span class="inlinecode"><span class="id" title="var">H</span></span> becomes <span class="inlinecode"><span class="id" title="var">Hxy</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">y</span></span>.
+
+<div class="paragraph"> </div>
+
+    (4) None of the above.
+
+</div>
+</div> <!-- /quiz -->
+
+<div class="doc">
+<a id="lab156"></a><h3 class="section"> </h3>
+ The injectivity of constructors allows us to reason that
+    <span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode">(<span class="id" title="var">n</span></span> <span class="inlinecode"><span class="id" title="var">m</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">nat</span>),</span> <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">m</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">m</span></span>.  The converse of this
+    implication is an instance of a more general fact about both
+    constructors and functions, which we will find convenient
+    below: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="tactic">f_equal</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">f</span>: <span class="id" title="var">A</span> → <span class="id" title="var">B</span>) (<span class="id" title="var">x</span> <span class="id" title="var">y</span>: <span class="id" title="var">A</span>),<br/>
+&nbsp;&nbsp;<span class="id" title="var">x</span> = <span class="id" title="var">y</span> → <span class="id" title="var">f</span> <span class="id" title="var">x</span> = <span class="id" title="var">f</span> <span class="id" title="var">y</span>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">f</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> <span class="id" title="var">eq</span>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">eq</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">eq_implies_succ_equal</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>),<br/>
+&nbsp;&nbsp;<span class="id" title="var">n</span> = <span class="id" title="var">m</span> → <span class="id" title="var">S</span> <span class="id" title="var">n</span> = <span class="id" title="var">S</span> <span class="id" title="var">m</span>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">apply</span> <span class="id" title="tactic">f_equal</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">H</span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+Coq also provides an <span class="inlinecode"><span class="id" title="tactic">f_equal</span></span> tactic. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">eq_implies_succ_equal'</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>),<br/>
+&nbsp;&nbsp;<span class="id" title="var">n</span> = <span class="id" title="var">m</span> → <span class="id" title="var">S</span> <span class="id" title="var">n</span> = <span class="id" title="var">S</span> <span class="id" title="var">m</span>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">f_equal</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">H</span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab157"></a><h1 class="section">Using Tactics on Hypotheses</h1>
+
+<div class="paragraph"> </div>
+
+ Many tactics come with "<span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode">...</span>" variants that work on
+    hypotheses instead of goals. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">S_inj</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">b</span> : <span class="id" title="var">bool</span>),<br/>
+&nbsp;&nbsp;((<span class="id" title="var">S</span> <span class="id" title="var">n</span>) =? (<span class="id" title="var">S</span> <span class="id" title="var">m</span>)) = <span class="id" title="var">b</span>  →<br/>
+&nbsp;&nbsp;(<span class="id" title="var">n</span> =? <span class="id" title="var">m</span>) = <span class="id" title="var">b</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> <span class="id" title="var">b</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">simpl</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">H</span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab158"></a><h3 class="section"> </h3>
+ The ordinary <span class="inlinecode"><span class="id" title="tactic">apply</span></span> tactic is a form of "backward
+    reasoning."  It says "We're trying to prove <span class="inlinecode"><span class="id" title="var">X</span></span> and we know
+    <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">X</span></span>, so if we can prove <span class="inlinecode"><span class="id" title="var">Y</span></span> we'll be done."
+
+<div class="paragraph"> </div>
+
+    By contrast, the variant <span class="inlinecode"><span class="id" title="tactic">apply</span>...</span> <span class="inlinecode"><span class="id" title="keyword">in</span>...</span> is "forward reasoning":
+    it says "We know <span class="inlinecode"><span class="id" title="var">Y</span></span> and we know <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">X</span></span>, so we also know <span class="inlinecode"><span class="id" title="var">X</span></span>." 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">silly4</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span> <span class="id" title="var">p</span> <span class="id" title="var">q</span> : <span class="id" title="var">nat</span>),<br/>
+&nbsp;&nbsp;(<span class="id" title="var">n</span> = <span class="id" title="var">m</span> → <span class="id" title="var">p</span> = <span class="id" title="var">q</span>) →<br/>
+&nbsp;&nbsp;<span class="id" title="var">m</span> = <span class="id" title="var">n</span> →<br/>
+&nbsp;&nbsp;<span class="id" title="var">q</span> = <span class="id" title="var">p</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> <span class="id" title="var">p</span> <span class="id" title="var">q</span> <span class="id" title="var">EQ</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">symmetry</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">EQ</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">symmetry</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">H</span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab159"></a><h1 class="section">Specializing Hypotheses</h1>
+
+<div class="paragraph"> </div>
+
+ Another handy tactic for fiddling with hypotheses is <span class="inlinecode"><span class="id" title="tactic">specialize</span></span>.
+    It is essentially just a combination of <span class="inlinecode"><span class="id" title="tactic">assert</span></span> and <span class="inlinecode"><span class="id" title="tactic">apply</span></span>, but
+    it often provides a pleasingly smooth way to nail down overly
+    general assumptions.  It works like this:
+
+<div class="paragraph"> </div>
+
+    If <span class="inlinecode"><span class="id" title="var">H</span></span> is a quantified hypothesis in the current context -- i.e.,
+    <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode">(<span class="id" title="var">x</span>:<span class="id" title="var">T</span>),</span> <span class="inlinecode"><span class="id" title="var">P</span></span> -- then <span class="inlinecode"><span class="id" title="tactic">specialize</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="keyword">with</span></span> <span class="inlinecode">(<span class="id" title="var">x</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="var">e</span>)</span> will
+    change <span class="inlinecode"><span class="id" title="var">H</span></span> so that it looks like <span class="inlinecode">[<span class="id" title="var">x</span>:=<span class="id" title="var">e</span>]<span class="id" title="var">P</span></span>, that is, <span class="inlinecode"><span class="id" title="var">P</span></span> with <span class="inlinecode"><span class="id" title="var">x</span></span>
+    replaced by <span class="inlinecode"><span class="id" title="var">e</span></span>.
+
+<div class="paragraph"> </div>
+
+    For example: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">specialize_example</span>: <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">∀</span> <span class="id" title="var">m</span>, <span class="id" title="var">m</span>×<span class="id" title="var">n</span> = 0)<br/>
+&nbsp;&nbsp;→ <span class="id" title="var">n</span> = 0.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">specialize</span> <span class="id" title="var">H</span> <span class="id" title="keyword">with</span> (<span class="id" title="var">m</span> := 1).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">simpl</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">add_comm</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">simpl</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">H</span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+Using <span class="inlinecode"><span class="id" title="tactic">specialize</span></span> before <span class="inlinecode"><span class="id" title="tactic">apply</span></span> gives us yet another way to
+    control where <span class="inlinecode"><span class="id" title="tactic">apply</span></span> does its work. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Example</span> <span class="id" title="var">trans_eq_example'''</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> <span class="id" title="var">d</span> <span class="id" title="var">e</span> <span class="id" title="var">f</span> : <span class="id" title="var">nat</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span class="id" title="var">a</span>;<span class="id" title="var">b</span>] = [<span class="id" title="var">c</span>;<span class="id" title="var">d</span>] →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span class="id" title="var">c</span>;<span class="id" title="var">d</span>] = [<span class="id" title="var">e</span>;<span class="id" title="var">f</span>] →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span class="id" title="var">a</span>;<span class="id" title="var">b</span>] = [<span class="id" title="var">e</span>;<span class="id" title="var">f</span>].<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> <span class="id" title="var">d</span> <span class="id" title="var">e</span> <span class="id" title="var">f</span> <span class="id" title="var">eq<sub>1</sub></span> <span class="id" title="var">eq<sub>2</sub></span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">specialize</span> <span class="id" title="var">trans_eq</span> <span class="id" title="keyword">with</span> (<span class="id" title="var">m</span>:=[<span class="id" title="var">c</span>;<span class="id" title="var">d</span>]) <span class="id" title="keyword">as</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">eq<sub>1</sub></span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">eq<sub>2</sub></span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+Note:
+<ul class="doclist">
+<li> We can <span class="inlinecode"><span class="id" title="tactic">specialize</span></span> facts in the global context, not just
+      local hypotheses.
+
+</li>
+<li> The <span class="inlinecode"><span class="id" title="keyword">as</span>...</span> clause at the end tells <span class="inlinecode"><span class="id" title="tactic">specialize</span></span> how to name
+      the new hypothesis in this case. 
+
+</li>
+</ul>
+</div>
+
+<div class="doc">
+<a id="lab160"></a><h1 class="section">Varying the Induction Hypothesis</h1>
+
+<div class="paragraph"> </div>
+
+ Recall this function for doubling a natural number from the
+    <a href="Induction.html"><span class="inlineref">Induction</span></a> chapter: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">double</span> (<span class="id" title="var">n</span>:<span class="id" title="var">nat</span>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">n</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">O</span> ⇒ <span class="id" title="var">O</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">S</span> <span class="id" title="var">n'</span> ⇒ <span class="id" title="var">S</span> (<span class="id" title="var">S</span> (<span class="id" title="var">double</span> <span class="id" title="var">n'</span>))<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab161"></a><h3 class="section"> </h3>
+ Suppose we want to show that <span class="inlinecode"><span class="id" title="var">double</span></span> is injective (i.e.,
+    it maps different arguments to different results).  The way we
+    <i>start</i> this proof is a little bit delicate: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">double_injective_FAILED</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>,<br/>
+&nbsp;&nbsp;<span class="id" title="var">double</span> <span class="id" title="var">n</span> = <span class="id" title="var">double</span> <span class="id" title="var">m</span> →<br/>
+&nbsp;&nbsp;<span class="id" title="var">n</span> = <span class="id" title="var">m</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">n</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">n'</span> <span class="id" title="var">IHn'</span>].<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;n&nbsp;=&nbsp;O&nbsp;*)</span> <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">intros</span> <span class="id" title="var">eq</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">m</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">m'</span>] <span class="id" title="var">eqn</span>:<span class="id" title="var">E</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;m&nbsp;=&nbsp;O&nbsp;*)</span> <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;m&nbsp;=&nbsp;S&nbsp;m'&nbsp;*)</span> <span class="id" title="tactic">discriminate</span> <span class="id" title="var">eq</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;n&nbsp;=&nbsp;S&nbsp;n'&nbsp;*)</span> <span class="id" title="tactic">intros</span> <span class="id" title="var">eq</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">m</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">m'</span>] <span class="id" title="var">eqn</span>:<span class="id" title="var">E</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;m&nbsp;=&nbsp;O&nbsp;*)</span> <span class="id" title="tactic">discriminate</span> <span class="id" title="var">eq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;m&nbsp;=&nbsp;S&nbsp;m'&nbsp;*)</span> <span class="id" title="tactic">f_equal</span>.<br/>
+</div>
+
+<div class="doc">
+At this point, the induction hypothesis (<span class="inlinecode"><span class="id" title="var">IHn'</span></span>) does <i>not</i> give us
+    <span class="inlinecode"><span class="id" title="var">n'</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">m'</span></span> -- there is an extra <span class="inlinecode"><span class="id" title="var">S</span></span> in the way -- so the goal is
+    not provable. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Abort</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab162"></a><h3 class="section"> </h3>
+
+<div class="paragraph"> </div>
+
+ What went wrong? 
+<div class="paragraph"> </div>
+
+ Trying to carry out this proof by induction on <span class="inlinecode"><span class="id" title="var">n</span></span> when <span class="inlinecode"><span class="id" title="var">m</span></span> is
+    already in the context doesn't work because we are then trying to
+    prove a statement involving <i>every</i> <span class="inlinecode"><span class="id" title="var">n</span></span> but just a <i>particular</i>
+    <span class="inlinecode"><span class="id" title="var">m</span></span>. 
+<div class="paragraph"> </div>
+
+<a id="lab163"></a><h3 class="section"> </h3>
+ A successful proof of <span class="inlinecode"><span class="id" title="var">double_injective</span></span> leaves <span class="inlinecode"><span class="id" title="var">m</span></span> universally
+    quantified in the goal statement at the point where the
+    <span class="inlinecode"><span class="id" title="tactic">induction</span></span> tactic is invoked on <span class="inlinecode"><span class="id" title="var">n</span></span>: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">double_injective</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>,<br/>
+&nbsp;&nbsp;<span class="id" title="var">double</span> <span class="id" title="var">n</span> = <span class="id" title="var">double</span> <span class="id" title="var">m</span> →<br/>
+&nbsp;&nbsp;<span class="id" title="var">n</span> = <span class="id" title="var">m</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">n</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">n'</span> <span class="id" title="var">IHn'</span>].<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;n&nbsp;=&nbsp;O&nbsp;*)</span> <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">intros</span> <span class="id" title="var">m</span> <span class="id" title="var">eq</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">m</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">m'</span>] <span class="id" title="var">eqn</span>:<span class="id" title="var">E</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;m&nbsp;=&nbsp;O&nbsp;*)</span> <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;m&nbsp;=&nbsp;S&nbsp;m'&nbsp;*)</span> <span class="id" title="tactic">discriminate</span> <span class="id" title="var">eq</span>.<br/><hr class='doublespaceincode'/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;n&nbsp;=&nbsp;S&nbsp;n'&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">m</span> <span class="id" title="var">eq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">m</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">m'</span>] <span class="id" title="var">eqn</span>:<span class="id" title="var">E</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;m&nbsp;=&nbsp;O&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">discriminate</span> <span class="id" title="var">eq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;m&nbsp;=&nbsp;S&nbsp;m'&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">f_equal</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHn'</span>. <span class="id" title="tactic">simpl</span> <span class="id" title="keyword">in</span> <span class="id" title="var">eq</span>. <span class="id" title="tactic">injection</span> <span class="id" title="var">eq</span> <span class="id" title="keyword">as</span> <span class="id" title="keyword">goal</span>. <span class="id" title="tactic">apply</span> <span class="id" title="keyword">goal</span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab164"></a><h3 class="section"> </h3>
+ The thing to take away from all this is that you need to be
+    careful, when using induction, that you are not trying to prove
+    something too specific: When proving a property quantified over
+    variables <span class="inlinecode"><span class="id" title="var">n</span></span> and <span class="inlinecode"><span class="id" title="var">m</span></span> by induction on <span class="inlinecode"><span class="id" title="var">n</span></span>, it is sometimes crucial
+    to leave <span class="inlinecode"><span class="id" title="var">m</span></span> generic. 
+<div class="paragraph"> </div>
+
+ The following theorem, which further strengthens the link between
+    <span class="inlinecode">=?</span> and <span class="inlinecode">=</span>, follows the same pattern. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">eqb_true</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>,<br/>
+&nbsp;&nbsp;<span class="id" title="var">n</span> =? <span class="id" title="var">m</span> = <span class="id" title="var">true</span> → <span class="id" title="var">n</span> = <span class="id" title="var">m</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;WORK&nbsp;IN&nbsp;CLASS&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab165"></a><h3 class="section"> </h3>
+ The strategy of doing fewer <span class="inlinecode"><span class="id" title="tactic">intros</span></span> before an <span class="inlinecode"><span class="id" title="tactic">induction</span></span> to
+    obtain a more general IH doesn't always work; sometimes some
+    <i>rearrangement</i> of quantified variables is needed.  Suppose, for
+    example, that we wanted to prove <span class="inlinecode"><span class="id" title="var">double_injective</span></span> by induction
+    on <span class="inlinecode"><span class="id" title="var">m</span></span> instead of <span class="inlinecode"><span class="id" title="var">n</span></span>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">double_injective_take2_FAILED</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>,<br/>
+&nbsp;&nbsp;<span class="id" title="var">double</span> <span class="id" title="var">n</span> = <span class="id" title="var">double</span> <span class="id" title="var">m</span> →<br/>
+&nbsp;&nbsp;<span class="id" title="var">n</span> = <span class="id" title="var">m</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">m</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">m'</span> <span class="id" title="var">IHm'</span>].<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;m&nbsp;=&nbsp;O&nbsp;*)</span> <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">intros</span> <span class="id" title="var">eq</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">n</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">n'</span>] <span class="id" title="var">eqn</span>:<span class="id" title="var">E</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;n&nbsp;=&nbsp;O&nbsp;*)</span> <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;n&nbsp;=&nbsp;S&nbsp;n'&nbsp;*)</span> <span class="id" title="tactic">discriminate</span> <span class="id" title="var">eq</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;m&nbsp;=&nbsp;S&nbsp;m'&nbsp;*)</span> <span class="id" title="tactic">intros</span> <span class="id" title="var">eq</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">n</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">n'</span>] <span class="id" title="var">eqn</span>:<span class="id" title="var">E</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;n&nbsp;=&nbsp;O&nbsp;*)</span> <span class="id" title="tactic">discriminate</span> <span class="id" title="var">eq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;n&nbsp;=&nbsp;S&nbsp;n'&nbsp;*)</span> <span class="id" title="tactic">f_equal</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;We&nbsp;are&nbsp;stuck&nbsp;here,&nbsp;just&nbsp;like&nbsp;before.&nbsp;*)</span><br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab166"></a><h3 class="section"> </h3>
+ The problem is that, to do induction on <span class="inlinecode"><span class="id" title="var">m</span></span>, we must first
+    introduce <span class="inlinecode"><span class="id" title="var">n</span></span>.  (If we simply say <span class="inlinecode"><span class="id" title="tactic">induction</span></span> <span class="inlinecode"><span class="id" title="var">m</span></span> without
+    introducing anything first, Coq will automatically introduce <span class="inlinecode"><span class="id" title="var">n</span></span>
+    for us!)  
+<div class="paragraph"> </div>
+
+ What can we do about this?  One possibility is to rewrite the
+    statement of the lemma so that <span class="inlinecode"><span class="id" title="var">m</span></span> is quantified before <span class="inlinecode"><span class="id" title="var">n</span></span>.  This
+    works, but it's not nice: We don't want to have to twist the
+    statements of lemmas to fit the needs of a particular strategy for
+    proving them!  Rather we want to state them in the clearest and
+    most natural way. 
+<div class="paragraph"> </div>
+
+<a id="lab167"></a><h3 class="section"> </h3>
+ What we can do instead is to first introduce all the quantified
+    variables and then <i>re-generalize</i> one or more of them,
+    selectively taking variables out of the context and putting them
+    back at the beginning of the goal.  The <span class="inlinecode"><span class="id" title="tactic">generalize</span></span> <span class="inlinecode"><span class="id" title="tactic">dependent</span></span>
+    tactic does this. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">double_injective_take2</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>,<br/>
+&nbsp;&nbsp;<span class="id" title="var">double</span> <span class="id" title="var">n</span> = <span class="id" title="var">double</span> <span class="id" title="var">m</span> →<br/>
+&nbsp;&nbsp;<span class="id" title="var">n</span> = <span class="id" title="var">m</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;<span class="inlinecode"><span class="id" title="var">n</span></span>&nbsp;and&nbsp;<span class="inlinecode"><span class="id" title="var">m</span></span>&nbsp;are&nbsp;both&nbsp;in&nbsp;the&nbsp;context&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="id" title="tactic">generalize</span> <span class="id" title="tactic">dependent</span> <span class="id" title="var">n</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Now&nbsp;<span class="inlinecode"><span class="id" title="var">n</span></span>&nbsp;is&nbsp;back&nbsp;in&nbsp;the&nbsp;goal&nbsp;and&nbsp;we&nbsp;can&nbsp;do&nbsp;induction&nbsp;on<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="inlinecode"><span class="id" title="var">m</span></span>&nbsp;and&nbsp;get&nbsp;a&nbsp;sufficiently&nbsp;general&nbsp;IH.&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">m</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">m'</span> <span class="id" title="var">IHm'</span>].<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;m&nbsp;=&nbsp;O&nbsp;*)</span> <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">eq</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">n</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">n'</span>] <span class="id" title="var">eqn</span>:<span class="id" title="var">E</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;n&nbsp;=&nbsp;O&nbsp;*)</span> <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;n&nbsp;=&nbsp;S&nbsp;n'&nbsp;*)</span> <span class="id" title="tactic">discriminate</span> <span class="id" title="var">eq</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;m&nbsp;=&nbsp;S&nbsp;m'&nbsp;*)</span> <span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">eq</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">n</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">n'</span>] <span class="id" title="var">eqn</span>:<span class="id" title="var">E</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;n&nbsp;=&nbsp;O&nbsp;*)</span> <span class="id" title="tactic">discriminate</span> <span class="id" title="var">eq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;n&nbsp;=&nbsp;S&nbsp;n'&nbsp;*)</span> <span class="id" title="tactic">f_equal</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHm'</span>. <span class="id" title="tactic">injection</span> <span class="id" title="var">eq</span> <span class="id" title="keyword">as</span> <span class="id" title="keyword">goal</span>. <span class="id" title="tactic">apply</span> <span class="id" title="keyword">goal</span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab168"></a><h1 class="section">Unfolding Definitions</h1>
+
+<div class="paragraph"> </div>
+
+ It sometimes happens that we need to manually unfold a name that
+    has been introduced by a <span class="inlinecode"><span class="id" title="keyword">Definition</span></span> so that we can manipulate
+    the expression it stands for.
+
+<div class="paragraph"> </div>
+
+    For example, if we define... 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">square</span> <span class="id" title="var">n</span> := <span class="id" title="var">n</span> × <span class="id" title="var">n</span>.<br/>
+</div>
+
+<div class="doc">
+...and try to prove a simple fact about <span class="inlinecode"><span class="id" title="var">square</span></span>... 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">square_mult</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>, <span class="id" title="var">square</span> (<span class="id" title="var">n</span> × <span class="id" title="var">m</span>) = <span class="id" title="var">square</span> <span class="id" title="var">n</span> × <span class="id" title="var">square</span> <span class="id" title="var">m</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>.<br/>
+</div>
+
+<div class="doc">
+...we appear to be stuck: <span class="inlinecode"><span class="id" title="tactic">simpl</span></span> doesn't simplify anything, and
+    since we haven't proved any other facts about <span class="inlinecode"><span class="id" title="var">square</span></span>, there is
+    nothing we can <span class="inlinecode"><span class="id" title="tactic">apply</span></span> or <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> with. 
+<div class="paragraph"> </div>
+
+<a id="lab169"></a><h3 class="section"> </h3>
+ To make progress, we can manually <span class="inlinecode"><span class="id" title="tactic">unfold</span></span> the definition of
+    <span class="inlinecode"><span class="id" title="var">square</span></span>: 
+</div>
+<div class="code">
+
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <span class="id" title="var">square</span>.<br/>
+</div>
+
+<div class="doc">
+Now we have plenty to work with: both sides of the equality are
+    expressions involving multiplication, and we have lots of facts
+    about multiplication at our disposal.  In particular, we know that
+    it is commutative and associative, and from these it is not hard
+    to finish the proof. 
+</div>
+<div class="code">
+
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">mult_assoc</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">H</span> : <span class="id" title="var">n</span> × <span class="id" title="var">m</span> × <span class="id" title="var">n</span> = <span class="id" title="var">n</span> × <span class="id" title="var">n</span> × <span class="id" title="var">m</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="tactic">rewrite</span> <span class="id" title="var">mul_comm</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">mult_assoc</span>. }<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">mult_assoc</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab170"></a><h3 class="section"> </h3>
+ At this point, a bit deeper discussion of unfolding and
+    simplification is in order.
+
+<div class="paragraph"> </div>
+
+    We already have observed that tactics like <span class="inlinecode"><span class="id" title="tactic">simpl</span></span>, <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span>,
+    and <span class="inlinecode"><span class="id" title="tactic">apply</span></span> will often unfold the definitions of functions
+    automatically when this allows them to make progress.  For
+    example, if we define <span class="inlinecode"><span class="id" title="var">foo</span></span> <span class="inlinecode"><span class="id" title="var">m</span></span> to be the constant <span class="inlinecode">5</span>... 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">foo</span> (<span class="id" title="var">x</span>: <span class="id" title="var">nat</span>) := 5.<br/>
+</div>
+
+<div class="doc">
+.... then the <span class="inlinecode"><span class="id" title="tactic">simpl</span></span> in the following proof (or the
+    <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span>, if we omit the <span class="inlinecode"><span class="id" title="tactic">simpl</span></span>) will unfold <span class="inlinecode"><span class="id" title="var">foo</span></span> <span class="inlinecode"><span class="id" title="var">m</span></span> to
+    <span class="inlinecode">(<span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode">5)</span> <span class="inlinecode"><span class="id" title="var">m</span></span> and further simplify this expression to just
+    <span class="inlinecode">5</span>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Fact</span> <span class="id" title="var">silly_fact_1</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">m</span>, <span class="id" title="var">foo</span> <span class="id" title="var">m</span> + 1 = <span class="id" title="var">foo</span> (<span class="id" title="var">m</span> + 1) + 1.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">m</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab171"></a><h3 class="section"> </h3>
+ But this automatic unfolding is somewhat conservative.  For
+    example, if we define a slightly more complicated function
+    involving a pattern match... 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">bar</span> <span class="id" title="var">x</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">x</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">O</span> ⇒ 5<br/>
+&nbsp;&nbsp;| <span class="id" title="var">S</span> <span class="id" title="var">_</span> ⇒ 5<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+</div>
+
+<div class="doc">
+...then the analogous proof will get stuck: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Fact</span> <span class="id" title="var">silly_fact_2_FAILED</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">m</span>, <span class="id" title="var">bar</span> <span class="id" title="var">m</span> + 1 = <span class="id" title="var">bar</span> (<span class="id" title="var">m</span> + 1) + 1.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">m</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>. <span class="comment">(*&nbsp;Does&nbsp;nothing!&nbsp;*)</span><br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+</div>
+
+<div class="doc">
+The reason that <span class="inlinecode"><span class="id" title="tactic">simpl</span></span> doesn't make progress here is that it
+    notices that, after tentatively unfolding <span class="inlinecode"><span class="id" title="var">bar</span></span> <span class="inlinecode"><span class="id" title="var">m</span></span>, it is left with
+    a match whose scrutinee, <span class="inlinecode"><span class="id" title="var">m</span></span>, is a variable, so the <span class="inlinecode"><span class="id" title="keyword">match</span></span> cannot
+    be simplified further.  It is not smart enough to notice that the
+    two branches of the <span class="inlinecode"><span class="id" title="keyword">match</span></span> are identical, so it gives up on
+    unfolding <span class="inlinecode"><span class="id" title="var">bar</span></span> <span class="inlinecode"><span class="id" title="var">m</span></span> and leaves it alone.
+
+<div class="paragraph"> </div>
+
+    Similarly, tentatively unfolding <span class="inlinecode"><span class="id" title="var">bar</span></span> <span class="inlinecode">(<span class="id" title="var">m</span>+1)</span> leaves a <span class="inlinecode"><span class="id" title="keyword">match</span></span>
+    whose scrutinee is a function application (that cannot itself be
+    simplified, even after unfolding the definition of <span class="inlinecode">+</span>), so
+    <span class="inlinecode"><span class="id" title="tactic">simpl</span></span> leaves it alone. 
+<div class="paragraph"> </div>
+
+<a id="lab172"></a><h3 class="section"> </h3>
+ There are now two ways make progress.
+
+<div class="paragraph"> </div>
+
+    (1) Use <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> <span class="inlinecode"><span class="id" title="var">m</span></span> to break the proof into two cases: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Fact</span> <span class="id" title="var">silly_fact_2</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">m</span>, <span class="id" title="var">bar</span> <span class="id" title="var">m</span> + 1 = <span class="id" title="var">bar</span> (<span class="id" title="var">m</span> + 1) + 1.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">m</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">m</span> <span class="id" title="var">eqn</span>:<span class="id" title="var">E</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+This approach works, but it depends on our recognizing that the
+    <span class="inlinecode"><span class="id" title="keyword">match</span></span> hidden inside <span class="inlinecode"><span class="id" title="var">bar</span></span> is what was preventing us from making
+    progress. 
+<div class="paragraph"> </div>
+
+<a id="lab173"></a><h3 class="section"> </h3>
+ (2) Explicitly tell Coq to unfold <span class="inlinecode"><span class="id" title="var">bar</span></span>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Fact</span> <span class="id" title="var">silly_fact_2'</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">m</span>, <span class="id" title="var">bar</span> <span class="id" title="var">m</span> + 1 = <span class="id" title="var">bar</span> (<span class="id" title="var">m</span> + 1) + 1.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">m</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <span class="id" title="var">bar</span>.<br/>
+</div>
+
+<div class="doc">
+Now it is apparent that we are stuck on the <span class="inlinecode"><span class="id" title="keyword">match</span></span> expressions on
+    both sides of the <span class="inlinecode">=</span>, and we can use <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> to finish the
+    proof without thinking so hard. 
+</div>
+<div class="code">
+
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">m</span> <span class="id" title="var">eqn</span>:<span class="id" title="var">E</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab174"></a><h1 class="section">Using <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> on Compound Expressions</h1>
+
+<div class="paragraph"> </div>
+
+ The <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> tactic can be used on expressions as well as
+    variables: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">sillyfun</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) : <span class="id" title="var">bool</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">if</span> <span class="id" title="var">n</span> =? 3 <span class="id" title="keyword">then</span> <span class="id" title="var">false</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">else</span> <span class="id" title="keyword">if</span> <span class="id" title="var">n</span> =? 5 <span class="id" title="keyword">then</span> <span class="id" title="var">false</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">else</span> <span class="id" title="var">false</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">sillyfun_false</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>),<br/>
+&nbsp;&nbsp;<span class="id" title="var">sillyfun</span> <span class="id" title="var">n</span> = <span class="id" title="var">false</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span>. <span class="id" title="tactic">unfold</span> <span class="id" title="var">sillyfun</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="var">n</span> =? 3) <span class="id" title="var">eqn</span>:<span class="id" title="var">E<sub>1</sub></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="comment">(*&nbsp;n&nbsp;=?&nbsp;3&nbsp;=&nbsp;true&nbsp;*)</span> <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="comment">(*&nbsp;n&nbsp;=?&nbsp;3&nbsp;=&nbsp;false&nbsp;*)</span> <span class="id" title="tactic">destruct</span> (<span class="id" title="var">n</span> =? 5) <span class="id" title="var">eqn</span>:<span class="id" title="var">E<sub>2</sub></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;n&nbsp;=?&nbsp;5&nbsp;=&nbsp;true&nbsp;*)</span> <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;n&nbsp;=?&nbsp;5&nbsp;=&nbsp;false&nbsp;*)</span> <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab175"></a><h3 class="section"> </h3>
+ The <span class="inlinecode"><span class="id" title="var">eqn</span>:</span> part of the <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> tactic is optional; although
+    we've chosen to include it most of the time, for the sake of
+    documentation, it can often be omitted without harm.
+
+<div class="paragraph"> </div>
+
+    However, when <span class="inlinecode"><span class="id" title="tactic">destruct</span></span>ing compound expressions, the information
+    recorded by the <span class="inlinecode"><span class="id" title="var">eqn</span>:</span> can actually be critical: if we leave it
+    out, then <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> can erase information we need to complete a
+    proof. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">sillyfun1</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) : <span class="id" title="var">bool</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">if</span> <span class="id" title="var">n</span> =? 3 <span class="id" title="keyword">then</span> <span class="id" title="var">true</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">else</span> <span class="id" title="keyword">if</span> <span class="id" title="var">n</span> =? 5 <span class="id" title="keyword">then</span> <span class="id" title="var">true</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">else</span> <span class="id" title="var">false</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">sillyfun1_odd_FAILED</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>),<br/>
+&nbsp;&nbsp;<span class="id" title="var">sillyfun1</span> <span class="id" title="var">n</span> = <span class="id" title="var">true</span> →<br/>
+&nbsp;&nbsp;<span class="id" title="var">odd</span> <span class="id" title="var">n</span> = <span class="id" title="var">true</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">eq</span>. <span class="id" title="tactic">unfold</span> <span class="id" title="var">sillyfun1</span> <span class="id" title="keyword">in</span> <span class="id" title="var">eq</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="var">n</span> =? 3).<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;stuck...&nbsp;*)</span><br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab176"></a><h3 class="section"> </h3>
+ Adding the <span class="inlinecode"><span class="id" title="var">eqn</span>:</span> qualifier saves this information so we
+    can use it. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">sillyfun1_odd</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>),<br/>
+&nbsp;&nbsp;<span class="id" title="var">sillyfun1</span> <span class="id" title="var">n</span> = <span class="id" title="var">true</span> →<br/>
+&nbsp;&nbsp;<span class="id" title="var">odd</span> <span class="id" title="var">n</span> = <span class="id" title="var">true</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">eq</span>. <span class="id" title="tactic">unfold</span> <span class="id" title="var">sillyfun1</span> <span class="id" title="keyword">in</span> <span class="id" title="var">eq</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="var">n</span> =? 3) <span class="id" title="var">eqn</span>:<span class="id" title="var">Heqe3</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="comment">(*&nbsp;e<sub>3</sub>&nbsp;=&nbsp;true&nbsp;*)</span> <span class="id" title="tactic">apply</span> <span class="id" title="var">eqb_true</span> <span class="id" title="keyword">in</span> <span class="id" title="var">Heqe3</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> → <span class="id" title="var">Heqe3</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="comment">(*&nbsp;e<sub>3</sub>&nbsp;=&nbsp;false&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="var">n</span> =? 5) <span class="id" title="var">eqn</span>:<span class="id" title="var">Heqe5</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;e<sub>5</sub>&nbsp;=&nbsp;true&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">eqb_true</span> <span class="id" title="keyword">in</span> <span class="id" title="var">Heqe5</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> → <span class="id" title="var">Heqe5</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;e<sub>5</sub>&nbsp;=&nbsp;false&nbsp;*)</span> <span class="id" title="tactic">discriminate</span> <span class="id" title="var">eq</span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab177"></a><h1 class="section">Micro Sermon</h1>
+
+<div class="paragraph"> </div>
+
+ Mindless proof-hacking is a terrible temptation...
+
+<div class="paragraph"> </div>
+
+    Try to resist!
+
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
