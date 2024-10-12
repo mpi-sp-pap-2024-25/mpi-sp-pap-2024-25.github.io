@@ -36,7 +36,7 @@
 
 
 <div class="doc">
-<a id="lab250"></a><h1 class="section">Inductively Defined Propositions</h1>
+<a id="lab247"></a><h1 class="section">Inductively Defined Propositions</h1>
 
 <div class="paragraph"> </div>
 
@@ -55,7 +55,7 @@
 </div>
 
 <div class="doc">
-<a id="lab251"></a><h2 class="section">Example: The Collatz Conjecture</h2>
+<a id="lab248"></a><h2 class="section">Example: The Collatz Conjecture</h2>
 
 <div class="paragraph"> </div>
 
@@ -81,7 +81,7 @@
 </div>
 
 <div class="doc">
-<a id="lab252"></a><h3 class="section"> </h3>
+<a id="lab249"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -103,7 +103,7 @@
     natural number guaranteed to reach <span class="inlinecode">1</span> eventually? 
 <div class="paragraph"> </div>
 
-<a id="lab253"></a><h3 class="section"> </h3>
+<a id="lab250"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -135,7 +135,7 @@ This definition is rejected by Coq's termination checker, since
     would be equivalent to settling the Collatz conjecture! 
 <div class="paragraph"> </div>
 
-<a id="lab254"></a><h3 class="section"> </h3>
+<a id="lab251"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -158,7 +158,7 @@ What we've done here is to use Coq's <span class="inlinecode"><span class="id" t
     <span class="inlinecode"><span class="id" title="var">n</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab255"></a><h3 class="section"> </h3>
+<a id="lab252"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -183,7 +183,7 @@ What we've done here is to use Coq's <span class="inlinecode"><span class="id" t
 </div>
 
 <div class="doc">
-<a id="lab256"></a><h3 class="section"> </h3>
+<a id="lab253"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -202,7 +202,7 @@ If you succeed in proving this conjecture, you've got a bright
 </div>
 
 <div class="doc">
-<a id="lab257"></a><h2 class="section">Example: Ordering</h2>
+<a id="lab254"></a><h2 class="section">Example: Ordering</h2>
 
 <div class="paragraph"> </div>
 
@@ -228,7 +228,7 @@ If you succeed in proving this conjecture, you've got a bright
 </div>
 
 <div class="doc">
-<a id="lab258"></a><h3 class="section"> </h3>
+<a id="lab255"></a><h3 class="section"> </h3>
 
 </div>
 
@@ -247,7 +247,7 @@ If you succeed in proving this conjecture, you've got a bright
 </div>
 
 <div class="doc">
-<a id="lab259"></a><h2 class="section">Example: Transitive Closure</h2>
+<a id="lab256"></a><h2 class="section">Example: Transitive Closure</h2>
 
 <div class="paragraph"> </div>
 
@@ -268,7 +268,7 @@ If you succeed in proving this conjecture, you've got a bright
 </div>
 
 <div class="doc">
-<a id="lab260"></a><h3 class="section"> </h3>
+<a id="lab257"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -299,7 +299,7 @@ Then we can define "ancestor of" as its transitive closure:
 </div>
 
 <div class="doc">
-<a id="lab261"></a><h2 class="section">Example: Permutations</h2>
+<a id="lab258"></a><h2 class="section">Example: Permutations</h2>
 
 <div class="paragraph"> </div>
 
@@ -337,7 +337,7 @@ This definition says:
 
 <div class="paragraph"> </div>
 
-<a id="lab262"></a><h3 class="section"> </h3>
+<a id="lab259"></a><h3 class="section"> </h3>
 
 </div>
 <div class="code">
@@ -349,7 +349,7 @@ This definition says:
 </div>
 
 <div class="doc">
-<a id="lab263"></a><h2 class="section">Example: Evenness (yet again)</h2>
+<a id="lab260"></a><h2 class="section">Example: Evenness (yet again)</h2>
 
 <div class="paragraph"> </div>
 
@@ -382,7 +382,7 @@ This definition says:
 
 <div class="paragraph"> </div>
 
-<a id="lab264"></a><h3 class="section"> </h3>
+<a id="lab261"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -403,7 +403,7 @@ We can think of this as defining a Coq property <span class="inlinecode"><span c
     <span class="inlinecode"><span class="id" title="var">ev_SS</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode"><span class="id" title="var">n</span>,</span> <span class="inlinecode"><span class="id" title="var">ev</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">ev</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n</span>))</span>. 
 <div class="paragraph"> </div>
 
-<a id="lab265"></a><h3 class="section"> </h3>
+<a id="lab262"></a><h3 class="section"> </h3>
  These evidence constructors can be thought of as "primitive
     evidence of evenness", and they can be used just like proven
     theorems.  In particular, we can use Coq's <span class="inlinecode"><span class="id" title="tactic">apply</span></span> tactic with the
@@ -439,7 +439,7 @@ In this way, we can also prove theorems that have hypotheses
 </div>
 
 <div class="doc">
-<a id="lab266"></a><h1 class="section">Using Evidence in Proofs</h1>
+<a id="lab263"></a><h1 class="section">Using Evidence in Proofs</h1>
 
 <div class="paragraph"> </div>
 
@@ -456,7 +456,7 @@ In this way, we can also prove theorems that have hypotheses
     are <span class="inlinecode"><span class="id" title="var">ev</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab267"></a><h3 class="section"> </h3>
+<a id="lab264"></a><h3 class="section"> </h3>
  In other words, if someone gives us evidence <span class="inlinecode"><span class="id" title="var">E</span></span> for the assertion
     <span class="inlinecode"><span class="id" title="var">ev</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span>, then we know that <span class="inlinecode"><span class="id" title="var">E</span></span> must be one of two things:
 
@@ -477,7 +477,7 @@ In this way, we can also prove theorems that have hypotheses
     analysis</i> and even <i>induction</i> on evidence of evenness... 
 <div class="paragraph"> </div>
 
-<a id="lab268"></a><h2 class="section">Inversion on Evidence</h2>
+<a id="lab265"></a><h2 class="section">Inversion on Evidence</h2>
 
 <div class="paragraph"> </div>
 
@@ -509,7 +509,7 @@ Facts like this are often called "inversion lemmas" because they
     makes this explicit. 
 <div class="paragraph"> </div>
 
-<a id="lab269"></a><h3 class="section"> </h3>
+<a id="lab266"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -528,7 +528,7 @@ Facts like this are often called "inversion lemmas" because they
 </div>
 
 <div class="doc">
-<a id="lab270"></a><h3 class="section"> </h3>
+<a id="lab267"></a><h3 class="section"> </h3>
  Coq provides a handy tactic called <span class="inlinecode"><span class="id" title="tactic">inversion</span></span> that does
     the work of our inversion lemma and more besides. 
 </div>
@@ -544,7 +544,7 @@ Facts like this are often called "inversion lemmas" because they
 </div>
 
 <div class="doc">
-<a id="lab271"></a><h3 class="section"> </h3>
+<a id="lab268"></a><h3 class="section"> </h3>
  We can use <span class="inlinecode"><span class="id" title="tactic">inversion</span></span> to re-prove some theorems from
     <span class="inlinecode"><span class="id" title="var">Tactics.v</span></span>.
 
@@ -565,7 +565,7 @@ Facts like this are often called "inversion lemmas" because they
 </div>
 
 <div class="doc">
-<a id="lab272"></a><h3 class="section"> </h3>
+<a id="lab269"></a><h3 class="section"> </h3>
  The tactic <span class="inlinecode"><span class="id" title="tactic">inversion</span></span> actually works on any <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">P</span></span> where
     <span class="inlinecode"><span class="id" title="var">P</span></span> is defined <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span>ly:
 
@@ -591,7 +591,7 @@ Facts like this are often called "inversion lemmas" because they
 
 <div class="paragraph"> </div>
 
-<a id="lab273"></a><h3 class="section"> </h3>
+<a id="lab270"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -607,7 +607,7 @@ Facts like this are often called "inversion lemmas" because they
 </div>
 
 <div class="doc">
-<a id="lab274"></a><h2 class="section">Induction on Evidence</h2>
+<a id="lab271"></a><h2 class="section">Induction on Evidence</h2>
 
 <div class="paragraph"> </div>
 
@@ -644,7 +644,7 @@ As we will see in later chapters, induction on evidence is a
 </div>
 
 <div class="doc">
-<a id="lab275"></a><h1 class="section">Inductive Relations</h1>
+<a id="lab272"></a><h1 class="section">Inductive Relations</h1>
 
 <div class="paragraph"> </div>
 
@@ -666,7 +666,7 @@ Just like properties, relations can be defined inductively.  One
 </div>
 
 <div class="doc">
-<a id="lab276"></a><h3 class="section"> </h3>
+<a id="lab273"></a><h3 class="section"> </h3>
  Some sanity checks... 
 </div>
 <div class="code">
@@ -686,7 +686,7 @@ Just like properties, relations can be defined inductively.  One
 </div>
 
 <div class="doc">
-<a id="lab277"></a><h3 class="section"> </h3>
+<a id="lab274"></a><h3 class="section"> </h3>
  The "strictly less than" relation <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">&lt;</span> <span class="inlinecode"><span class="id" title="var">m</span></span> can now be defined
     in terms of <span class="inlinecode"><span class="id" title="var">le</span></span>. 
 </div>
@@ -697,7 +697,7 @@ Just like properties, relations can be defined inductively.  One
 </div>
 
 <div class="doc">
-<a id="lab278"></a><h1 class="section">A Digression on Notation</h1>
+<a id="lab275"></a><h1 class="section">A Digression on Notation</h1>
 
 <div class="paragraph"> </div>
 
@@ -740,7 +740,7 @@ Just like properties, relations can be defined inductively.  One
 ... where we put everything on the right of the colon. 
 <div class="paragraph"> </div>
 
-<a id="lab279"></a><h3 class="section"> </h3>
+<a id="lab276"></a><h3 class="section"> </h3>
  For inductively defined <i>propositions</i>, we need to explicitly give
     the result type for each constructor (because they are not all the
     same), so the first style doesn't make sense, but we can use
@@ -748,7 +748,7 @@ Just like properties, relations can be defined inductively.  One
 </div>
 
 <div class="doc">
-<a id="lab280"></a><h1 class="section">Case Study: Regular Expressions</h1>
+<a id="lab277"></a><h1 class="section">Case Study: Regular Expressions</h1>
 
 <div class="paragraph"> </div>
 
@@ -767,7 +767,7 @@ Just like properties, relations can be defined inductively.  One
 </div>
 
 <div class="doc">
-<a id="lab281"></a><h3 class="section"> </h3>
+<a id="lab278"></a><h3 class="section"> </h3>
  We connect regular expressions and strings via the following
     rules, which define when a regular expression <i>matches</i> some
     string:
@@ -822,7 +822,7 @@ Just like properties, relations can be defined inductively.  One
 
 <div class="paragraph"> </div>
 
-<a id="lab282"></a><h3 class="section"> </h3>
+<a id="lab279"></a><h3 class="section"> </h3>
  We can easily translate this informal definition into an
     <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span> one as follows.  We use the notation <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode">=~</span> <span class="inlinecode"><span class="id" title="var">re</span></span> in
     place of <span class="inlinecode"><span class="id" title="var">exp_match</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">re</span></span>. 
@@ -890,7 +890,7 @@ Notice that this clause in our informal definition...
 </div> <!-- /quiz -->
 
 <div class="doc">
-<a id="lab283"></a><h3 class="section"> </h3>
+<a id="lab280"></a><h3 class="section"> </h3>
 
 </div>
 <div class="code">
@@ -924,7 +924,7 @@ Notice that this clause in our informal definition...
 </div>
 
 <div class="doc">
-<a id="lab284"></a><h3 class="section"> </h3>
+<a id="lab281"></a><h3 class="section"> </h3>
  Something more interesting: 
 </div>
 <div class="code">
@@ -937,7 +937,7 @@ Notice that this clause in our informal definition...
 </div>
 
 <div class="doc">
-<a id="lab285"></a><h3 class="section"> </h3>
+<a id="lab282"></a><h3 class="section"> </h3>
  Naturally, proofs about <span class="inlinecode"><span class="id" title="var">exp_match</span></span> often require
     induction (on evidence!). 
 <div class="paragraph"> </div>
@@ -966,7 +966,7 @@ Notice that this clause in our informal definition...
 </div>
 
 <div class="doc">
-<a id="lab286"></a><h3 class="section"> </h3>
+<a id="lab283"></a><h3 class="section"> </h3>
 
 </div>
 <div class="code">
@@ -986,7 +986,7 @@ Notice that this clause in our informal definition...
 </div>
 
 <div class="doc">
-<a id="lab287"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="var">remember</span></span> Tactic</h2>
+<a id="lab284"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="var">remember</span></span> Tactic</h2>
 
 <div class="paragraph"> </div>
 
@@ -1020,7 +1020,7 @@ Here is a naive first attempt at setting up the
 </div>
 
 <div class="doc">
-<a id="lab288"></a><h3 class="section"> </h3>
+<a id="lab285"></a><h3 class="section"> </h3>
  We can get through the first case... 
 </div>
 <div class="code">
@@ -1044,7 +1044,7 @@ Here is a naive first attempt at setting up the
 </div>
 
 <div class="doc">
-<a id="lab289"></a><h3 class="section"> </h3>
+<a id="lab286"></a><h3 class="section"> </h3>
  The problem here is that <span class="inlinecode"><span class="id" title="tactic">induction</span></span> over a Prop hypothesis
     only works properly with hypotheses that are "completely
     general," i.e., ones in which all the arguments are variables,
@@ -1074,7 +1074,7 @@ This works, but it makes the statement of the lemma a bit ugly.
 </div>
 
 <div class="doc">
-<a id="lab290"></a><h3 class="section"> </h3>
+<a id="lab287"></a><h3 class="section"> </h3>
  The tactic <span class="inlinecode"><span class="id" title="var">remember</span></span> <span class="inlinecode"><span class="id" title="var">e</span></span> <span class="inlinecode"><span class="id" title="keyword">as</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> causes Coq to (1) replace all
     occurrences of the expression <span class="inlinecode"><span class="id" title="var">e</span></span> by the variable <span class="inlinecode"><span class="id" title="var">x</span></span>, and (2) add
     an equation <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">e</span></span> to the context.  Here's how we can use it to
@@ -1103,7 +1103,7 @@ We now have <span class="inlinecode"><span class="id" title="var">Heqre'</span><
 </div>
 
 <div class="doc">
-<a id="lab291"></a><h3 class="section"> </h3>
+<a id="lab288"></a><h3 class="section"> </h3>
  The <span class="inlinecode"><span class="id" title="var">Heqre'</span></span> is contradictory in most cases, allowing us to
     conclude immediately. 
 </div>
@@ -1137,7 +1137,7 @@ The interesting cases are those that correspond to <span class="inlinecode"><spa
 </div>
 
 <div class="doc">
-<a id="lab292"></a><h3 class="section"> </h3>
+<a id="lab289"></a><h3 class="section"> </h3>
  The remainder of this section in the full version of the chapter
     develops an extended exercise on regular expressions, leading up
     to a proof of the well-known "pumping lemma."
@@ -1151,7 +1151,7 @@ The interesting cases are those that correspond to <span class="inlinecode"><spa
 </div>
 
 <div class="doc">
-<a id="lab293"></a><h1 class="section">Case Study: Improving Reflection</h1>
+<a id="lab290"></a><h1 class="section">Case Study: Improving Reflection</h1>
 
 <div class="paragraph"> </div>
 
@@ -1191,7 +1191,7 @@ The first subcase (where <span class="inlinecode"><span class="id" title="var">n
     time. 
 <div class="paragraph"> </div>
 
-<a id="lab294"></a><h3 class="section"> </h3>
+<a id="lab291"></a><h3 class="section"> </h3>
  We can streamline this sort of reasoning by defining an inductive
     proposition that yields a better case-analysis principle for <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=?</span>
     <span class="inlinecode"><span class="id" title="var">m</span></span>.  Instead of generating the assumption <span class="inlinecode">(<span class="id" title="var">n</span></span> <span class="inlinecode">=?</span> <span class="inlinecode"><span class="id" title="var">m</span>)</span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">true</span></span>, which
@@ -1238,7 +1238,7 @@ Notice that the only way to produce evidence for <span class="inlinecode"><span 
 (The right-to-left implication is left as an exercise.) 
 <div class="paragraph"> </div>
 
-<a id="lab295"></a><h3 class="section"> </h3>
+<a id="lab292"></a><h3 class="section"> </h3>
  We can think of <span class="inlinecode"><span class="id" title="var">reflect</span></span> as a variant of the usual "if and only
     if" connective; the advantage of <span class="inlinecode"><span class="id" title="var">reflect</span></span> is that, by destructing
     a hypothesis or lemma of the form <span class="inlinecode"><span class="id" title="var">reflect</span></span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span>, we can perform
@@ -1247,7 +1247,7 @@ Notice that the only way to produce evidence for <span class="inlinecode"><span 
     subgoal and <span class="inlinecode">¬</span> <span class="inlinecode"><span class="id" title="var">P</span></span> in the second). 
 <div class="paragraph"> </div>
 
-<a id="lab296"></a><h3 class="section"> </h3>
+<a id="lab293"></a><h3 class="section"> </h3>
  Let's use <span class="inlinecode"><span class="id" title="var">reflect</span></span> to produce a smoother proof of
     <span class="inlinecode"><span class="id" title="var">filter_not_empty_In</span></span>.
 
@@ -1264,7 +1264,7 @@ Notice that the only way to produce evidence for <span class="inlinecode"><span 
 </div>
 
 <div class="doc">
-<a id="lab297"></a><h3 class="section"> </h3>
+<a id="lab294"></a><h3 class="section"> </h3>
  The proof of <span class="inlinecode"><span class="id" title="var">filter_not_empty_In</span></span> now goes as follows.  Notice
     how the calls to <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> and <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> in the earlier proof of
     this theorem are combined here into a single call to
@@ -1289,7 +1289,7 @@ Notice that the only way to produce evidence for <span class="inlinecode"><span 
 </div>
 
 <div class="doc">
-<a id="lab298"></a><h3 class="section"> </h3>
+<a id="lab295"></a><h3 class="section"> </h3>
  This small example shows reflection giving us a small gain in
     convenience; in larger developments, using <span class="inlinecode"><span class="id" title="var">reflect</span></span> consistently
     can often lead to noticeably shorter and clearer proof scripts.
