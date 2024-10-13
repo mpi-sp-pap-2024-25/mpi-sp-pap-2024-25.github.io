@@ -371,7 +371,9 @@
 <div class="paragraph"> </div>
 
  Coq runs on Windows, Linux, and macOS.  The files in this book
-    have been tested with Coq 8.17.1.
+    have been tested with various Coq versions, but for ensuring
+    reproducibility of auto-grading for our lecture in Bochum please
+    use Coq 8.18.0 for your homework solutions.
 
 <div class="paragraph"> </div>
 
@@ -380,15 +382,15 @@
 <div class="paragraph"> </div>
 
 <ul class="doclist">
-<li> A current installation of Coq, available from the Coq home page
+<li> Coq 8.18.0, available from the Coq home page
       (<a href="https://coq.inria.fr/download"><span class="inlineref" <a href='https://coq.inria.fr/download</span></a>).'>https://coq.inria.fr/download</span></a>).</a>
-      The "Coq Platform" usually offers the smoothest installation
-      experience.
+      The "Coq Platform" usually offers the easiest installation
+      experience, especially on Windows.
 
 <div class="paragraph"> </div>
 
-      If you use the VSCode + Docker option described below, you don't
-      need to install Coq separately.
+      If you use the advanced VsCode + Docker option described below,
+      you don't need to install Coq separately.
 
 <div class="paragraph"> </div>
 
@@ -399,15 +401,16 @@
 <div class="paragraph"> </div>
 
 <ul class="doclist">
-<li> <i>VSCoq</i> is an extension for Visual Studio Code that offers a
+<li> <i>VsCoq</i> is an extension for Visual Studio Code that offers a
           simple interface via a familiar IDE.  This option is the
-          recommended default.
+          recommended default. If you installed Coq via the Coq
+          platform binary then can only use "VsCoq Legacy", which is
+          anyway the more stable version. If you instead use opam, you
+          can also try "VsCoq 2", which is a bit more experimental.
 
 <div class="paragraph"> </div>
 
-          VSCoq can be used as an ordinary IDE or it can be combined
-          with Docker (see below) for a lightweight installation
-          experience.
+          VsCoq can also be combined with Docker (see advanced option below).
 
 <div class="paragraph"> </div>
 
@@ -415,8 +418,10 @@
 </li>
 <li> <i>Proof General</i> is an Emacs-based IDE.  It tends to be
           preferred by users who are already comfortable with Emacs.
-          It requires a separate installation (google "Proof
-          General").
+          It requires a separate installation (google "Proof General",
+          but generally all you need to do is <span class="inlinecode"><span class="id" title="var">M</span>-<span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">package</span>-<span class="id" title="var">list</span>-<span class="id" title="var">packages</span></span>,
+          then select the <span class="inlinecode"><span class="id" title="var">proof</span>-<span class="id" title="var">general</span></span> package from the list and
+          hit the <span class="inlinecode"><span class="id" title="var">i</span></span> key for install, then hit the <span class="inlinecode"><span class="id" title="var">x</span></span> key for execute).
 
 <div class="paragraph"> </div>
 
@@ -450,7 +455,7 @@
 
 </li>
 </ul>
-<a id="lab9"></a><h3 class="section">Using Coq with VSCode and Docker</h3>
+<a id="lab9"></a><h3 class="section">Advanced option using Coq with VsCode and Docker</h3>
 
 <div class="paragraph"> </div>
 
@@ -491,11 +496,12 @@
 
 </li>
 <li> Set up a directory for this SF volume by downloading the
-      provided <span class="inlinecode">.<span class="id" title="var">tgz</span></span> file.  Besides the <span class="inlinecode">.<span class="id" title="var">v</span></span> file for each chapter,
-      this directory will contain a <span class="inlinecode">.<span class="id" title="var">devcontainer</span></span> subdirectory with
+      <span class="inlinecode">.<span class="id" title="var">tgz</span></span> file from <a href="https://softwarefoundations.cis.upenn.edu/lf-current/lf.tgz"><span class="inlineref" <a href='https://softwarefoundations.cis.upenn.edu/lf-current/lf.tgz</span></a>'>https://softwarefoundations.cis.upenn.edu/lf-current/lf.tgz</span></a></a>
+      and extracting the <span class="inlinecode">.<span class="id" title="var">devcontainer</span></span> subdirectory with
       instructions for VSCode about where to find an appropriate
-      Docker image and a <span class="inlinecode"><span class="id" title="var">_CoqProject</span></span> file, whose presence triggers
-      the VSCoq extension.
+      Docker image. Next to this subdirectory add the <span class="inlinecode">.<span class="id" title="var">v</span></span> files
+      we give out to you (in Bochum via Moodle) for each chapter
+      and our <span class="inlinecode"><span class="id" title="var">_CoqProject</span></span> file, whose presence triggers the VSCoq extension.
 
 <div class="paragraph"> </div>
 
