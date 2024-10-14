@@ -232,6 +232,23 @@ We can define new symbolic notations for existing definitions.
 </div>
 
 <div class="doc">
+This works for all datatypes with two constructors: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Inductive</span> <span class="id" title="var">bw</span> : <span class="id" title="keyword">Type</span> := <br/>
+&nbsp;&nbsp;| <span class="id" title="var">b</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">w</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">invert</span> (<span class="id" title="var">x</span>: <span class="id" title="var">bw</span>) : <span class="id" title="var">bw</span> := <br/>
+&nbsp;&nbsp;<span class="id" title="keyword">if</span> <span class="id" title="var">x</span> <span class="id" title="keyword">then</span> <span class="id" title="var">w</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">else</span> <span class="id" title="var">b</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Compute</span> (<span class="id" title="var">invert</span> <span class="id" title="var">b</span>).<br/>
+<span class="comment">(*&nbsp;==&gt;&nbsp;w:&nbsp;bw&nbsp;*)</span><br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Compute</span> (<span class="id" title="var">invert</span> <span class="id" title="var">w</span>).<br/>
+<span class="comment">(*&nbsp;==&gt;&nbsp;b:&nbsp;bw&nbsp;*)</span><br/>
+</div>
+
+<div class="doc">
 <a id="lab27"></a><h3 class="section"> </h3>
 <a id="lab28"></a><h4 class="section">Exercise: 1 star, standard (nandb)</h4>
 
