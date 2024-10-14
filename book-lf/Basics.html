@@ -410,14 +410,17 @@ Coq's conditionals are exactly like those found in any other
     in this case) and false if it evaluates to the second. 
 <div class="paragraph"> </div>
 
- For example we can define the following datatype <span class="inlinecode"><span class="id" title="var">bw</span></span>, with two constructors representing black (<span class="inlinecode"><span class="id" title="var">b</span></span>) and white (<span class="inlinecode"><span class="id" title="var">w</span></span>) and define a function <span class="inlinecode"><span class="id" title="var">invert</span></span> that inverts values of this type using a conditional. 
+ For example we can define the following datatype <span class="inlinecode"><span class="id" title="var">bw</span></span>, with
+    two constructors representing black (<span class="inlinecode"><span class="id" title="var">b</span></span>) and white (<span class="inlinecode"><span class="id" title="var">w</span></span>) and
+    define a function <span class="inlinecode"><span class="id" title="var">invert</span></span> that inverts values of this type using
+    a conditional. 
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Inductive</span> <a id="bw" class="idref" href="#bw"><span class="id" title="definition, inductive"><span id="bw_rect" class="id"><span id="bw_ind" class="id"><span id="bw_rec" class="id"><span id="bw_sind" class="id">bw</span></span></span></span></span></a> : <span class="id" title="keyword">Type</span> := <br/>
+<span class="id" title="keyword">Inductive</span> <a id="bw" class="idref" href="#bw"><span class="id" title="definition, inductive"><span id="bw_rect" class="id"><span id="bw_ind" class="id"><span id="bw_rec" class="id"><span id="bw_sind" class="id">bw</span></span></span></span></span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="b" class="idref" href="#b"><span class="id" title="constructor">b</span></a><br/>
 &nbsp;&nbsp;| <a id="w" class="idref" href="#w"><span class="id" title="constructor">w</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Definition</span> <a id="invert" class="idref" href="#invert"><span class="id" title="definition">invert</span></a> (<a id="x:22" class="idref" href="#x:22"><span class="id" title="binder">x</span></a>: <a class="idref" href="Basics.html#bw"><span class="id" title="inductive">bw</span></a>) : <a class="idref" href="Basics.html#bw"><span class="id" title="inductive">bw</span></a> := <br/>
+<span class="id" title="keyword">Definition</span> <a id="invert" class="idref" href="#invert"><span class="id" title="definition">invert</span></a> (<a id="x:22" class="idref" href="#x:22"><span class="id" title="binder">x</span></a>: <a class="idref" href="Basics.html#bw"><span class="id" title="inductive">bw</span></a>) : <a class="idref" href="Basics.html#bw"><span class="id" title="inductive">bw</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">if</span> <a class="idref" href="Basics.html#x:22"><span class="id" title="variable">x</span></a> <span class="id" title="keyword">then</span> <a class="idref" href="Basics.html#w"><span class="id" title="constructor">w</span></a><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">else</span> <a class="idref" href="Basics.html#b"><span class="id" title="constructor">b</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Compute</span> (<a class="idref" href="Basics.html#invert"><span class="id" title="definition">invert</span></a> <a class="idref" href="Basics.html#b"><span class="id" title="constructor">b</span></a>).<br/>
@@ -2693,7 +2696,7 @@ The following "unit tests" of your increment and binary-to-unary
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2024-10-14&nbsp;12:53&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2024-10-14&nbsp;13:25&nbsp;*)</span><br/>
 </div>
 </div>
 
