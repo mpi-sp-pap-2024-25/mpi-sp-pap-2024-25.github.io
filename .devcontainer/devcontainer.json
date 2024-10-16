@@ -1,0 +1,30 @@
+{
+  "name" : "Coq 8.18.0 - VSCoq - Github Codespaces",
+  "build": {
+    "dockerfile": "minimal.Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["maximedenes.vscoq"],
+      "settings": {
+        "coqtop.binPath" : "/home/coq/.opam/default/bin",
+        "files.exclude": {
+          "**/*.aux": true,
+          "**/*.glob": true,
+          "**/*.vo": true,
+          "**/*.vos": true,
+          "**/*.vok": true,
+          "**/*.html": true,
+          "**/.*.report": true,
+          "**/.*.cache": true
+        },
+        "coq.loadCoqProject": true,
+        "coq.coqProjectRoot": "exercises/.",
+        "[coq]": {
+          "editor.tabSize": 2,
+          "editor.insertSpaces": true
+        }
+      }
+    }
+  }
+}
