@@ -19,3 +19,6 @@
 *.report
 */.lia.cache
 *.reformat.v
+*.coq.d
+*.coq
+*.coq.conf
