@@ -1525,7 +1525,7 @@ We can use the <span class="inlinecode"><span class="id" title="tactic">rewrite<
 
 
 <div class="doc">
-<a id="lab36"></a><h1 class="section">Proof by Case Analysis</h1>
+<a id="lab36"></a><h1 class="section">Proof by Case Analysis (Optional in this chapter, repeated as non-optional material in next chapter)</h1>
 
 <div class="paragraph"> </div>
 
@@ -1752,7 +1752,7 @@ Since curly braces mark both the beginning and the end of a proof,
 </div>
 
 <div class="doc">
-<a id="lab37"></a><h4 class="section">Exercise: 2 stars, standard (andb_true_elim2)</h4>
+<a id="lab37"></a><h4 class="section">Exercise: 2 stars, standard, optional (andb_true_elim2)</h4>
  Prove the following claim, marking cases (and subcases) with
     bullets when you use <span class="inlinecode"><span class="id" title="tactic">destruct</span></span>.
 
@@ -1820,7 +1820,7 @@ If there are no constructor arguments that need names, we can just
 </div>
 
 <div class="doc">
-<a id="lab38"></a><h4 class="section">Exercise: 1 star, standard (zero_nbeq_plus_1)</h4>
+<a id="lab38"></a><h4 class="section">Exercise: 1 star, standard, optional (zero_nbeq_plus_1)</h4>
 
 </div>
 <div class="code">
@@ -1973,7 +1973,7 @@ When Coq checks this definition, it notes that <span class="inlinecode"><span cl
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab45"></a><h4 class="section">Exercise: 1 star, standard (negation_fn_applied_twice)</h4>
+<a id="lab45"></a><h4 class="section">Exercise: 1 star, standard, optional (negation_fn_applied_twice)</h4>
  Now state and prove a theorem <span class="inlinecode"><span class="id" title="var">negation_fn_applied_twice</span></span> similar
     to the previous one but where the second hypothesis says that the
     function <span class="inlinecode"><span class="id" title="var">f</span></span> has the property that <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">negb</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span>. 
@@ -2149,7 +2149,7 @@ We can test the <span class="inlinecode"><span class="id" title="var">letter_com
 
  As a further sanity check, we can prove that the
     <span class="inlinecode"><span class="id" title="var">letter_comparison</span></span> function does indeed give the result <span class="inlinecode"><span class="id" title="var">Eq</span></span> when
-    comparing a letter <span class="inlinecode"><span class="id" title="var">l</span></span> against itself.  <a id="lab48"></a><h4 class="section">Exercise: 1 star, standard (letter_comparison)</h4>
+    comparing a letter <span class="inlinecode"><span class="id" title="var">l</span></span> against itself.  <a id="lab48"></a><h4 class="section">Exercise: 1 star, standard, optional (letter_comparison)</h4>
 
 </div>
 <div class="code">
@@ -2285,7 +2285,7 @@ With this insight, we can state a better version of the lower
     letter theorem that actually is provable.  In this version, the
     hypothesis about <span class="inlinecode"><span class="id" title="var">F</span></span> says that <span class="inlinecode"><span class="id" title="var">F</span></span> is strictly smaller than <span class="inlinecode"><span class="id" title="var">l</span></span>,
     which rules out the problematic case above. In other words, as
-    long as <span class="inlinecode"><span class="id" title="var">l</span></span> is bigger than <span class="inlinecode"><span class="id" title="var">F</span></span>, it will be lowered. <a id="lab50"></a><h4 class="section">Exercise: 2 stars, standard (lower_letter_lowers)</h4>
+    long as <span class="inlinecode"><span class="id" title="var">l</span></span> is bigger than <span class="inlinecode"><span class="id" title="var">F</span></span>, it will be lowered. <a id="lab50"></a><h4 class="section">Exercise: 2 stars, standard, optional (lower_letter_lowers)</h4>
  Prove the following theorem. 
 </div>
 <div class="code">
@@ -2379,7 +2379,7 @@ Coq makes no distinction between an <span class="inlinecode"><span class="id" ti
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab52"></a><h4 class="section">Exercise: 3 stars, standard (lower_grade_lowers)</h4>
+<a id="lab52"></a><h4 class="section">Exercise: 3 stars, standard, optional (lower_grade_lowers)</h4>
  Prove the following theorem, which says that, as long as the grade
     starts out above F-, the <span class="inlinecode"><span class="id" title="var">lower_grade</span></span> option does indeed lower
     the grade.  As usual, destructing everything in sight is <i>not</i> a
@@ -2612,10 +2612,11 @@ The following "unit tests" of your increment and binary-to-unary
 <div class="paragraph"> </div>
 
     The test file for this chapter is <span class="inlinecode"><span class="id" title="var">BasicsTest.v</span></span>. To run it, make
-    sure you have saved <span class="inlinecode"><span class="id" title="var">Basics.v</span></span> to disk.  Then do this: <span class="inlinecode">[</span> <span class="inlinecode"><span class="id" title="var">coqc</span></span> <span class="inlinecode">-<span class="id" title="var">Q</span></span>
-    <span class="inlinecode">.</span> <span class="inlinecode"><span class="id" title="var">LF</span></span> <span class="inlinecode"><span class="id" title="var">Basics.v</span></span> <span class="inlinecode"><span class="id" title="var">coqc</span></span> <span class="inlinecode">-<span class="id" title="var">Q</span></span> <span class="inlinecode">.</span> <span class="inlinecode"><span class="id" title="var">LF</span></span> <span class="inlinecode"><span class="id" title="var">BasicsTest.v</span></span> <span class="inlinecode">]</span> (Make sure you do this
-    in a directory that also contains a file named <span class="inlinecode"><span class="id" title="var">_CoqProject</span></span>
-    containing the single line <span class="inlinecode">-<span class="id" title="var">Q</span></span> <span class="inlinecode">.</span> <span class="inlinecode"><span class="id" title="var">LF</span></span>.)
+    sure you have saved <span class="inlinecode"><span class="id" title="var">Basics.v</span></span> to disk.  Then first run
+    <span class="inlinecode"><span class="id" title="var">coqc</span></span> <span class="inlinecode">-<span class="id" title="var">Q</span></span> <span class="inlinecode">.</span> <span class="inlinecode"><span class="id" title="var">LF</span></span> <span class="inlinecode"><span class="id" title="var">Basics.v</span></span> and then run <span class="inlinecode"><span class="id" title="var">coqc</span></span> <span class="inlinecode">-<span class="id" title="var">Q</span></span> <span class="inlinecode">.</span> <span class="inlinecode"><span class="id" title="var">LF</span></span> <span class="inlinecode"><span class="id" title="var">BasicsTest.v</span></span>;
+    or, if you have make installed, you can run <span class="inlinecode"><span class="id" title="var">make</span></span> <span class="inlinecode"><span class="id" title="var">BasicsTest.vo</span></span>.
+    (Make sure you do this in a directory that also contains a file
+    named <span class="inlinecode"><span class="id" title="var">_CoqProject</span></span> containing the single line <span class="inlinecode">-<span class="id" title="var">Q</span></span> <span class="inlinecode">.</span> <span class="inlinecode"><span class="id" title="var">LF</span></span>.)
 
 <div class="paragraph"> </div>
 
@@ -2696,7 +2697,7 @@ The following "unit tests" of your increment and binary-to-unary
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2024-10-14&nbsp;13:25&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2024-10-30&nbsp;15:55&nbsp;*)</span><br/>
 </div>
 </div>
 
