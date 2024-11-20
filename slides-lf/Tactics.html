@@ -36,7 +36,7 @@
 
 
 <div class="doc">
-<a id="lab144"></a><h1 class="section">The <span class="inlinecode"><span class="id" title="tactic">apply</span></span> Tactic</h1>
+<a id="lab148"></a><h1 class="section">The <span class="inlinecode"><span class="id" title="tactic">apply</span></span> Tactic</h1>
 
 <div class="paragraph"> </div>
 
@@ -63,7 +63,7 @@ Here, we could finish with "<span class="inlinecode"><span class="id" title="tac
 </div>
 
 <div class="doc">
-<a id="lab145"></a><h3 class="section"> </h3>
+<a id="lab149"></a><h3 class="section"> </h3>
  <span class="inlinecode"><span class="id" title="tactic">apply</span></span> also works with <i>conditional</i> hypotheses: 
 </div>
 <div class="code">
@@ -78,7 +78,7 @@ Here, we could finish with "<span class="inlinecode"><span class="id" title="tac
 </div>
 
 <div class="doc">
-<a id="lab146"></a><h3 class="section"> </h3>
+<a id="lab150"></a><h3 class="section"> </h3>
  Observe how Coq picks appropriate values for the
     <span class="inlinecode"><span class="id" title="keyword">∀</span></span>-quantified variables of the hypothesis: 
 </div>
@@ -94,7 +94,7 @@ Here, we could finish with "<span class="inlinecode"><span class="id" title="tac
 </div>
 
 <div class="doc">
-<a id="lab147"></a><h3 class="section"> </h3>
+<a id="lab151"></a><h3 class="section"> </h3>
  The goal must match the hypothesis <i>exactly</i> for <span class="inlinecode"><span class="id" title="tactic">apply</span></span> to
     work: 
 </div>
@@ -125,7 +125,7 @@ but we can use the <span class="inlinecode"><span class="id" title="tactic">symm
 </div>
 
 <div class="doc">
-<a id="lab148"></a><h1 class="section">The <span class="inlinecode"><span class="id" title="tactic">apply</span></span> <span class="inlinecode"><span class="id" title="keyword">with</span></span> Tactic</h1>
+<a id="lab152"></a><h1 class="section">The <span class="inlinecode"><span class="id" title="tactic">apply</span></span> <span class="inlinecode"><span class="id" title="keyword">with</span></span> Tactic</h1>
 
 <div class="paragraph"> </div>
 
@@ -144,7 +144,7 @@ but we can use the <span class="inlinecode"><span class="id" title="tactic">symm
 </div>
 
 <div class="doc">
-<a id="lab149"></a><h3 class="section"> </h3>
+<a id="lab153"></a><h3 class="section"> </h3>
  Since this is a common pattern, we might like to pull it out as a
     lemma that records, once and for all, the fact that equality is
     transitive. 
@@ -159,7 +159,7 @@ but we can use the <span class="inlinecode"><span class="id" title="tactic">symm
 </div>
 
 <div class="doc">
-<a id="lab150"></a><h3 class="section"> </h3>
+<a id="lab154"></a><h3 class="section"> </h3>
  Applying this lemma to the example above requires a slight
     refinement of <span class="inlinecode"><span class="id" title="tactic">apply</span></span>: 
 </div>
@@ -189,7 +189,7 @@ does.
 </div>
 
 <div class="doc">
-<a id="lab151"></a><h3 class="section"> </h3>
+<a id="lab155"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -208,7 +208,7 @@ does.
 </div>
 
 <div class="doc">
-<a id="lab152"></a><h1 class="section">The <span class="inlinecode"><span class="id" title="tactic">injection</span></span> and <span class="inlinecode"><span class="id" title="tactic">discriminate</span></span> Tactics</h1>
+<a id="lab156"></a><h1 class="section">The <span class="inlinecode"><span class="id" title="tactic">injection</span></span> and <span class="inlinecode"><span class="id" title="tactic">discriminate</span></span> Tactics</h1>
 
 <div class="paragraph"> </div>
 
@@ -235,7 +235,7 @@ does.
  
 <div class="paragraph"> </div>
 
-<a id="lab153"></a><h3 class="section"> </h3>
+<a id="lab157"></a><h3 class="section"> </h3>
  We can <i>prove</i> the injectivity of <span class="inlinecode"><span class="id" title="var">S</span></span> by using the <span class="inlinecode"><span class="id" title="var">pred</span></span> function
     defined in <span class="inlinecode"><span class="id" title="var">Basics.v</span></span>. 
 </div>
@@ -252,7 +252,7 @@ does.
 </div>
 
 <div class="doc">
-<a id="lab154"></a><h3 class="section"> </h3>
+<a id="lab158"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -271,7 +271,7 @@ does.
 </div>
 
 <div class="doc">
-<a id="lab155"></a><h3 class="section"> </h3>
+<a id="lab159"></a><h3 class="section"> </h3>
  Here's a more interesting example that shows how <span class="inlinecode"><span class="id" title="tactic">injection</span></span> can
     derive multiple equations at once. 
 </div>
@@ -286,7 +286,7 @@ does.
 </div>
 
 <div class="doc">
-<a id="lab156"></a><h3 class="section"> </h3>
+<a id="lab160"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -297,7 +297,7 @@ does.
     <span class="inlinecode"><span class="id" title="var">O</span></span> and <span class="inlinecode"><span class="id" title="var">S</span></span>, or <span class="inlinecode"><span class="id" title="var">true</span></span> and <span class="inlinecode"><span class="id" title="var">false</span></span>) can never be equal! 
 <div class="paragraph"> </div>
 
-<a id="lab157"></a><h3 class="section"> </h3>
+<a id="lab161"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -326,7 +326,7 @@ These examples are instances of a logical principle known as the
     hypothesis entails anything (even manifestly false things!). 
 <div class="paragraph"> </div>
 
-<a id="lab158"></a><h3 class="section"> </h3>
+<a id="lab162"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -442,7 +442,7 @@ Finally, suppose Coq's proof state looks like
 </div> <!-- /quiz -->
 
 <div class="doc">
-<a id="lab159"></a><h3 class="section"> </h3>
+<a id="lab163"></a><h3 class="section"> </h3>
  The injectivity of constructors allows us to reason that
     <span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode">(<span class="id" title="var">n</span></span> <span class="inlinecode"><span class="id" title="var">m</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">nat</span>),</span> <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">m</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">m</span></span>.  The converse of this
     implication is an instance of a more general fact about both
@@ -470,7 +470,7 @@ Coq also provides an <span class="inlinecode"><span class="id" title="tactic">f_
 </div>
 
 <div class="doc">
-<a id="lab160"></a><h1 class="section">Using Tactics on Hypotheses</h1>
+<a id="lab164"></a><h1 class="section">Using Tactics on Hypotheses</h1>
 
 <div class="paragraph"> </div>
 
@@ -487,7 +487,7 @@ Coq also provides an <span class="inlinecode"><span class="id" title="tactic">f_
 </div>
 
 <div class="doc">
-<a id="lab161"></a><h3 class="section"> </h3>
+<a id="lab165"></a><h3 class="section"> </h3>
  The ordinary <span class="inlinecode"><span class="id" title="tactic">apply</span></span> tactic is a form of "backward
     reasoning."  It says "We're trying to prove <span class="inlinecode"><span class="id" title="var">X</span></span> and we know
     <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">X</span></span>, so if we can prove <span class="inlinecode"><span class="id" title="var">Y</span></span> we'll be done."
@@ -510,7 +510,7 @@ Coq also provides an <span class="inlinecode"><span class="id" title="tactic">f_
 </div>
 
 <div class="doc">
-<a id="lab162"></a><h1 class="section">Specializing Hypotheses</h1>
+<a id="lab166"></a><h1 class="section">Specializing Hypotheses</h1>
 
 <div class="paragraph"> </div>
 
@@ -576,7 +576,7 @@ Note:
 </div>
 
 <div class="doc">
-<a id="lab163"></a><h1 class="section">Varying the Induction Hypothesis</h1>
+<a id="lab167"></a><h1 class="section">Varying the Induction Hypothesis</h1>
 
 <div class="paragraph"> </div>
 
@@ -593,7 +593,7 @@ Note:
 </div>
 
 <div class="doc">
-<a id="lab164"></a><h3 class="section"> </h3>
+<a id="lab168"></a><h3 class="section"> </h3>
  Suppose we want to show that <span class="inlinecode"><span class="id" title="var">double</span></span> is injective (i.e.,
     it maps different arguments to different results).  The way we
     <i>start</i> this proof is a little bit delicate: 
@@ -624,7 +624,7 @@ At this point, the induction hypothesis (<span class="inlinecode"><span class="i
 </div>
 
 <div class="doc">
-<a id="lab165"></a><h3 class="section"> </h3>
+<a id="lab169"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -637,7 +637,7 @@ At this point, the induction hypothesis (<span class="inlinecode"><span class="i
     <span class="inlinecode"><span class="id" title="var">m</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab166"></a><h3 class="section"> </h3>
+<a id="lab170"></a><h3 class="section"> </h3>
  A successful proof of <span class="inlinecode"><span class="id" title="var">double_injective</span></span> leaves <span class="inlinecode"><span class="id" title="var">m</span></span> universally
     quantified in the goal statement at the point where the
     <span class="inlinecode"><span class="id" title="tactic">induction</span></span> tactic is invoked on <span class="inlinecode"><span class="id" title="var">n</span></span>: 
@@ -663,7 +663,7 @@ At this point, the induction hypothesis (<span class="inlinecode"><span class="i
 </div>
 
 <div class="doc">
-<a id="lab167"></a><h3 class="section"> </h3>
+<a id="lab171"></a><h3 class="section"> </h3>
  The thing to take away from all this is that you need to be
     careful, when using induction, that you are not trying to prove
     something too specific: When proving a property quantified over
@@ -682,7 +682,7 @@ At this point, the induction hypothesis (<span class="inlinecode"><span class="i
 </div>
 
 <div class="doc">
-<a id="lab168"></a><h3 class="section"> </h3>
+<a id="lab172"></a><h3 class="section"> </h3>
  The strategy of doing fewer <span class="inlinecode"><span class="id" title="tactic">intros</span></span> before an <span class="inlinecode"><span class="id" title="tactic">induction</span></span> to
     obtain a more general IH doesn't always work; sometimes some
     <i>rearrangement</i> of quantified variables is needed.  Suppose, for
@@ -707,7 +707,7 @@ At this point, the induction hypothesis (<span class="inlinecode"><span class="i
 </div>
 
 <div class="doc">
-<a id="lab169"></a><h3 class="section"> </h3>
+<a id="lab173"></a><h3 class="section"> </h3>
  The problem is that, to do induction on <span class="inlinecode"><span class="id" title="var">m</span></span>, we must first
     introduce <span class="inlinecode"><span class="id" title="var">n</span></span>.  (If we simply say <span class="inlinecode"><span class="id" title="tactic">induction</span></span> <span class="inlinecode"><span class="id" title="var">m</span></span> without
     introducing anything first, Coq will automatically introduce <span class="inlinecode"><span class="id" title="var">n</span></span>
@@ -722,7 +722,7 @@ At this point, the induction hypothesis (<span class="inlinecode"><span class="i
     most natural way. 
 <div class="paragraph"> </div>
 
-<a id="lab170"></a><h3 class="section"> </h3>
+<a id="lab174"></a><h3 class="section"> </h3>
  What we can do instead is to first introduce all the quantified
     variables and then <i>re-generalize</i> one or more of them,
     selectively taking variables out of the context and putting them
@@ -751,7 +751,7 @@ At this point, the induction hypothesis (<span class="inlinecode"><span class="i
 </div>
 
 <div class="doc">
-<a id="lab171"></a><h1 class="section">Unfolding Definitions</h1>
+<a id="lab175"></a><h1 class="section">Unfolding Definitions</h1>
 
 <div class="paragraph"> </div>
 
@@ -785,7 +785,7 @@ At this point, the induction hypothesis (<span class="inlinecode"><span class="i
     nothing we can <span class="inlinecode"><span class="id" title="tactic">apply</span></span> or <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> with. 
 <div class="paragraph"> </div>
 
-<a id="lab172"></a><h3 class="section"> </h3>
+<a id="lab176"></a><h3 class="section"> </h3>
  To make progress, we can manually <span class="inlinecode"><span class="id" title="tactic">unfold</span></span> the definition of
     <span class="inlinecode"><span class="id" title="var">square</span></span>: 
 </div>
@@ -811,7 +811,7 @@ Now we have plenty to work with: both sides of the equality are
 </div>
 
 <div class="doc">
-<a id="lab173"></a><h3 class="section"> </h3>
+<a id="lab177"></a><h3 class="section"> </h3>
  At this point, a bit deeper discussion of unfolding and
     simplification is in order.
 
@@ -844,7 +844,7 @@ Now we have plenty to work with: both sides of the equality are
 </div>
 
 <div class="doc">
-<a id="lab174"></a><h3 class="section"> </h3>
+<a id="lab178"></a><h3 class="section"> </h3>
  But this automatic unfolding is somewhat conservative.  For
     example, if we define a slightly more complicated function
     involving a pattern match... 
@@ -886,7 +886,7 @@ The reason that <span class="inlinecode"><span class="id" title="tactic">simpl</
     <span class="inlinecode"><span class="id" title="tactic">simpl</span></span> leaves it alone. 
 <div class="paragraph"> </div>
 
-<a id="lab175"></a><h3 class="section"> </h3>
+<a id="lab179"></a><h3 class="section"> </h3>
  There are now two ways make progress.
 
 <div class="paragraph"> </div>
@@ -910,7 +910,7 @@ This approach works, but it depends on our recognizing that the
     progress. 
 <div class="paragraph"> </div>
 
-<a id="lab176"></a><h3 class="section"> </h3>
+<a id="lab180"></a><h3 class="section"> </h3>
  (2) Explicitly tell Coq to unfold <span class="inlinecode"><span class="id" title="var">bar</span></span>. 
 </div>
 <div class="code">
@@ -935,7 +935,7 @@ Now it is apparent that we are stuck on the <span class="inlinecode"><span class
 </div>
 
 <div class="doc">
-<a id="lab177"></a><h1 class="section">Using <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> on Compound Expressions</h1>
+<a id="lab181"></a><h1 class="section">Using <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> on Compound Expressions</h1>
 
 <div class="paragraph"> </div>
 
@@ -960,7 +960,7 @@ Now it is apparent that we are stuck on the <span class="inlinecode"><span class
 </div>
 
 <div class="doc">
-<a id="lab178"></a><h3 class="section"> </h3>
+<a id="lab182"></a><h3 class="section"> </h3>
  The <span class="inlinecode"><span class="id" title="var">eqn</span>:</span> part of the <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> tactic is optional; although
     we've chosen to include it most of the time, for the sake of
     documentation, it can often be omitted without harm.
@@ -989,7 +989,7 @@ Now it is apparent that we are stuck on the <span class="inlinecode"><span class
 </div>
 
 <div class="doc">
-<a id="lab179"></a><h3 class="section"> </h3>
+<a id="lab183"></a><h3 class="section"> </h3>
  Adding the <span class="inlinecode"><span class="id" title="var">eqn</span>:</span> qualifier saves this information so we
     can use it. 
 </div>
@@ -1012,7 +1012,7 @@ Now it is apparent that we are stuck on the <span class="inlinecode"><span class
 </div>
 
 <div class="doc">
-<a id="lab180"></a><h1 class="section">Micro Sermon</h1>
+<a id="lab184"></a><h1 class="section">Micro Sermon</h1>
 
 <div class="paragraph"> </div>
 

@@ -59,7 +59,7 @@
 </div>
 
 <div class="doc">
-<a id="lab302"></a><h1 class="section">The Coq Standard Library</h1>
+<a id="lab310"></a><h1 class="section">The Coq Standard Library</h1>
 
 <div class="paragraph"> </div>
 
@@ -100,7 +100,7 @@ We'll see some more uses of <span class="inlinecode"><span class="id" title="key
 </div>
 
 <div class="doc">
-<a id="lab303"></a><h1 class="section">Identifiers</h1>
+<a id="lab311"></a><h1 class="section">Identifiers</h1>
 
 <div class="paragraph"> </div>
 
@@ -120,7 +120,7 @@ We'll see some more uses of <span class="inlinecode"><span class="id" title="key
 </div>
 
 <div class="doc">
-<a id="lab304"></a><h3 class="section"> </h3>
+<a id="lab312"></a><h3 class="section"> </h3>
  We will often use a few basic properties of string equality... 
 </div>
 <div class="code">
@@ -133,7 +133,7 @@ We'll see some more uses of <span class="inlinecode"><span class="id" title="key
 </div>
 
 <div class="doc">
-<a id="lab305"></a><h1 class="section">Total Maps</h1>
+<a id="lab313"></a><h1 class="section">Total Maps</h1>
 
 <div class="paragraph"> </div>
 
@@ -152,7 +152,7 @@ We'll see some more uses of <span class="inlinecode"><span class="id" title="key
     that use maps. 
 <div class="paragraph"> </div>
 
-<a id="lab306"></a><h3 class="section"> </h3>
+<a id="lab314"></a><h3 class="section"> </h3>
  We build up to partial maps in two steps.  First, we define a type
     of <i>total maps</i> that return a default value when we look up a key
     that is not present in the map. 
@@ -167,7 +167,7 @@ Intuitively, a total map over an element type <span class="inlinecode"><span cla
     function that can be used to look up <span class="inlinecode"><span class="id" title="var">string</span></span>s, yielding <span class="inlinecode"><span class="id" title="var">A</span></span>s. 
 <div class="paragraph"> </div>
 
-<a id="lab307"></a><h3 class="section"> </h3>
+<a id="lab315"></a><h3 class="section"> </h3>
  The function <span class="inlinecode"><span class="id" title="var">t_empty</span></span> yields an empty total map, given a default
     element; this map always returns the default element when applied
     to any string. 
@@ -179,7 +179,7 @@ Intuitively, a total map over an element type <span class="inlinecode"><span cla
 </div>
 
 <div class="doc">
-<a id="lab308"></a><h3 class="section"> </h3>
+<a id="lab316"></a><h3 class="section"> </h3>
  More interesting is the map-updating function, which (as always)
     takes a map <span class="inlinecode"><span class="id" title="var">m</span></span>, a key <span class="inlinecode"><span class="id" title="var">x</span></span>, and a value <span class="inlinecode"><span class="id" title="var">v</span></span> and returns a new map
     that takes <span class="inlinecode"><span class="id" title="var">x</span></span> to <span class="inlinecode"><span class="id" title="var">v</span></span> and takes every other key to whatever <span class="inlinecode"><span class="id" title="var">m</span></span>
@@ -199,7 +199,7 @@ This definition is a nice example of higher-order programming:
     <span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">x'</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode">...</span> that behaves like the desired map. 
 <div class="paragraph"> </div>
 
-<a id="lab309"></a><h3 class="section"> </h3>
+<a id="lab317"></a><h3 class="section"> </h3>
  For example, we can build a map taking <span class="inlinecode"><span class="id" title="var">string</span></span>s to <span class="inlinecode"><span class="id" title="var">bool</span></span>s, where
     <span class="inlinecode">&quot;<span class="id" title="var">foo</span>&quot;</span> and <span class="inlinecode">&quot;<span class="id" title="var">bar</span>&quot;</span> are mapped to <span class="inlinecode"><span class="id" title="var">true</span></span> and every other key is
     mapped to <span class="inlinecode"><span class="id" title="var">false</span></span>, like this: 
@@ -212,7 +212,7 @@ This definition is a nice example of higher-order programming:
 </div>
 
 <div class="doc">
-<a id="lab310"></a><h3 class="section"> </h3>
+<a id="lab318"></a><h3 class="section"> </h3>
  Next, let's introduce some notations to facilitate working with
     maps. 
 <div class="paragraph"> </div>
@@ -227,7 +227,7 @@ This definition is a nice example of higher-order programming:
 </div>
 
 <div class="doc">
-<a id="lab311"></a><h3 class="section"> </h3>
+<a id="lab319"></a><h3 class="section"> </h3>
  We next introduce a convenient notation for extending an existing
     map with a new binding. 
 </div>
@@ -237,7 +237,7 @@ This definition is a nice example of higher-order programming:
 </div>
 
 <div class="doc">
-<a id="lab312"></a><h3 class="section"> </h3>
+<a id="lab320"></a><h3 class="section"> </h3>
  The <span class="inlinecode"><span class="id" title="var">examplemap</span></span> above can now be defined as follows: 
 </div>
 <div class="code">
@@ -250,7 +250,7 @@ This definition is a nice example of higher-order programming:
 </div>
 
 <div class="doc">
-<a id="lab313"></a><h3 class="section"> </h3>
+<a id="lab321"></a><h3 class="section"> </h3>
  When we use maps in later chapters, we'll need several fundamental
     facts about how they behave. 
 <div class="paragraph"> </div>
@@ -298,7 +298,7 @@ This definition is a nice example of higher-order programming:
 </div>
 
 <div class="doc">
-<a id="lab318"></a><h3 class="section"> </h3>
+<a id="lab326"></a><h3 class="section"> </h3>
   
 </div>
 <div class="code">
@@ -326,7 +326,7 @@ This definition is a nice example of higher-order programming:
 </div>
 
 <div class="doc">
-<a id="lab321"></a><h1 class="section">Partial maps</h1>
+<a id="lab329"></a><h1 class="section">Partial maps</h1>
 
 <div class="paragraph"> </div>
 
@@ -345,7 +345,7 @@ This definition is a nice example of higher-order programming:
 </div>
 
 <div class="doc">
-<a id="lab322"></a><h3 class="section"> </h3>
+<a id="lab330"></a><h3 class="section"> </h3>
  We introduce a similar notation for partial maps: 
 </div>
 <div class="code">
@@ -364,7 +364,7 @@ We can also hide the last case when it is empty.
 </div>
 
 <div class="doc">
-<a id="lab323"></a><h3 class="section"> </h3>
+<a id="lab331"></a><h3 class="section"> </h3>
  We now straightforwardly lift all of the basic lemmas about total
     maps to partial maps.  
 </div>
@@ -391,7 +391,7 @@ We can also hide the last case when it is empty.
 </div>
 
 <div class="doc">
-<a id="lab324"></a><h3 class="section"> </h3>
+<a id="lab332"></a><h3 class="section"> </h3>
  One last thing: For partial maps, it's convenient to introduce a
     notion of map inclusion, stating that all the entries in one map
     are also present in another: 

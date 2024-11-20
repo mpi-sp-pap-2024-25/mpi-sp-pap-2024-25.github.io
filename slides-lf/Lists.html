@@ -36,7 +36,7 @@
 
 
 <div class="doc">
-<a id="lab82"></a><h1 class="section">Pairs of Numbers</h1>
+<a id="lab84"></a><h1 class="section">Pairs of Numbers</h1>
 
 <div class="paragraph"> </div>
 
@@ -51,7 +51,7 @@
 </div>
 
 <div class="doc">
-<a id="lab83"></a><h3 class="section"> </h3>
+<a id="lab85"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -73,7 +73,7 @@
 </div>
 
 <div class="doc">
-<a id="lab84"></a><h3 class="section"> </h3>
+<a id="lab86"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -106,7 +106,7 @@ The new notation can be used both in expressions and in pattern
 </div>
 
 <div class="doc">
-<a id="lab85"></a><h3 class="section"> </h3>
+<a id="lab87"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -123,7 +123,7 @@ The new notation can be used both in expressions and in pattern
 </div>
 
 <div class="doc">
-<a id="lab86"></a><h3 class="section"> </h3>
+<a id="lab88"></a><h3 class="section"> </h3>
  But just <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span> is not enough if we state the lemma in a more
     natural way: 
 </div>
@@ -137,7 +137,7 @@ The new notation can be used both in expressions and in pattern
 </div>
 
 <div class="doc">
-<a id="lab87"></a><h3 class="section"> </h3>
+<a id="lab89"></a><h3 class="section"> </h3>
  Solution: use <span class="inlinecode"><span class="id" title="tactic">destruct</span></span>. 
 </div>
 <div class="code">
@@ -149,7 +149,7 @@ The new notation can be used both in expressions and in pattern
 </div>
 
 <div class="doc">
-<a id="lab88"></a><h1 class="section">Lists of Numbers</h1>
+<a id="lab90"></a><h1 class="section">Lists of Numbers</h1>
 
 <div class="paragraph"> </div>
 
@@ -164,7 +164,7 @@ The new notation can be used both in expressions and in pattern
 </div>
 
 <div class="doc">
-<a id="lab89"></a><h3 class="section"> </h3>
+<a id="lab91"></a><h3 class="section"> </h3>
  Some notation for lists to make our lives easier: 
 </div>
 <div class="code">
@@ -189,7 +189,7 @@ Now these all mean exactly the same thing:
 Some useful list-manipulation functions... 
 <div class="paragraph"> </div>
 
-<a id="lab90"></a><h3 class="section">Repeat</h3>
+<a id="lab92"></a><h3 class="section">Repeat</h3>
 
 </div>
 <div class="code">
@@ -202,7 +202,7 @@ Some useful list-manipulation functions...
 </div>
 
 <div class="doc">
-<a id="lab91"></a><h3 class="section">Length</h3>
+<a id="lab93"></a><h3 class="section">Length</h3>
 
 </div>
 <div class="code">
@@ -215,7 +215,7 @@ Some useful list-manipulation functions...
 </div>
 
 <div class="doc">
-<a id="lab92"></a><h3 class="section">Append</h3>
+<a id="lab94"></a><h3 class="section">Append</h3>
 
 </div>
 <div class="code">
@@ -236,7 +236,7 @@ Some useful list-manipulation functions...
 </div>
 
 <div class="doc">
-<a id="lab93"></a><h3 class="section">Head and Tail</h3>
+<a id="lab95"></a><h3 class="section">Head and Tail</h3>
 
 </div>
 <div class="code">
@@ -274,7 +274,7 @@ What does the following function do?
 </div></div> <!-- /quiz -->
 
 <div class="doc">
-<a id="lab94"></a><h1 class="section">Reasoning About Lists</h1>
+<a id="lab96"></a><h1 class="section">Reasoning About Lists</h1>
 
 <div class="paragraph"> </div>
 
@@ -289,7 +289,7 @@ What does the following function do?
 </div>
 
 <div class="doc">
-<a id="lab95"></a><h3 class="section"> </h3>
+<a id="lab97"></a><h3 class="section"> </h3>
  ...and some need case analysis. 
 </div>
 <div class="code">
@@ -310,7 +310,7 @@ Usually, though, interesting theorems about lists require
 </div>
 
 <div class="doc">
-<a id="lab96"></a><h2 class="section">Induction on Lists</h2>
+<a id="lab98"></a><h2 class="section">Induction on Lists</h2>
 
 <div class="paragraph"> </div>
 
@@ -331,7 +331,7 @@ Usually, though, interesting theorems about lists require
 </div>
 
 <div class="doc">
-<a id="lab97"></a><h3 class="section"> </h3>
+<a id="lab99"></a><h3 class="section"> </h3>
  For comparison, here is an informal proof of the same theorem. 
 <div class="paragraph"> </div>
 
@@ -369,7 +369,52 @@ Usually, though, interesting theorems about lists require
 
 <div class="paragraph"> </div>
 
-<a id="lab98"></a><h3 class="section">Reversing a List</h3>
+<a id="lab100"></a><h3 class="section">Generalizing Statements</h3>
+
+<div class="paragraph"> </div>
+
+ Sometimes statements need to be generalized to proof them by
+induction:  
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">repeat_double_firsttry</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">c</span> <span class="id" title="var">n</span>: <span class="id" title="var">nat</span>,<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="var">n</span> <span class="id" title="var">c</span> ++ <span class="id" title="tactic">repeat</span> <span class="id" title="var">n</span> <span class="id" title="var">c</span> = <span class="id" title="tactic">repeat</span> <span class="id" title="var">n</span> (<span class="id" title="var">c</span> + <span class="id" title="var">c</span>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">c</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">c</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">c'</span> <span class="id" title="var">IHc'</span>].<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;c&nbsp;=&nbsp;0&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span>. <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;c&nbsp;=&nbsp;S&nbsp;c'&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span>. <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;&nbsp;Now,&nbsp;we&nbsp;seem&nbsp;stuck.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;IH&nbsp;cannot&nbsp;be&nbsp;used&nbsp;to&nbsp;rewrite&nbsp;<span class="inlinecode"><span class="id" title="tactic">repeat</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">(<span class="id" title="var">c'</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">c'</span>)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;but&nbsp;would&nbsp;only&nbsp;work&nbsp;for&nbsp;<span class="inlinecode"><span class="id" title="tactic">repeat</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">(<span class="id" title="var">c'</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">c'</span>)</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;the&nbsp;IH&nbsp;would&nbsp;be&nbsp;more&nbsp;liberal&nbsp;here<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(e.g.,&nbsp;work&nbsp;for&nbsp;an&nbsp;arbitrary&nbsp;second&nbsp;summand)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;proof&nbsp;would&nbsp;go&nbsp;through.&nbsp;*)</span><br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+</div>
+
+<div class="doc">
+A generalization of the statement that gives a stronger
+inductive hypothesis: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">repeat_plus</span>: <span class="id" title="keyword">∀</span> <span class="id" title="var">c<sub>1</sub></span> <span class="id" title="var">c<sub>2</sub></span> <span class="id" title="var">n</span>: <span class="id" title="var">nat</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="var">n</span> <span class="id" title="var">c<sub>1</sub></span> ++ <span class="id" title="tactic">repeat</span> <span class="id" title="var">n</span> <span class="id" title="var">c<sub>2</sub></span> = <span class="id" title="tactic">repeat</span> <span class="id" title="var">n</span> (<span class="id" title="var">c<sub>1</sub></span> + <span class="id" title="var">c<sub>2</sub></span>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">c<sub>1</sub></span> <span class="id" title="var">c<sub>2</sub></span> <span class="id" title="var">n</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">c<sub>1</sub></span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">c<sub>1</sub>'</span> <span class="id" title="var">IHc1'</span>].<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- <span class="id" title="var">IHc1'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab101"></a><h3 class="section">Reversing a List</h3>
 
 <div class="paragraph"> </div>
 
@@ -389,7 +434,7 @@ Usually, though, interesting theorems about lists require
 </div>
 
 <div class="doc">
-<a id="lab99"></a><h3 class="section"> </h3>
+<a id="lab102"></a><h3 class="section"> </h3>
  Let's try to prove <span class="inlinecode"><span class="id" title="var">length</span></span> <span class="inlinecode">(<span class="id" title="var">rev</span></span> <span class="inlinecode"><span class="id" title="var">l</span>)</span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">length</span></span> <span class="inlinecode"><span class="id" title="var">l</span></span>. 
 </div>
 <div class="code">
@@ -407,10 +452,43 @@ Usually, though, interesting theorems about lists require
 </div>
 
 <div class="doc">
+A first attempt: 
+</div>
+<div class="code">
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">app_rev_length_S_firsttry</span>: <span class="id" title="keyword">∀</span> <span class="id" title="var">l</span> <span class="id" title="var">n</span>,<br/>
+&nbsp;&nbsp;<span class="id" title="var">length</span> (<span class="id" title="var">rev</span> <span class="id" title="var">l</span> ++ [<span class="id" title="var">n</span>]) = <span class="id" title="var">S</span> (<span class="id" title="var">length</span> (<span class="id" title="var">rev</span> <span class="id" title="var">l</span>)).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">l</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">l</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">m</span> <span class="id" title="var">l'</span> <span class="id" title="var">IHl'</span>].<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;l&nbsp;=&nbsp;<span class="inlinecode"></span>&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span>. <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;l&nbsp;=&nbsp;m::&nbsp;l'&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span>. <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;IHl'&nbsp;not&nbsp;applicable.&nbsp;*)</span><br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+</div>
+
+<div class="doc">
+A slightly strenghtened statement: 
+</div>
+<div class="code">
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">app_length_S</span>: <span class="id" title="keyword">∀</span> <span class="id" title="var">l</span> <span class="id" title="var">n</span>,<br/>
+&nbsp;&nbsp;<span class="id" title="var">length</span> (<span class="id" title="var">l</span> ++ [<span class="id" title="var">n</span>]) = <span class="id" title="var">S</span> (<span class="id" title="var">length</span> <span class="id" title="var">l</span>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">l</span> <span class="id" title="var">n</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">l</span> <span class="id" title="keyword">as</span> [| <span class="id" title="var">m</span> <span class="id" title="var">l'</span> <span class="id" title="var">IHl'</span>].<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;l&nbsp;=&nbsp;<span class="inlinecode"></span>&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;l&nbsp;=&nbsp;m::&nbsp;l'&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">IHl'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
 We can prove a lemma to bridge the gap. 
 <div class="paragraph"> </div>
 
-<a id="lab100"></a><h3 class="section"> </h3>
+<a id="lab103"></a><h3 class="section"> </h3>
 
 </div>
 <div class="code">
@@ -422,7 +500,7 @@ We can prove a lemma to bridge the gap.
 </div>
 
 <div class="doc">
-<a id="lab101"></a><h3 class="section"> </h3>
+<a id="lab104"></a><h3 class="section"> </h3>
  Now we can complete the original proof. 
 </div>
 <div class="code">
@@ -470,7 +548,7 @@ What about the next one?
 </div> <!-- /quiz -->
 
 <div class="doc">
-<a id="lab102"></a><h1 class="section">Options</h1>
+<a id="lab105"></a><h1 class="section">Options</h1>
 
 <div class="paragraph"> </div>
 
@@ -490,7 +568,7 @@ What about the next one?
 </div>
 
 <div class="doc">
-<a id="lab103"></a><h3 class="section"> </h3>
+<a id="lab106"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -527,7 +605,7 @@ What about the next one?
 </div>
 
 <div class="doc">
-<a id="lab104"></a><h3 class="section"> </h3>
+<a id="lab107"></a><h3 class="section"> </h3>
 
 </div>
 <div class="code">
@@ -536,7 +614,7 @@ What about the next one?
 </div>
 
 <div class="doc">
-<a id="lab105"></a><h1 class="section">Partial Maps</h1>
+<a id="lab108"></a><h1 class="section">Partial Maps</h1>
 
 <div class="paragraph"> </div>
 
@@ -562,7 +640,7 @@ Internally, an <span class="inlinecode"><span class="id" title="var">id</span></
     if we want to. 
 <div class="paragraph"> </div>
 
-<a id="lab106"></a><h3 class="section"> </h3>
+<a id="lab109"></a><h3 class="section"> </h3>
  We'll also need an equality test for <span class="inlinecode"><span class="id" title="var">id</span></span>s: 
 </div>
 <div class="code">
@@ -574,7 +652,7 @@ Internally, an <span class="inlinecode"><span class="id" title="var">id</span></
 </div>
 
 <div class="doc">
-<a id="lab108"></a><h3 class="section"> </h3>
+<a id="lab111"></a><h3 class="section"> </h3>
  Now we define the type of partial maps: 
 </div>
 <div class="code">
@@ -585,7 +663,7 @@ Internally, an <span class="inlinecode"><span class="id" title="var">id</span></
 </div>
 
 <div class="doc">
-<a id="lab109"></a><h3 class="section"> </h3>
+<a id="lab112"></a><h3 class="section"> </h3>
  The <span class="inlinecode"><span class="id" title="var">update</span></span> function overrides the entry for a given key in a
     partial map by shadowing it with a new one (or simply adds a new
     entry if the given key is not already present). 
@@ -599,7 +677,7 @@ Internally, an <span class="inlinecode"><span class="id" title="var">id</span></
 </div>
 
 <div class="doc">
-<a id="lab110"></a><h3 class="section"> </h3>
+<a id="lab113"></a><h3 class="section"> </h3>
  We can define functions on <span class="inlinecode"><span class="id" title="var">partial_map</span></span>s by pattern matching. 
 </div>
 <div class="code">
@@ -665,6 +743,108 @@ Is the following claim true or false?
 
 </div>
 </div> <!-- /quiz -->
+
+<div class="doc">
+<a id="lab114"></a><h1 class="section">Labeled Trees</h1>
+
+<div class="paragraph"> </div>
+
+ Consider the following datatype of (at most) binary trees 
+</div>
+<div class="code">
+<hr class='doublespaceincode'/>
+<span class="id" title="keyword">Inductive</span> <span class="id" title="var">btree</span> : <span class="id" title="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;| <span class="id" title="var">leaf</span> (<span class="id" title="var">n</span>: <span class="id" title="var">nat</span>)<br/>
+&nbsp;&nbsp;| <span class="id" title="var">unary</span> (<span class="id" title="var">n</span>: <span class="id" title="var">nat</span>) (<span class="id" title="var">t</span>: <span class="id" title="var">btree</span>)<br/>
+&nbsp;&nbsp;| <span class="id" title="var">binary</span> (<span class="id" title="var">n</span>: <span class="id" title="var">nat</span>) (<span class="id" title="var">t<sub>1</sub></span>: <span class="id" title="var">btree</span>) (<span class="id" title="var">t<sub>2</sub></span>: <span class="id" title="var">btree</span>).<br/>
+</div>
+
+<div class="doc">
+Function <span class="inlinecode"><span class="id" title="var">size</span></span> counts the number of nodes in the tree. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">size</span> (<span class="id" title="var">t</span>: <span class="id" title="var">btree</span>): <span class="id" title="var">nat</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">t</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">leaf</span> <span class="id" title="var">n</span> ⇒ 1<br/>
+&nbsp;&nbsp;| <span class="id" title="var">unary</span> <span class="id" title="var">n</span> <span class="id" title="var">t</span> ⇒ 1 + <span class="id" title="var">size</span> <span class="id" title="var">t</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">binary</span> <span class="id" title="var">n</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span> ⇒ 1 + <span class="id" title="var">size</span> <span class="id" title="var">t<sub>1</sub></span> + <span class="id" title="var">size</span> <span class="id" title="var">t<sub>2</sub></span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+</div>
+
+<div class="doc">
+Function <span class="inlinecode"><span class="id" title="var">sumLabels</span></span> sums up the labels at all nodes. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">sumLabels</span> (<span class="id" title="var">t</span>: <span class="id" title="var">btree</span>): <span class="id" title="var">nat</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">t</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">leaf</span> <span class="id" title="var">n</span> ⇒ <span class="id" title="var">n</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">unary</span> <span class="id" title="var">n</span> <span class="id" title="var">t</span> ⇒ <span class="id" title="var">n</span> + <span class="id" title="var">sumLabels</span> <span class="id" title="var">t</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">binary</span> <span class="id" title="var">n</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span> ⇒ <span class="id" title="var">n</span> + <span class="id" title="var">sumLabels</span> <span class="id" title="var">t<sub>1</sub></span> + <span class="id" title="var">sumLabels</span> <span class="id" title="var">t<sub>2</sub></span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+</div>
+
+<div class="doc">
+Function <span class="inlinecode"><span class="id" title="var">incrementLabels</span></span> increments all tree labels by one. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">incrementLabels</span> (<span class="id" title="var">t</span>: <span class="id" title="var">btree</span>): <span class="id" title="var">btree</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">t</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">leaf</span> <span class="id" title="var">n</span> ⇒ <span class="id" title="var">leaf</span> (<span class="id" title="var">S</span> <span class="id" title="var">n</span>)<br/>
+&nbsp;&nbsp;| <span class="id" title="var">unary</span> <span class="id" title="var">n</span> <span class="id" title="var">t</span> ⇒ <span class="id" title="var">unary</span> (<span class="id" title="var">S</span> <span class="id" title="var">n</span>) (<span class="id" title="var">incrementLabels</span> <span class="id" title="var">t</span>)<br/>
+&nbsp;&nbsp;| <span class="id" title="var">binary</span> <span class="id" title="var">n</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span> ⇒ <span class="id" title="var">binary</span> (<span class="id" title="var">S</span> <span class="id" title="var">n</span>) (<span class="id" title="var">incrementLabels</span> <span class="id" title="var">t<sub>1</sub></span>) (<span class="id" title="var">incrementLabels</span> <span class="id" title="var">t<sub>2</sub></span>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">transformEquationHelp</span>: <span class="id" title="keyword">∀</span> (<span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> <span class="id" title="var">d</span> <span class="id" title="var">e</span>: <span class="id" title="var">nat</span>),<br/>
+&nbsp;&nbsp;(<span class="id" title="var">a</span> + (<span class="id" title="var">b</span> + <span class="id" title="var">c</span>)) + (<span class="id" title="var">d</span> + <span class="id" title="var">e</span>) =  (<span class="id" title="var">b</span> + <span class="id" title="var">d</span>) + ((<span class="id" title="var">a</span> + <span class="id" title="var">c</span>) + <span class="id" title="var">e</span>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> <span class="id" title="var">d</span> <span class="id" title="var">e</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">assert</span> ( <span class="id" title="var">b</span> + <span class="id" title="var">d</span> + (<span class="id" title="var">a</span> + <span class="id" title="var">c</span> + <span class="id" title="var">e</span>) = <span class="id" title="var">b</span> + <span class="id" title="var">d</span> + (<span class="id" title="var">a</span> + <span class="id" title="var">c</span>) + <span class="id" title="var">e</span>) <span class="id" title="keyword">as</span> <span class="id" title="var">H<sub>1</sub></span>.<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">rewrite</span> <span class="id" title="var">add_assoc'</span>. <span class="id" title="tactic">reflexivity</span>. }<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H<sub>1</sub></span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">b</span> + <span class="id" title="var">d</span> + (<span class="id" title="var">a</span> + <span class="id" title="var">c</span>) = (<span class="id" title="var">a</span> + <span class="id" title="var">c</span>) + (<span class="id" title="var">b</span> + <span class="id" title="var">d</span>)) <span class="id" title="keyword">as</span> <span class="id" title="var">H<sub>2</sub></span>.<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">rewrite</span> <span class="id" title="var">add_comm</span>. <span class="id" title="tactic">reflexivity</span>. }<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H<sub>2</sub></span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">a</span> + <span class="id" title="var">c</span> + (<span class="id" title="var">b</span> + <span class="id" title="var">d</span>) + <span class="id" title="var">e</span> = <span class="id" title="var">a</span> + <span class="id" title="var">c</span> + ((<span class="id" title="var">b</span> + <span class="id" title="var">d</span>) + <span class="id" title="var">e</span>)) <span class="id" title="keyword">as</span> <span class="id" title="var">H<sub>3</sub></span>.<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">rewrite</span> &lt;- <span class="id" title="var">add_assoc'</span>. <span class="id" title="tactic">reflexivity</span>. }<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H<sub>3</sub></span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">b</span> + <span class="id" title="var">d</span> + <span class="id" title="var">e</span> = <span class="id" title="var">b</span> + (<span class="id" title="var">d</span> + <span class="id" title="var">e</span>)) <span class="id" title="keyword">as</span> <span class="id" title="var">H<sub>4</sub></span>.<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">rewrite</span> <span class="id" title="var">add_assoc'</span>. <span class="id" title="tactic">reflexivity</span>. }<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H<sub>4</sub></span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">assert</span> ( <span class="id" title="var">a</span> + <span class="id" title="var">c</span> + (<span class="id" title="var">b</span> + (<span class="id" title="var">d</span> + <span class="id" title="var">e</span>)) = <span class="id" title="var">a</span> + <span class="id" title="var">c</span> + <span class="id" title="var">b</span> + (<span class="id" title="var">d</span> + <span class="id" title="var">e</span>)) <span class="id" title="keyword">as</span> <span class="id" title="var">H<sub>5</sub></span>.<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">rewrite</span> <span class="id" title="var">add_assoc'</span>. <span class="id" title="tactic">reflexivity</span>. }<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H<sub>5</sub></span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">a</span> + <span class="id" title="var">c</span> + <span class="id" title="var">b</span> = <span class="id" title="var">a</span> + (<span class="id" title="var">c</span> + <span class="id" title="var">b</span>)) <span class="id" title="keyword">as</span> <span class="id" title="var">H<sub>6</sub></span>.<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">rewrite</span> <span class="id" title="var">add_assoc'</span>. <span class="id" title="tactic">reflexivity</span>. }<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H<sub>6</sub></span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">c</span> + <span class="id" title="var">b</span> = <span class="id" title="var">b</span> + <span class="id" title="var">c</span>) <span class="id" title="keyword">as</span> <span class="id" title="var">H<sub>7</sub></span>.<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">rewrite</span> <span class="id" title="var">add_comm</span>. <span class="id" title="tactic">reflexivity</span>. }<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H<sub>7</sub></span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+A lemma on the sum of labels in an incremented tree: 
+</div>
+<div class="code">
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">increment_sumLabels</span>: <span class="id" title="keyword">∀</span> (<span class="id" title="var">t</span>: <span class="id" title="var">btree</span>),<br/>
+&nbsp;&nbsp;<span class="id" title="var">sumLabels</span> (<span class="id" title="var">incrementLabels</span> <span class="id" title="var">t</span>) = (<span class="id" title="var">size</span> <span class="id" title="var">t</span>) + <span class="id" title="var">sumLabels</span> <span class="id" title="var">t</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">t</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">t</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">n</span> | <span class="id" title="var">n</span> <span class="id" title="var">t'</span> <span class="id" title="var">IHt'</span> | <span class="id" title="var">n</span> <span class="id" title="var">t<sub>1</sub>'</span> <span class="id" title="var">IHt1'</span> <span class="id" title="var">t<sub>2</sub>'</span> <span class="id" title="var">IHt2'</span> ].<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;t&nbsp;=&nbsp;leaf&nbsp;n*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;t&nbsp;=&nbsp;unary&nbsp;n&nbsp;t'&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">IHt'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">add_assoc'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">add_assoc'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">n</span> + <span class="id" title="var">size</span> <span class="id" title="var">t'</span> = <span class="id" title="var">size</span> <span class="id" title="var">t'</span> + <span class="id" title="var">n</span>) <span class="id" title="keyword">as</span> <span class="id" title="var">H<sub>1</sub></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="tactic">rewrite</span> <span class="id" title="var">add_comm</span>. <span class="id" title="tactic">reflexivity</span>. }<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H<sub>1</sub></span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;t&nbsp;=&nbsp;binary&nbsp;n&nbsp;t<sub>1</sub>'&nbsp;t<sub>2</sub>'&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">IHt1'</span>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">IHt2'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">transformEquationHelp</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+<span class="id" title="keyword">End</span> <span class="id" title="var">BTrees</span>.<br/>
+</div>
 </div>
 
 <div id="footer">
