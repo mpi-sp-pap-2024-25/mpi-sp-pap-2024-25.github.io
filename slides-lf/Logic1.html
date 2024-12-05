@@ -151,7 +151,7 @@
 
 <div class="doc">
 <a id="lab190"></a><h3 class="section"> </h3>
- So far, we've seen one primary place that propositions can appear:
+ So far, we've seen one primary place where propositions can appear:
     in <span class="inlinecode"><span class="id" title="keyword">Theorem</span></span> (and <span class="inlinecode"><span class="id" title="keyword">Lemma</span></span> and <span class="inlinecode"><span class="id" title="keyword">Example</span></span>) declarations. 
 </div>
 <div class="code">
@@ -629,12 +629,6 @@ For the present example, both ways work.  But ... <a id="lab202"></a><h3 class="
 </div>
 
 <div class="doc">
-We can see in this example that, when we perform case analysis on a
-    disjunction <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode">∨</span> <span class="inlinecode"><span class="id" title="var">B</span></span>, we must separately satisfy two proof
-    obligations, each showing that the conclusion holds under a different
-    assumption -- <span class="inlinecode"><span class="id" title="var">A</span></span> in the first subgoal and <span class="inlinecode"><span class="id" title="var">B</span></span> in the second. 
-<div class="paragraph"> </div>
-
 <a id="lab206"></a><h3 class="section"> </h3>
  Conversely, to show that a disjunction holds, it suffices to show that
     one of its sides holds. This can be done via the tactics <span class="inlinecode"><span class="id" title="tactic">left</span></span> and
@@ -768,21 +762,11 @@ We can see in this example that, when we perform case analysis on a
 
 <div class="doc">
 <a id="lab217"></a><h3 class="section"> </h3>
- Since inequality involves a negation, it also requires a little
-    practice to be able to work with it fluently.  Here is one useful
-    trick.
-
-<div class="paragraph"> </div>
-
-    If you are trying to prove a goal that is nonsensical (e.g., the
-    goal state is <span class="inlinecode"><span class="id" title="var">false</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">true</span></span>), apply <span class="inlinecode"><span class="id" title="var">ex_falso_quodlibet</span></span> to
-    change the goal to <span class="inlinecode"><span class="id" title="var">False</span></span>.
-
-<div class="paragraph"> </div>
-
-    This makes it easier to use assumptions of the form <span class="inlinecode">¬<span class="id" title="var">P</span></span> that may
-    be available in the context -- in particular, assumptions of the
-    form <span class="inlinecode"><span class="id" title="var">x</span>≠<span class="id" title="var">y</span></span>. 
+ Since inequality involves a negation, it also requires a
+    little practice. Here is a useful trick: if you are trying to
+    prove a nonsensical goal, apply <span class="inlinecode"><span class="id" title="var">ex_falso_quodlibet</span></span> to change the
+    goal to <span class="inlinecode"><span class="id" title="var">False</span></span>. This makes it easier to use assumptions of the
+    form <span class="inlinecode">¬<span class="id" title="var">P</span></span>, and in particular <span class="inlinecode"><span class="id" title="var">x</span>≠<span class="id" title="var">y</span></span>. 
 </div>
 <div class="code">
 

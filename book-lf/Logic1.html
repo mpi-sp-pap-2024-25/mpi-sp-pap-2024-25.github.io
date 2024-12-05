@@ -78,7 +78,7 @@ Indeed, propositions don't just have types -- they are
     any of the other things in Coq's world. 
 <div class="paragraph"> </div>
 
- So far, we've seen one primary place that propositions can appear:
+ So far, we've seen one primary place where propositions can appear:
     in <span class="inlinecode"><span class="id" title="keyword">Theorem</span></span> (and <span class="inlinecode"><span class="id" title="keyword">Lemma</span></span> and <span class="inlinecode"><span class="id" title="keyword">Example</span></span>) declarations. 
 </div>
 <div class="code">
@@ -428,7 +428,7 @@ Another common situation is that we know <span class="inlinecode"><span class="i
 
 <div class="doc">
 We can see in this example that, when we perform case analysis on a
-    disjunction <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode">∨</span> <span class="inlinecode"><span class="id" title="var">B</span></span>, we must separately satisfy two proof
+    disjunction <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode">∨</span> <span class="inlinecode"><span class="id" title="var">B</span></span>, we must separately discharge two proof
     obligations, each showing that the conclusion holds under a different
     assumption -- <span class="inlinecode"><span class="id" title="var">A</span></span> in the first subgoal and <span class="inlinecode"><span class="id" title="var">B</span></span> in the second.  The case analysis pattern <span class="inlinecode">[<span class="id" title="var">Hn</span></span> <span class="inlinecode">|</span> <span class="inlinecode"><span class="id" title="var">Hm</span>]</span> allows
     us to name the hypotheses that are generated for the subgoals. 
@@ -868,7 +868,7 @@ To generalize this to other constructors, we simply have to provide an
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2024-11-21&nbsp;14:25&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2024-12-05&nbsp;13:50&nbsp;*)</span><br/>
 </div>
 </div>
 
