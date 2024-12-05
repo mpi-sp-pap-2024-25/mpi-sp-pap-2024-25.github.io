@@ -256,7 +256,7 @@
 <title>Logic2</title>
 <g id="a_node11"><a xlink:href="Logic2.html" xlink:title="Go to chapter" target="_top">
 <polygon fill="lightblue" stroke="black" points="339.05,-613.6 231,-613.6 231,-568.4 339.05,-568.4 339.05,-613.6"/>
-<text text-anchor="start" x="269.65" y="-595.55" font-family="Times,serif" font-size="11.00">Logic1</text>
+<text text-anchor="start" x="269.65" y="-595.55" font-family="Times,serif" font-size="11.00">Logic2</text>
 <text text-anchor="start" x="249.4" y="-577.95" font-family="Times,serif" font-size="9.00">Logic in Coq: part 2</text>
 </a>
 </g>
