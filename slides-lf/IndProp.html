@@ -64,56 +64,43 @@
 
 <div class="paragraph"> </div>
 
-    Its statement is quite simple.  First, we define a function <span class="inlinecode"><span class="id" title="var">f</span></span>
-    on numbers, as follows: 
+    Its statement is quite simple.  First, we define a function <span class="inlinecode"><span class="id" title="var">csf</span></span>
+    on numbers, as follows (where <span class="inlinecode"><span class="id" title="var">csf</span></span> stands for "Collatz step function"): 
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">div2</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) :=<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">div2</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) : <span class="id" title="var">nat</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">n</span> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;0 ⇒ 0<br/>
 &nbsp;&nbsp;| 1 ⇒ 0<br/>
 &nbsp;&nbsp;| <span class="id" title="var">S</span> (<span class="id" title="var">S</span> <span class="id" title="var">n</span>) ⇒ <span class="id" title="var">S</span> (<span class="id" title="var">div2</span> <span class="id" title="var">n</span>)<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Definition</span> <span class="id" title="var">f</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) :=<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">csf</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) : <span class="id" title="var">nat</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">if</span> <span class="id" title="var">even</span> <span class="id" title="var">n</span> <span class="id" title="keyword">then</span> <span class="id" title="var">div2</span> <span class="id" title="var">n</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">else</span> (3 × <span class="id" title="var">n</span>) + 1.<br/>
 </div>
 
 <div class="doc">
-The Collatz step function <span class="inlinecode"><span class="id" title="var">f</span></span> also allows us to define a
-    corresponding binary relation: 
-</div>
-<div class="code">
-
-<span class="id" title="keyword">Definition</span> <span class="id" title="var">collatz_step</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>) : <span class="id" title="keyword">Prop</span> := <span class="id" title="var">f</span> <span class="id" title="var">n</span> = <span class="id" title="var">m</span>.<br/>
-</div>
-
-<div class="doc">
-This Collatz step relation is useful in conjunction with the
-    reflexive and transitive closure operation below. 
-<div class="paragraph"> </div>
-
 <a id="lab264"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
- Next, we look at what happens when we repeatedly apply <span class="inlinecode"><span class="id" title="var">f</span></span> to
-    some given starting number.  For example, <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode">12</span> is <span class="inlinecode">6</span>, and <span class="inlinecode"><span class="id" title="var">f</span></span>
-    <span class="inlinecode">6</span> is <span class="inlinecode">3</span>, so by repeatedly applying <span class="inlinecode"><span class="id" title="var">f</span></span> we get the sequence
-    <span class="inlinecode">12,</span> <span class="inlinecode">6,</span> <span class="inlinecode">3,</span> <span class="inlinecode">10,</span> <span class="inlinecode">5,</span> <span class="inlinecode">16,</span> <span class="inlinecode">8,</span> <span class="inlinecode">4,</span> <span class="inlinecode">2,</span> <span class="inlinecode">1</span>.
+ Next, we look at what happens when we repeatedly apply <span class="inlinecode"><span class="id" title="var">csf</span></span> to
+    some given starting number.  For example, <span class="inlinecode"><span class="id" title="var">csf</span></span> <span class="inlinecode">12</span> is <span class="inlinecode">6</span>, and
+    <span class="inlinecode"><span class="id" title="var">csf</span></span> <span class="inlinecode">6</span> is <span class="inlinecode">3</span>, so by repeatedly applying <span class="inlinecode"><span class="id" title="var">csf</span></span> we get the
+    sequence <span class="inlinecode">12,</span> <span class="inlinecode">6,</span> <span class="inlinecode">3,</span> <span class="inlinecode">10,</span> <span class="inlinecode">5,</span> <span class="inlinecode">16,</span> <span class="inlinecode">8,</span> <span class="inlinecode">4,</span> <span class="inlinecode">2,</span> <span class="inlinecode">1</span>.
 
 <div class="paragraph"> </div>
 
-    Similarly, if we start with <span class="inlinecode">19</span>, we get the longer sequence
-    <span class="inlinecode">19,</span> <span class="inlinecode">58,</span> <span class="inlinecode">29,</span> <span class="inlinecode">88,</span> <span class="inlinecode">44,</span> <span class="inlinecode">22,</span> <span class="inlinecode">11,</span> <span class="inlinecode">34,</span> <span class="inlinecode">17,</span> <span class="inlinecode">52,</span> <span class="inlinecode">26,</span> <span class="inlinecode">13,</span> <span class="inlinecode">40,</span> <span class="inlinecode">20,</span> <span class="inlinecode">10,</span> <span class="inlinecode">5,</span>
-    <span class="inlinecode">16,</span> <span class="inlinecode">8,</span> <span class="inlinecode">4,</span> <span class="inlinecode">2,</span> <span class="inlinecode">1</span>.
+    Similarly, if we start with <span class="inlinecode">19</span>, we get the longer sequence <span class="inlinecode">19,</span>
+    <span class="inlinecode">58,</span> <span class="inlinecode">29,</span> <span class="inlinecode">88,</span> <span class="inlinecode">44,</span> <span class="inlinecode">22,</span> <span class="inlinecode">11,</span> <span class="inlinecode">34,</span> <span class="inlinecode">17,</span> <span class="inlinecode">52,</span> <span class="inlinecode">26,</span> <span class="inlinecode">13,</span> <span class="inlinecode">40,</span> <span class="inlinecode">20,</span> <span class="inlinecode">10,</span> <span class="inlinecode">5,</span> <span class="inlinecode">16,</span> <span class="inlinecode">8,</span>
+    <span class="inlinecode">4,</span> <span class="inlinecode">2,</span> <span class="inlinecode">1</span>.
 
 <div class="paragraph"> </div>
 
-    Both of these sequences eventually reach <span class="inlinecode">1</span>.  The question
-    posed by Collatz was: Is the sequence starting from <i>any</i>
-    natural number guaranteed to reach <span class="inlinecode">1</span> eventually? 
+    Both of these sequences eventually reach <span class="inlinecode">1</span>.  The question posed
+    by Collatz was: Is the sequence starting from <i>any</i> natural number
+    guaranteed to reach <span class="inlinecode">1</span> eventually? 
 <div class="paragraph"> </div>
 
 <a id="lab265"></a><h3 class="section"> </h3>
@@ -128,12 +115,12 @@ This Collatz step relation is useful in conjunction with the
 
 <span class="id" title="var">Fail</span> <span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">reaches1_in</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) : <span class="id" title="var">nat</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">if</span> <span class="id" title="var">n</span> =? 1 <span class="id" title="keyword">then</span> 0<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">else</span> 1 + <span class="id" title="var">reaches1_in</span> (<span class="id" title="var">f</span> <span class="id" title="var">n</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">else</span> 1 + <span class="id" title="var">reaches1_in</span> (<span class="id" title="var">csf</span> <span class="id" title="var">n</span>).<br/>
 </div>
 
 <div class="doc">
 This definition is rejected by Coq's termination checker, since
-    the argument to the recursive call, <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span>, is not "obviously
+    the argument to the recursive call, <span class="inlinecode"><span class="id" title="var">csf</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span>, is not "obviously
     smaller" than <span class="inlinecode"><span class="id" title="var">n</span></span>.
 
 <div class="paragraph"> </div>
@@ -152,10 +139,35 @@ This definition is rejected by Coq's termination checker, since
 
 <div class="paragraph"> </div>
 
+ Another idea is to express the concept of "eventually reaches <span class="inlinecode">1</span> in
+    the Collatz sequence" as an <i>recursively defined property</i> of
+    numbers <span class="inlinecode"><span class="id" title="var">Collatz_holds_for</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">nat</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>. 
+</div>
+<div class="code">
+
+<span class="id" title="var">Fail</span> <span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">Collatz_holds_for</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) : <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">n</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| 0 ⇒ <span class="id" title="var">False</span><br/>
+&nbsp;&nbsp;| 1 ⇒ <span class="id" title="var">True</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <span class="id" title="keyword">if</span> <span class="id" title="var">even</span> <span class="id" title="var">n</span> <span class="id" title="keyword">then</span> <span class="id" title="var">Collatz_holds_for</span> (<span class="id" title="var">div2</span> <span class="id" title="var">n</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">else</span> <span class="id" title="var">Collatz_holds_for</span> ((3 × <span class="id" title="var">n</span>) + 1)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+</div>
+
+<div class="doc">
+This recursive function is also rejected by the termination
+    checker, since while we can in principle convince Coq that
+    <span class="inlinecode"><span class="id" title="var">div2</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> is smaller than <span class="inlinecode"><span class="id" title="var">n</span></span>, we can't convince it that
+    <span class="inlinecode">(3</span> <span class="inlinecode">×</span> <span class="inlinecode"><span class="id" title="var">n</span>)</span> <span class="inlinecode">+</span> <span class="inlinecode">1</span> is smaller than <span class="inlinecode"><span class="id" title="var">n</span></span>. Since it's definitely not! 
+<div class="paragraph"> </div>
+
 <a id="lab267"></a><h3 class="section"> </h3>
+
+<div class="paragraph"> </div>
+
  Fortunately, there is another way to do it: We can express the
-    concept "reaches <span class="inlinecode">1</span> eventually" as an <i>inductively defined
-    property</i> of numbers <span class="inlinecode"><span class="id" title="var">reaches1</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">nat</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>. Intuitively, this
+    concept "reaches <span class="inlinecode">1</span> eventually in the Collatz sequence" as an
+    <i>inductively defined property</i> of numbers. Intuitively, this
     property is defined by a set of rules:
 
 <div class="paragraph"> </div>
@@ -164,46 +176,46 @@ This definition is rejected by Coq's termination checker, since
 <tr class="infruleassumption">
   <td class="infrule">&nbsp;&nbsp;</td>
   <td class="infrulenamecol" rowspan="3">
-    (reach_one) &nbsp;
+    (Chf_one) &nbsp;
   </td></tr>
 <tr class="infrulemiddle">
   <td class="infrule"><hr /></td>
 </tr>
 <tr class="infruleassumption">
-  <td class="infrule">reaches1 1</td>
+  <td class="infrule">Collatz_holds_for 1</td>
   <td></td>
 </tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
-  <td class="infrule">Even n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reaches1 (div2 n)</td>
+  <td class="infrule">Even n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Collatz_holds_for (div2 n)</td>
   <td class="infrulenamecol" rowspan="3">
-    (reach_even) &nbsp;
+    (Chf_even) &nbsp;
   </td></tr>
 <tr class="infrulemiddle">
   <td class="infrule"><hr /></td>
 </tr>
 <tr class="infruleassumption">
-  <td class="infrule">reaches1 n</td>
+  <td class="infrule">Collatz_holds_for n</td>
   <td></td>
 </tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
-  <td class="infrule">~Even n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reaches1 ((3 * n) + 1)</td>
+  <td class="infrule">~Even n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Collatz_holds_for ((3 * n) + 1)</td>
   <td class="infrulenamecol" rowspan="3">
-    (reach_odd) &nbsp;
+    (Chf_odd) &nbsp;
   </td></tr>
 <tr class="infrulemiddle">
   <td class="infrule"><hr /></td>
 </tr>
 <tr class="infruleassumption">
-  <td class="infrule">reaches1 n</td>
+  <td class="infrule">Collatz_holds_for n</td>
   <td></td>
 </tr>
 </table></center>
 <div class="paragraph"> </div>
 
-    So there are three ways to prove that a number <span class="inlinecode"><span class="id" title="var">n</span></span> reaches 1 in
-    the Collatz sequence:
+    So there are three ways to prove that a number <span class="inlinecode"><span class="id" title="var">n</span></span> eventually
+    reaches 1 in the Collatz sequence:
 <ul class="doclist">
 <li> <span class="inlinecode"><span class="id" title="var">n</span></span> is 1;
 
@@ -221,43 +233,43 @@ This definition is rejected by Coq's termination checker, since
     proving that 12 reaches 1 (where we left out the evenness/oddness
     premises):
 <br/>
-<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;——————————— (<span class="id" title="var">reach_one</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">reaches1</span> 1<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;——————————— (<span class="id" title="var">reach_even</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">reaches1</span> 2<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;——————————— (<span class="id" title="var">reach_even</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">reaches1</span> 4<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;——————————— (<span class="id" title="var">reach_even</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">reaches1</span> 8<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;——————————— (<span class="id" title="var">reach_even</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">reaches1</span> 16<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;——————————— (<span class="id" title="var">reach_odd</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">reaches1</span> 5<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;——————————— (<span class="id" title="var">reach_even</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">reaches1</span> 10<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;——————————— (<span class="id" title="var">reach_odd</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">reaches1</span> 3<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;——————————— (<span class="id" title="var">reach_even</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">reaches1</span> 6<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;——————————— (<span class="id" title="var">reach_even</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">reaches1</span> 12
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;———————————————————— (<span class="id" title="var">Chf_one</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Collatz_holds_for</span> 1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;———————————————————— (<span class="id" title="var">Chf_even</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Collatz_holds_for</span> 2<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;———————————————————— (<span class="id" title="var">Chf_even</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Collatz_holds_for</span> 4<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;———————————————————— (<span class="id" title="var">Chf_even</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Collatz_holds_for</span> 8<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;———————————————————— (<span class="id" title="var">Chf_even</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Collatz_holds_for</span> 16<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;———————————————————— (<span class="id" title="var">Chf_odd</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Collatz_holds_for</span> 5<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;———————————————————— (<span class="id" title="var">Chf_even</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Collatz_holds_for</span> 10<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;———————————————————— (<span class="id" title="var">Chf_odd</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Collatz_holds_for</span> 3<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;———————————————————— (<span class="id" title="var">Chf_even</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Collatz_holds_for</span> 6<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;———————————————————— (<span class="id" title="var">Chf_even</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Collatz_holds_for</span> 12
 </span><a id="lab269"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
- Formally in Coq, <span class="inlinecode"><span class="id" title="var">reaches1</span></span> is an <i>inductively defined property</i>
-    of numbers: 
+ Formally in Coq, the <span class="inlinecode"><span class="id" title="var">Collatz_holds_for</span></span> property is
+    <i>inductively defined</i>: 
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Inductive</span> <span class="id" title="var">reaches1</span> : <span class="id" title="var">nat</span> → <span class="id" title="keyword">Prop</span> :=<br/>
-&nbsp;&nbsp;| <span class="id" title="var">reach_one</span> : <span class="id" title="var">reaches1</span> 1<br/>
-&nbsp;&nbsp;| <span class="id" title="var">reach_even</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) : <span class="id" title="var">Even</span> <span class="id" title="var">n</span> →<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">reaches1</span> (<span class="id" title="var">div2</span> <span class="id" title="var">n</span>) →<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">reaches1</span> <span class="id" title="var">n</span><br/>
-&nbsp;&nbsp;| <span class="id" title="var">reach_odd</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) : ¬<span class="id" title="var">Even</span> <span class="id" title="var">n</span> →<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">reaches1</span> ((3 × <span class="id" title="var">n</span>) + 1) →<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">reaches1</span> <span class="id" title="var">n</span>.<br/>
+<span class="id" title="keyword">Inductive</span> <span class="id" title="var">Collatz_holds_for</span> : <span class="id" title="var">nat</span> → <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;| <span class="id" title="var">Chf_one</span> : <span class="id" title="var">Collatz_holds_for</span> 1<br/>
+&nbsp;&nbsp;| <span class="id" title="var">Chf_even</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) : <span class="id" title="var">Even</span> <span class="id" title="var">n</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Collatz_holds_for</span> (<span class="id" title="var">div2</span> <span class="id" title="var">n</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Collatz_holds_for</span> <span class="id" title="var">n</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">Chf_odd</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) : ¬<span class="id" title="var">Even</span> <span class="id" title="var">n</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Collatz_holds_for</span> ((3 × <span class="id" title="var">n</span>) + 1) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Collatz_holds_for</span> <span class="id" title="var">n</span>.<br/>
 </div>
 
 <div class="doc">
@@ -265,12 +277,40 @@ This definition is rejected by Coq's termination checker, since
 
 <div class="paragraph"> </div>
 
- The Collatz conjecture then states that the sequence beginning
-    from <i>any</i> number reaches <span class="inlinecode">1</span>: 
+ For particular numbers, we can now prove that the Collatz sequence
+    reaches <span class="inlinecode">1</span> (we'll go through the details of how it works a bit
+    later in the chapter): 
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Conjecture</span> <span class="id" title="var">collatz</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span>, <span class="id" title="var">reaches1</span> <span class="id" title="var">n</span>.<br/>
+<span class="id" title="keyword">Example</span> <span class="id" title="var">Collatz_holds_for_12</span> : <span class="id" title="var">Collatz_holds_for</span> 12.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">Chf_even</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">even_bool_prop</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">Chf_even</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">even_bool_prop</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">Chf_odd</span>. <span class="id" title="tactic">intro</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">even_bool_prop</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">discriminate</span>. <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">Chf_even</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">even_bool_prop</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">Chf_odd</span>. <span class="id" title="tactic">intro</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">even_bool_prop</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">discriminate</span>. <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">Chf_even</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">even_bool_prop</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">Chf_even</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">even_bool_prop</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">Chf_even</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">even_bool_prop</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">Chf_even</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">even_bool_prop</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">Chf_one</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab271"></a><h3 class="section"> </h3>
+
+<div class="paragraph"> </div>
+
+ The Collatz conjecture then states that the sequence beginning
+    from <i>any</i> positive number reaches <span class="inlinecode">1</span>: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Conjecture</span> <span class="id" title="var">collatz</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span>, <span class="id" title="var">n</span> ≠ 0 → <span class="id" title="var">Collatz_holds_for</span> <span class="id" title="var">n</span>.<br/>
 </div>
 
 <div class="doc">
@@ -280,7 +320,7 @@ If you succeed in proving this conjecture, you've got a bright
 </div>
 
 <div class="doc">
-<a id="lab271"></a><h2 class="section">Example: Binary relations</h2>
+<a id="lab272"></a><h2 class="section">Example: Binary relation for comparing numbers</h2>
 
 <div class="paragraph"> </div>
 
@@ -326,7 +366,7 @@ If you succeed in proving this conjecture, you've got a bright
 </table></center>
 <div class="paragraph"> </div>
 
-<a id="lab272"></a><h3 class="section"> </h3>
+<a id="lab273"></a><h3 class="section"> </h3>
 
 </div>
 
@@ -345,7 +385,7 @@ If you succeed in proving this conjecture, you've got a bright
 </div>
 
 <div class="doc">
-<a id="lab273"></a><h2 class="section">Example: Reflexive and Transitive Closure</h2>
+<a id="lab274"></a><h2 class="section">Example: Reflexive and Transitive Closure</h2>
 
 <div class="paragraph"> </div>
 
@@ -396,25 +436,37 @@ If you succeed in proving this conjecture, you've got a bright
 </div>
 
 <div class="doc">
-This enables an equivalent definition of the Collatz conjecture: 
+For instance, this enables an equivalent definition of the Collatz
+    conjecture.  First we define the binary relation corresponding to
+    the Collatz step function <span class="inlinecode"><span class="id" title="var">csf</span></span>: 
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Definition</span> <span class="id" title="var">cms</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> := <span class="id" title="var">clos_refl_trans</span> <span class="id" title="var">collatz_step</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>.<br/>
-<span class="id" title="keyword">Conjecture</span> <span class="id" title="var">collatz'</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span>, <span class="id" title="var">cms</span> <span class="id" title="var">n</span> 1.<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">cs</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>) : <span class="id" title="keyword">Prop</span> := <span class="id" title="var">csf</span> <span class="id" title="var">n</span> = <span class="id" title="var">m</span>.<br/>
 </div>
 
 <div class="doc">
-<a id="lab274"></a><h3 class="section"> </h3>
+This Collatz step relation can be used in conjunction with the
+    reflexive and transitive closure operation to define a Collatz
+    multi-step (<span class="inlinecode"><span class="id" title="var">cms</span></span>) relation: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">cms</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> := <span class="id" title="var">clos_refl_trans</span> <span class="id" title="var">cs</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>.<br/>
+<span class="id" title="keyword">Conjecture</span> <span class="id" title="var">collatz'</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span>, <span class="id" title="var">n</span> ≠ 0 → <span class="id" title="var">cms</span> <span class="id" title="var">n</span> 1.<br/>
+</div>
+
+<div class="doc">
+<a id="lab275"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
- This <span class="inlinecode"><span class="id" title="var">cms</span></span> (Collatz multi-step) relation defined in terms of
+ This <span class="inlinecode"><span class="id" title="var">cms</span></span> relation defined in terms of
     <span class="inlinecode"><span class="id" title="var">clos_refl_trans</span></span> allows for more interesting derivations than the
-    linear ones of the directly defined <span class="inlinecode"><span class="id" title="var">reaches1</span></span> relation:
+    linear ones of the directly defined <span class="inlinecode"><span class="id" title="var">Collatz_holds_for</span></span> relation:
 <br/>
 <span class="inlinecode"><br/>
-<span class="id" title="var">f</span> 16 = 8           <span class="id" title="var">f</span> 8 = 4           <span class="id" title="var">f</span> 4 = 2           <span class="id" title="var">f</span> 2 = 1<br/>
+<span class="id" title="var">csf</span> 16 = 8         <span class="id" title="var">csf</span> 8 = 4         <span class="id" title="var">csf</span> 4 = 2         <span class="id" title="var">csf</span> 2 = 1<br/>
 ————————(<span class="id" title="var">rt_step</span>)  ———————(<span class="id" title="var">rt_step</span>)  ———————(<span class="id" title="var">rt_step</span>)  ———————(<span class="id" title="var">rt_step</span>)<br/>
 <span class="id" title="var">cms</span> 16 8           <span class="id" title="var">cms</span> 8 4           <span class="id" title="var">cms</span> 4 2           <span class="id" title="var">cms</span> 2 1<br/>
 —————————————————————————(<span class="id" title="var">rt_trans</span>)  ————————————————————————(<span class="id" title="var">rt_trans</span>)<br/>
@@ -425,71 +477,7 @@ This enables an equivalent definition of the Collatz conjecture:
 </div>
 
 <div class="doc">
-<a id="lab275"></a><h2 class="section">Example: Transitive Closure</h2>
-
-<div class="paragraph"> </div>
-
- As another example, the <i>transitive closure</i> of a relation <span class="inlinecode"><span class="id" title="var">R</span></span>
-    is the smallest relation that contains <span class="inlinecode"><span class="id" title="var">R</span></span> and that is transitive. 
-</div>
-<div class="code">
-
-<span class="id" title="keyword">Inductive</span> <span class="id" title="var">clos_trans</span> {<span class="id" title="var">X</span>: <span class="id" title="keyword">Type</span>} (<span class="id" title="var">R</span>: <span class="id" title="var">X</span>→<span class="id" title="var">X</span>→<span class="id" title="keyword">Prop</span>) : <span class="id" title="var">X</span>→<span class="id" title="var">X</span>→<span class="id" title="keyword">Prop</span> :=<br/>
-&nbsp;&nbsp;| <span class="id" title="var">t_step</span> (<span class="id" title="var">x</span> <span class="id" title="var">y</span> : <span class="id" title="var">X</span>) :<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> →<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">clos_trans</span> <span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span><br/>
-&nbsp;&nbsp;| <span class="id" title="var">t_trans</span> (<span class="id" title="var">x</span> <span class="id" title="var">y</span> <span class="id" title="var">z</span> : <span class="id" title="var">X</span>) :<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">clos_trans</span> <span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> →<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">clos_trans</span> <span class="id" title="var">R</span> <span class="id" title="var">y</span> <span class="id" title="var">z</span> →<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">clos_trans</span> <span class="id" title="var">R</span> <span class="id" title="var">x</span> <span class="id" title="var">z</span>.<br/>
-</div>
-
-<div class="doc">
-<a id="lab276"></a><h3 class="section"> </h3>
-
-<div class="paragraph"> </div>
-
- For example, suppose we define a "parent of" relation on a group
-    of people... 
-</div>
-<div class="code">
-
-<span class="id" title="keyword">Inductive</span> <span class="id" title="var">Person</span> : <span class="id" title="keyword">Type</span> := <span class="id" title="var">Sage</span> | <span class="id" title="var">Cleo</span> | <span class="id" title="var">Ridley</span> | <span class="id" title="var">Moss</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Inductive</span> <span class="id" title="var">parent_of</span> : <span class="id" title="var">Person</span> → <span class="id" title="var">Person</span> → <span class="id" title="keyword">Prop</span> :=<br/>
-&nbsp;&nbsp;<span class="id" title="var">po_SC</span> : <span class="id" title="var">parent_of</span> <span class="id" title="var">Sage</span> <span class="id" title="var">Cleo</span><br/>
-| <span class="id" title="var">po_SR</span> : <span class="id" title="var">parent_of</span> <span class="id" title="var">Sage</span> <span class="id" title="var">Ridley</span><br/>
-| <span class="id" title="var">po_CM</span> : <span class="id" title="var">parent_of</span> <span class="id" title="var">Cleo</span> <span class="id" title="var">Moss</span>.<br/>
-</div>
-
-<div class="doc">
-Then we can define "ancestor of" as its transitive closure: 
-</div>
-<div class="code">
-
-<span class="id" title="keyword">Definition</span> <span class="id" title="var">ancestor_of</span> : <span class="id" title="var">Person</span> → <span class="id" title="var">Person</span> → <span class="id" title="keyword">Prop</span> :=<br/>
-&nbsp;&nbsp;<span class="id" title="var">clos_trans</span> <span class="id" title="var">parent_of</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Example</span> <span class="id" title="var">ancestor_of<sub>1</sub></span> : <span class="id" title="var">ancestor_of</span> <span class="id" title="var">Sage</span> <span class="id" title="var">Moss</span>.<br/>
-<span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <span class="id" title="var">ancestor_of</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">t_trans</span> <span class="id" title="keyword">with</span> <span class="id" title="var">Cleo</span>.<br/>
-&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <span class="id" title="var">t_step</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">po_SC</span>.<br/>
-&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <span class="id" title="var">t_step</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">po_CM</span>. <span class="id" title="keyword">Qed</span>.<br/>
-</div>
-
-<div class="doc">
-Computing the transitive closure can be undecidable even for a
-    relation R that is decidable, so in general we can't expect to
-    define transitive closure as a boolean function. Fortunately, Coq
-    allows us to define transitive closure as an inductive relation.
-
-<div class="paragraph"> </div>
-
-    The transitive closure of a binary relation cannot, in general, be
-    expressed in first-order logic. The logic of Coq is, however, much
-    more powerful, and can easily define such inductive relations. 
-</div>
-
-<div class="doc">
-<a id="lab277"></a><h2 class="section">Example: Permutations</h2>
+<a id="lab276"></a><h2 class="section">Example: Permutations</h2>
 
 <div class="paragraph"> </div>
 
@@ -548,7 +536,7 @@ Computing the transitive closure can be undecidable even for a
 </span>
 <div class="paragraph"> </div>
 
-<a id="lab278"></a><h3 class="section"> </h3>
+<a id="lab277"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -566,19 +554,7 @@ Computing the transitive closure can be undecidable even for a
 </div>
 
 <div class="doc">
-<a id="lab279"></a><h3 class="section"> </h3>
-
-</div>
-<div class="code">
-<span class="id" title="keyword">Example</span> <span class="id" title="var">Perm3_example1</span> : <span class="id" title="var">Perm3</span> [1;2;3] [2;3;1].<br/>
-<span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">perm3_trans</span> <span class="id" title="keyword">with</span> [2;1;3].<br/>
-&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <span class="id" title="var">perm3_swap12</span>.<br/>
-&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <span class="id" title="var">perm3_swap23</span>. <span class="id" title="keyword">Qed</span>.<br/>
-</div>
-
-<div class="doc">
-<a id="lab280"></a><h2 class="section">Example: Evenness (yet again)</h2>
+<a id="lab278"></a><h2 class="section">Example: Evenness (yet again)</h2>
 
 <div class="paragraph"> </div>
 
@@ -608,7 +584,7 @@ Computing the transitive closure can be undecidable even for a
 
 <div class="paragraph"> </div>
 
-<a id="lab281"></a><h3 class="section"> </h3>
+<a id="lab279"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -652,7 +628,7 @@ Computing the transitive closure can be undecidable even for a
 </span>
 <div class="paragraph"> </div>
 
-<a id="lab282"></a><h3 class="section"> </h3>
+<a id="lab280"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -668,21 +644,32 @@ Computing the transitive closure can be undecidable even for a
 </div>
 
 <div class="doc">
-We put off discussing syntax so far, but there are a few
-    differences between inductive properties like <span class="inlinecode"><span class="id" title="var">ev</span></span> and inductive
-    types like <span class="inlinecode"><span class="id" title="var">nat</span></span> or <span class="inlinecode"><span class="id" title="var">list</span></span>:
+We put off discussing syntax so far, but there are both
+    similarities and a few differences between inductive properties
+    like <span class="inlinecode"><span class="id" title="var">ev</span></span> and inductive types like <span class="inlinecode"><span class="id" title="var">nat</span></span> or <span class="inlinecode"><span class="id" title="var">list</span></span>:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Inductive</span> <span class="id" title="var">list</span> (<span class="id" title="var">X</span>:<span class="id" title="keyword">Type</span>) : <span class="id" title="keyword">Type</span> :=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">nil</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">cons</span> (<span class="id" title="var">x</span> : <span class="id" title="var">X</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> <span class="id" title="var">X</span>).
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">nil</span>                       : <span class="id" title="var">list</span> <span class="id" title="var">X</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">cons</span> (<span class="id" title="var">x</span> : <span class="id" title="var">X</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> <span class="id" title="var">X</span>) : <span class="id" title="var">list</span> <span class="id" title="var">X</span>.
 </span> 
 <div class="paragraph"> </div>
 
- We can think of the inductive definition of <span class="inlinecode"><span class="id" title="var">ev</span></span> this as defining
-    a Coq property <span class="inlinecode"><span class="id" title="var">ev</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">nat</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>, together with "evidence
-    constructors" <span class="inlinecode"><span class="id" title="var">ev_0</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">ev</span></span> <span class="inlinecode">0</span> and
-    <span class="inlinecode"><span class="id" title="var">ev_SS</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode"><span class="id" title="var">n</span>,</span> <span class="inlinecode"><span class="id" title="var">ev</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">ev</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n</span>))</span>. In fact, Coq also
-    accepts the following equivalent definition of <span class="inlinecode"><span class="id" title="var">ev</span></span>: 
+<a id="lab281"></a><h3 class="section"> </h3>
+
+<div class="paragraph"> </div>
+
+ We can think of the inductive definition of <span class="inlinecode"><span class="id" title="var">ev</span></span> as defining
+    a Coq property <span class="inlinecode"><span class="id" title="var">ev</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">nat</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>, together with two "evidence
+    constructors": 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Check</span> <span class="id" title="var">ev_0</span> : <span class="id" title="var">ev</span> 0.<br/>
+<span class="id" title="keyword">Check</span> <span class="id" title="var">ev_SS</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>), <span class="id" title="var">ev</span> <span class="id" title="var">n</span> → <span class="id" title="var">ev</span> (<span class="id" title="var">S</span> (<span class="id" title="var">S</span> <span class="id" title="var">n</span>)).<br/>
+</div>
+
+<div class="doc">
+In fact, Coq also accepts the following equivalent definition of <span class="inlinecode"><span class="id" title="var">ev</span></span>: 
 </div>
 <div class="code">
 
@@ -694,7 +681,7 @@ We put off discussing syntax so far, but there are a few
 </div>
 
 <div class="doc">
-<a id="lab283"></a><h3 class="section"> </h3>
+<a id="lab282"></a><h3 class="section"> </h3>
  These evidence constructors can be thought of as "primitive
     evidence of evenness", and they can be used just like proven
     theorems.  In particular, we can use Coq's <span class="inlinecode"><span class="id" title="tactic">apply</span></span> tactic with the
@@ -730,7 +717,7 @@ In this way, we can also prove theorems that have hypotheses
 </div>
 
 <div class="doc">
-<a id="lab284"></a><h2 class="section">Constructing Evidence for Permutations</h2>
+<a id="lab283"></a><h2 class="section">Constructing Evidence for Permutations</h2>
 
 <div class="paragraph"> </div>
 
@@ -750,7 +737,7 @@ In this way, we can also prove theorems that have hypotheses
 </div>
 
 <div class="doc">
-<a id="lab285"></a><h3 class="section"> </h3>
+<a id="lab284"></a><h3 class="section"> </h3>
  And again we can equivalently use function application syntax to
     combine several constructors. Note that the Coq type checker can
     infer not only types, but also nats and lists. 
@@ -770,13 +757,13 @@ In this way, we can also prove theorems that have hypotheses
 <div class="doc">
 So the informal derivation trees we drew above are not too far
     from what's happening formally.  Formally we're using the evidence
-    constructors to build <i>evidence trees</i>, similar to the trees we
+    constructors to build <i>evidence trees</i>, similar to the finite trees we
     built using the constructors of data types such as nat, list,
     binary trees storing numbers, etc. 
 </div>
 
 <div class="doc">
-<a id="lab286"></a><h1 class="section">Using Evidence in Proofs</h1>
+<a id="lab285"></a><h1 class="section">Using Evidence in Proofs</h1>
 
 <div class="paragraph"> </div>
 
@@ -793,7 +780,7 @@ So the informal derivation trees we drew above are not too far
     are <span class="inlinecode"><span class="id" title="var">ev</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab287"></a><h3 class="section"> </h3>
+<a id="lab286"></a><h3 class="section"> </h3>
  In other words, if someone gives us evidence <span class="inlinecode"><span class="id" title="var">E</span></span> for the proposition
     <span class="inlinecode"><span class="id" title="var">ev</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span>, then we know that <span class="inlinecode"><span class="id" title="var">E</span></span> must be one of two things:
 
@@ -814,7 +801,7 @@ So the informal derivation trees we drew above are not too far
     analysis</i> and even <i>induction</i> on evidence of evenness... 
 <div class="paragraph"> </div>
 
-<a id="lab288"></a><h2 class="section">Destructing and Inverting Evidence</h2>
+<a id="lab287"></a><h2 class="section">Destructing and Inverting Evidence</h2>
 
 <div class="paragraph"> </div>
 
@@ -841,7 +828,7 @@ Facts like this are often called "inversion lemmas" because they
     the different ways it could have been derived. 
 <div class="paragraph"> </div>
 
-<a id="lab289"></a><h3 class="section"> </h3>
+<a id="lab288"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -860,7 +847,7 @@ Facts like this are often called "inversion lemmas" because they
 </div>
 
 <div class="doc">
-<a id="lab290"></a><h3 class="section"> </h3>
+<a id="lab289"></a><h3 class="section"> </h3>
  Coq provides a handy tactic called <span class="inlinecode"><span class="id" title="tactic">inversion</span></span> that does
     the work of our inversion lemma and more besides. 
 </div>
@@ -876,7 +863,7 @@ Facts like this are often called "inversion lemmas" because they
 </div>
 
 <div class="doc">
-<a id="lab291"></a><h3 class="section"> </h3>
+<a id="lab290"></a><h3 class="section"> </h3>
  We can use <span class="inlinecode"><span class="id" title="tactic">inversion</span></span> to re-prove some theorems from
     <span class="inlinecode"><span class="id" title="var">Tactics.v</span></span>.
 
@@ -897,7 +884,7 @@ Facts like this are often called "inversion lemmas" because they
 </div>
 
 <div class="doc">
-<a id="lab292"></a><h3 class="section"> </h3>
+<a id="lab291"></a><h3 class="section"> </h3>
  The tactic <span class="inlinecode"><span class="id" title="tactic">inversion</span></span> actually works on any <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">P</span></span> where
     <span class="inlinecode"><span class="id" title="var">P</span></span> is defined <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span>ly:
 
@@ -923,7 +910,7 @@ Facts like this are often called "inversion lemmas" because they
 
 <div class="paragraph"> </div>
 
-<a id="lab293"></a><h3 class="section"> </h3>
+<a id="lab292"></a><h3 class="section"> </h3>
 
 <div class="paragraph"> </div>
 
@@ -939,7 +926,7 @@ Facts like this are often called "inversion lemmas" because they
 </div>
 
 <div class="doc">
-<a id="lab294"></a><h2 class="section">Induction on Evidence</h2>
+<a id="lab293"></a><h2 class="section">Induction on Evidence</h2>
 
 <div class="paragraph"> </div>
 
@@ -967,7 +954,7 @@ Facts like this are often called "inversion lemmas" because they
 </div>
 
 <div class="doc">
-<a id="lab295"></a><h1 class="section">Case Study: Regular Expressions</h1>
+<a id="lab294"></a><h1 class="section">Case Study: Regular Expressions</h1>
 
 <div class="paragraph"> </div>
 
@@ -992,7 +979,7 @@ Note that this definition is <i>polymorphic</i>: Regular
     elements from <span class="inlinecode"><span class="id" title="var">T</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab296"></a><h3 class="section"> </h3>
+<a id="lab295"></a><h3 class="section"> </h3>
  We connect regular expressions and strings by defining when a
     regular expression <i>matches</i> some string.
     Informally this looks as follows:
@@ -1047,7 +1034,7 @@ Note that this definition is <i>polymorphic</i>: Regular
 
 <div class="paragraph"> </div>
 
-<a id="lab297"></a><h3 class="section"> </h3>
+<a id="lab296"></a><h3 class="section"> </h3>
  We can easily translate this intuition into a set of rules,
     where we write <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode">=~</span> <span class="inlinecode"><span class="id" title="var">re</span></span> to :
 <center><table class="infrule">
@@ -1148,7 +1135,7 @@ Note that this definition is <i>polymorphic</i>: Regular
 </table></center>
 <div class="paragraph"> </div>
 
-<a id="lab298"></a><h3 class="section"> </h3>
+<a id="lab297"></a><h3 class="section"> </h3>
  This directly corresponds to the following <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span> definition.
     We use the notation <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode">=~</span> <span class="inlinecode"><span class="id" title="var">re</span></span> in  place of <span class="inlinecode"><span class="id" title="var">exp_match</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">re</span></span>.
     (By "reserving" the notation before defining the <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span>,
@@ -1217,7 +1204,7 @@ Notice that this clause in our informal definition...
 </div> <!-- /quiz -->
 
 <div class="doc">
-<a id="lab299"></a><h3 class="section"> </h3>
+<a id="lab298"></a><h3 class="section"> </h3>
 
 </div>
 <div class="code">
@@ -1251,7 +1238,7 @@ Notice that this clause in our informal definition...
 </div>
 
 <div class="doc">
-<a id="lab300"></a><h3 class="section"> </h3>
+<a id="lab299"></a><h3 class="section"> </h3>
  Something more interesting: 
 </div>
 <div class="code">
@@ -1264,7 +1251,7 @@ Notice that this clause in our informal definition...
 </div>
 
 <div class="doc">
-<a id="lab301"></a><h4 class="section">Exercise: 2 stars, standard, optional (EmptyStr_not_needed)</h4>
+<a id="lab300"></a><h4 class="section">Exercise: 2 stars, standard, optional (EmptyStr_not_needed)</h4>
 
 </div>
 <div class="code">
@@ -1281,7 +1268,7 @@ Notice that this clause in our informal definition...
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab302"></a><h3 class="section"> </h3>
+<a id="lab301"></a><h3 class="section"> </h3>
  Naturally, proofs about <span class="inlinecode"><span class="id" title="var">exp_match</span></span> often require
     induction (on evidence!). 
 <div class="paragraph"> </div>
@@ -1310,7 +1297,7 @@ Notice that this clause in our informal definition...
 </div>
 
 <div class="doc">
-<a id="lab303"></a><h3 class="section"> </h3>
+<a id="lab302"></a><h3 class="section"> </h3>
 
 </div>
 <div class="code">
@@ -1330,7 +1317,7 @@ Notice that this clause in our informal definition...
 </div>
 
 <div class="doc">
-<a id="lab304"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="var">remember</span></span> Tactic</h2>
+<a id="lab303"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="var">remember</span></span> Tactic</h2>
 
 <div class="paragraph"> </div>
 
@@ -1369,7 +1356,7 @@ Here is a naive first attempt at setting up the
 </div>
 
 <div class="doc">
-<a id="lab305"></a><h3 class="section"> </h3>
+<a id="lab304"></a><h3 class="section"> </h3>
  We can get through the first case... 
 </div>
 <div class="code">
@@ -1393,7 +1380,7 @@ Here is a naive first attempt at setting up the
 </div>
 
 <div class="doc">
-<a id="lab306"></a><h3 class="section"> </h3>
+<a id="lab305"></a><h3 class="section"> </h3>
  The problem here is that <span class="inlinecode"><span class="id" title="tactic">induction</span></span> over a Prop hypothesis
     only works properly with hypotheses that are "completely
     general," i.e., ones in which all the arguments are variables,
@@ -1423,7 +1410,7 @@ This works, but it makes the statement of the lemma a bit ugly.
 </div>
 
 <div class="doc">
-<a id="lab307"></a><h3 class="section"> </h3>
+<a id="lab306"></a><h3 class="section"> </h3>
  The tactic <span class="inlinecode"><span class="id" title="var">remember</span></span> <span class="inlinecode"><span class="id" title="var">e</span></span> <span class="inlinecode"><span class="id" title="keyword">as</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">eqn</span>:<span class="id" title="var">Eq</span></span> causes Coq to (1) replace all
     occurrences of the expression <span class="inlinecode"><span class="id" title="var">e</span></span> by the variable <span class="inlinecode"><span class="id" title="var">x</span></span>, and (2) add
     an equation <span class="inlinecode"><span class="id" title="var">Eq</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">e</span></span> to the context.  Here's how we can use it
@@ -1452,7 +1439,7 @@ We now have <span class="inlinecode"><span class="id" title="var">Eq</span></spa
 </div>
 
 <div class="doc">
-<a id="lab308"></a><h3 class="section"> </h3>
+<a id="lab307"></a><h3 class="section"> </h3>
  The <span class="inlinecode"><span class="id" title="var">Eq</span></span> is contradictory in most cases, allowing us to
     conclude immediately. 
 </div>
@@ -1491,7 +1478,7 @@ Note that the induction hypothesis <span class="inlinecode"><span class="id" tit
 </div>
 
 <div class="doc">
-<a id="lab309"></a><h3 class="section"> </h3>
+<a id="lab308"></a><h3 class="section"> </h3>
  The remainder of this section in the full version of the chapter
     develops an extended exercise on regular expressions, leading up
     to a proof of the well-known "pumping lemma."
@@ -1505,7 +1492,7 @@ Note that the induction hypothesis <span class="inlinecode"><span class="id" tit
 </div>
 
 <div class="doc">
-<a id="lab310"></a><h1 class="section">Case Study: Improving Reflection</h1>
+<a id="lab309"></a><h1 class="section">Case Study: Improving Reflection</h1>
 
 <div class="paragraph"> </div>
 
@@ -1551,7 +1538,7 @@ The first subcase (where <span class="inlinecode"><span class="id" title="var">n
     time. 
 <div class="paragraph"> </div>
 
-<a id="lab311"></a><h3 class="section"> </h3>
+<a id="lab310"></a><h3 class="section"> </h3>
  We can streamline this sort of reasoning by defining an inductive
     proposition that yields a better case-analysis principle for <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=?</span>
     <span class="inlinecode"><span class="id" title="var">m</span></span>.  Instead of generating the assumption <span class="inlinecode">(<span class="id" title="var">n</span></span> <span class="inlinecode">=?</span> <span class="inlinecode"><span class="id" title="var">m</span>)</span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">true</span></span>, which
@@ -1598,7 +1585,7 @@ Notice that the only way to produce evidence for <span class="inlinecode"><span 
 (The right-to-left implication is left as an exercise.) 
 <div class="paragraph"> </div>
 
-<a id="lab312"></a><h3 class="section"> </h3>
+<a id="lab311"></a><h3 class="section"> </h3>
  We can think of <span class="inlinecode"><span class="id" title="var">reflect</span></span> as a variant of the usual "if and only
     if" connective; the advantage of <span class="inlinecode"><span class="id" title="var">reflect</span></span> is that, by destructing
     a hypothesis or lemma of the form <span class="inlinecode"><span class="id" title="var">reflect</span></span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span>, we can perform
@@ -1607,7 +1594,7 @@ Notice that the only way to produce evidence for <span class="inlinecode"><span 
     subgoal and <span class="inlinecode">¬</span> <span class="inlinecode"><span class="id" title="var">P</span></span> in the second). 
 <div class="paragraph"> </div>
 
-<a id="lab313"></a><h3 class="section"> </h3>
+<a id="lab312"></a><h3 class="section"> </h3>
  Let's use <span class="inlinecode"><span class="id" title="var">reflect</span></span> to produce a smoother proof of
     <span class="inlinecode"><span class="id" title="var">filter_not_empty_In</span></span>.
 
@@ -1624,7 +1611,7 @@ Notice that the only way to produce evidence for <span class="inlinecode"><span 
 </div>
 
 <div class="doc">
-<a id="lab314"></a><h3 class="section"> </h3>
+<a id="lab313"></a><h3 class="section"> </h3>
  The proof of <span class="inlinecode"><span class="id" title="var">filter_not_empty_In</span></span> now goes as follows.  Notice
     how the calls to <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> and <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> in the earlier proof of
     this theorem are combined here into a single call to
@@ -1649,7 +1636,7 @@ Notice that the only way to produce evidence for <span class="inlinecode"><span 
 </div>
 
 <div class="doc">
-<a id="lab315"></a><h3 class="section"> </h3>
+<a id="lab314"></a><h3 class="section"> </h3>
  This small example shows reflection giving us a small gain in
     convenience; in larger developments, using <span class="inlinecode"><span class="id" title="var">reflect</span></span> consistently
     can often lead to noticeably shorter and clearer proof scripts.
