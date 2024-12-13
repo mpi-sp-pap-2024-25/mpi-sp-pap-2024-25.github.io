@@ -502,7 +502,7 @@ The tactic <span class="inlinecode"><span class="id" title="tactic">repeat</span
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Theorem</span> <a id="ev100" class="idref" href="#ev100"><span class="id" title="lemma">ev100</span></a>: <a class="idref" href="IndProp.html#ev"><span class="id" title="inductive">ev</span></a> 100.<br/>
+<span class="id" title="keyword">Theorem</span> <a id="ev100" class="idref" href="#ev100"><span class="id" title="lemma">ev100</span></a>: <a class="idref" href="IndProp1.html#ev"><span class="id" title="inductive">ev</span></a> 100.<br/>
 <span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
 </div>
@@ -898,10 +898,10 @@ Actually there are two forms of this tactic.
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Check</span> <a class="idref" href="IndProp.html#ev_0"><span class="id" title="constructor">ev_0</span></a> : <a class="idref" href="IndProp.html#ev"><span class="id" title="inductive">ev</span></a> 0.<br/>
-<span class="id" title="keyword">Check</span> <a class="idref" href="IndProp.html#ev_SS"><span class="id" title="constructor">ev_SS</span></a> : <span class="id" title="keyword">∀</span> <a id="n:60" class="idref" href="#n:60"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>, <a class="idref" href="IndProp.html#ev"><span class="id" title="inductive">ev</span></a> <a class="idref" href="AltAuto.html#n:60"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="IndProp.html#ev"><span class="id" title="inductive">ev</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="AltAuto.html#n:60"><span class="id" title="variable">n</span></a>)).<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="IndProp1.html#ev_0"><span class="id" title="constructor">ev_0</span></a> : <a class="idref" href="IndProp1.html#ev"><span class="id" title="inductive">ev</span></a> 0.<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="IndProp1.html#ev_SS"><span class="id" title="constructor">ev_SS</span></a> : <span class="id" title="keyword">∀</span> <a id="n:60" class="idref" href="#n:60"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>, <a class="idref" href="IndProp1.html#ev"><span class="id" title="inductive">ev</span></a> <a class="idref" href="AltAuto.html#n:60"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="IndProp1.html#ev"><span class="id" title="inductive">ev</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="AltAuto.html#n:60"><span class="id" title="variable">n</span></a>)).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="constructor_example" class="idref" href="#constructor_example"><span class="id" title="definition">constructor_example</span></a>: <span class="id" title="keyword">∀</span> (<a id="n:61" class="idref" href="#n:61"><span class="id" title="binder">n</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="IndProp.html#ev"><span class="id" title="inductive">ev</span></a> (<a class="idref" href="AltAuto.html#n:61"><span class="id" title="variable">n</span></a> <a class="idref" href="Basics.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="AltAuto.html#n:61"><span class="id" title="variable">n</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="IndProp1.html#ev"><span class="id" title="inductive">ev</span></a> (<a class="idref" href="AltAuto.html#n:61"><span class="id" title="variable">n</span></a> <a class="idref" href="Basics.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="AltAuto.html#n:61"><span class="id" title="variable">n</span></a>).<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">n</span>; <span class="id" title="tactic">simpl</span>.<br/>
 &nbsp;&nbsp;- <span class="id" title="tactic">constructor</span>. <span class="comment">(*&nbsp;applies&nbsp;ev_0&nbsp;*)</span><br/>
@@ -2417,7 +2417,7 @@ Each of the three theorems below, and many others involving these
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2024-12-11&nbsp;18:01&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2024-12-13&nbsp;14:02&nbsp;*)</span><br/>
 </div>
 </div>
 
