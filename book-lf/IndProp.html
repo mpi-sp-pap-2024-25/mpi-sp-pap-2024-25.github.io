@@ -260,17 +260,15 @@ Note that this definition is <i>polymorphic</i>: Regular
     expressions in <span class="inlinecode"><span class="id" title="var">reg_exp</span></span> <span class="inlinecode"><span class="id" title="var">T</span></span> describe strings with characters drawn
     from <span class="inlinecode"><span class="id" title="var">T</span></span> -- which in this exercise we represent as <i>lists</i> with
     elements from <span class="inlinecode"><span class="id" title="var">T</span></span>. 
-</div>
-<div class="code">
+<div class="paragraph"> </div>
 
-<span class="comment">(*(Technical&nbsp;aside:&nbsp;We&nbsp;depart&nbsp;slightly&nbsp;from&nbsp;standard&nbsp;practice&nbsp;in<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;we&nbsp;do&nbsp;not&nbsp;require&nbsp;the&nbsp;type&nbsp;<span class="inlinecode"><span class="id" title="var">T</span></span>&nbsp;to&nbsp;be&nbsp;finite.&nbsp;&nbsp;This&nbsp;results&nbsp;in<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;somewhat&nbsp;different&nbsp;theory&nbsp;of&nbsp;regular&nbsp;expressions,&nbsp;but&nbsp;the<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;difference&nbsp;is&nbsp;not&nbsp;significant&nbsp;for&nbsp;present&nbsp;purposes.)&nbsp;*)</span><br/>
-</div>
+ (Technical aside: We depart slightly from standard practice in
+    that we do not require the type <span class="inlinecode"><span class="id" title="var">T</span></span> to be finite.  This results in
+    a somewhat different theory of regular expressions, but the
+    difference is not significant for present purposes.) 
+<div class="paragraph"> </div>
 
-<div class="doc">
-We connect regular expressions and strings by defining when a
+ We connect regular expressions and strings by defining when a
     regular expression <i>matches</i> some string.
     Informally this looks as follows:
 
@@ -325,7 +323,7 @@ We connect regular expressions and strings by defining when a
 <div class="paragraph"> </div>
 
  We can easily translate this intuition into a set of rules,
-    where we write <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode">=~</span> <span class="inlinecode"><span class="id" title="var">re</span></span> to :
+    where we write <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode">=~</span> <span class="inlinecode"><span class="id" title="var">re</span></span> to say that <span class="inlinecode"><span class="id" title="var">s</span></span> matches <span class="inlinecode"><span class="id" title="var">re</span></span>:
 <center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">&nbsp;&nbsp;</td>
@@ -618,15 +616,20 @@ The next lemma is stated in terms of the <span class="inlinecode"><span class="i
 <div class="paragraph"> </div>
 
 <a id="lab268"></a><h4 class="section">Exercise: 2 stars, standard, optional (EmptyStr_not_needed)</h4>
-
+ It turns out that the <span class="inlinecode"><span class="id" title="var">EmptyStr</span></span> constructor is actually not
+   needed, since the regular expression matching the empty string can
+   also be defined from <span class="inlinecode"><span class="id" title="var">Star</span></span> and <span class="inlinecode"><span class="id" title="var">EmptySet</span></span>: 
 </div>
 <div class="code">
-<span class="comment">(*&nbsp;It&nbsp;turns&nbsp;out&nbsp;that&nbsp;the&nbsp;<span class="inlinecode"><span class="id" title="var">EmptyStr</span></span>&nbsp;constructor&nbsp;is&nbsp;actually&nbsp;not<br/>
-&nbsp;&nbsp;&nbsp;needed,&nbsp;since&nbsp;the&nbsp;regular&nbsp;expression&nbsp;matching&nbsp;the&nbsp;empty&nbsp;string&nbsp;can<br/>
-&nbsp;&nbsp;&nbsp;also&nbsp;be&nbsp;defined&nbsp;from&nbsp;<span class="inlinecode"><span class="id" title="var">Star</span></span>&nbsp;and&nbsp;<span class="inlinecode"><span class="id" title="var">EmptySet</span></span>:&nbsp;*)</span><br/>
-<span class="id" title="keyword">Definition</span> <a id="EmptyStr'" class="idref" href="#EmptyStr'"><span class="id" title="definition">EmptyStr'</span></a> {<a id="T:81" class="idref" href="#T:81"><span class="id" title="binder">T</span></a>:<span class="id" title="keyword">Type</span>} := @<a class="idref" href="IndProp.html#Star"><span class="id" title="constructor">Star</span></a> <a class="idref" href="IndProp.html#T:81"><span class="id" title="variable">T</span></a> (<a class="idref" href="IndProp.html#EmptySet"><span class="id" title="constructor">EmptySet</span></a>).<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;State&nbsp;and&nbsp;prove&nbsp;that&nbsp;this&nbsp;<span class="inlinecode"><span class="id" title="var">EmptyStr'</span></span>&nbsp;definition&nbsp;matches&nbsp;exactly<br/>
-&nbsp;&nbsp;&nbsp;the&nbsp;same&nbsp;strings&nbsp;as&nbsp;the&nbsp;<span class="inlinecode"><span class="id" title="var">EmptyStr</span></span>&nbsp;constructor.&nbsp;*)</span><br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Definition</span> <a id="EmptyStr'" class="idref" href="#EmptyStr'"><span class="id" title="definition">EmptyStr'</span></a> {<a id="T:81" class="idref" href="#T:81"><span class="id" title="binder">T</span></a>:<span class="id" title="keyword">Type</span>} := @<a class="idref" href="IndProp.html#Star"><span class="id" title="constructor">Star</span></a> <a class="idref" href="IndProp.html#T:81"><span class="id" title="variable">T</span></a> (<a class="idref" href="IndProp.html#EmptySet"><span class="id" title="constructor">EmptySet</span></a>).<br/>
+</div>
+
+<div class="doc">
+State and prove that this <span class="inlinecode"><span class="id" title="var">EmptyStr'</span></span> definition matches exactly
+   the same strings as the <span class="inlinecode"><span class="id" title="var">EmptyStr</span></span> constructor. 
+</div>
+<div class="code">
+
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 <font size=-2>&#9744;</font>
 </div>
@@ -1151,7 +1154,7 @@ You may want to copy your proof of weak_pumping below.
 
 
 <div class="doc">
-<a id="lab274"></a><h1 class="section">Case Study: Improving Reflection</h1>
+<a id="lab274"></a><h1 class="section">Case Study: Improving Reflection (optional, covered later in the course)</h1>
 
 <div class="paragraph"> </div>
 
@@ -1249,7 +1252,7 @@ The <span class="inlinecode"><span class="id" title="var">reflect</span></span> 
 Now you prove the right-to-left implication: 
 <div class="paragraph"> </div>
 
-<a id="lab275"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (reflect_iff)</h4>
+<a id="lab275"></a><h4 class="section">Exercise: 2 stars, standard, optional (reflect_iff)</h4>
 
 </div>
 <div class="code">
@@ -1316,7 +1319,7 @@ The proof of <span class="inlinecode"><span class="id" title="var">filter_not_em
 </div>
 
 <div class="doc">
-<a id="lab276"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (eqbP_practice)</h4>
+<a id="lab276"></a><h4 class="section">Exercise: 3 stars, standard, optional (eqbP_practice)</h4>
  Use <span class="inlinecode"><span class="id" title="var">eqbP</span></span> as above to prove the following: 
 </div>
 <div class="code">
@@ -2182,7 +2185,7 @@ A function <span class="inlinecode"><span class="id" title="var">m</span></span>
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2024-12-13&nbsp;16:19&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2024-12-18&nbsp;17:16&nbsp;*)</span><br/>
 </div>
 </div>
 

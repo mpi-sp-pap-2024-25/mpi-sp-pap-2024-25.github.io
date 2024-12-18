@@ -98,8 +98,8 @@ Next, we look at what happens when we repeatedly apply <span class="inlinecode">
 <div class="paragraph"> </div>
 
     Both of these sequences eventually reach <span class="inlinecode">1</span>.  The question posed
-    by Collatz was: Is the sequence starting from <i>any</i> natural number
-    guaranteed to reach <span class="inlinecode">1</span> eventually? 
+    by Collatz was: Is the sequence starting from <i>any</i> positive
+    natural number guaranteed to reach <span class="inlinecode">1</span> eventually? 
 <div class="paragraph"> </div>
 
  To formalize this question in Coq, we might try to define a
@@ -265,7 +265,8 @@ What we've done here is to use Coq's <span class="inlinecode"><span class="id" t
     stating three different ways in which it can hold: (1) Collatz
     holds for <span class="inlinecode">1</span>, (2) if Collatz holds for <span class="inlinecode"><span class="id" title="var">div2</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> and <span class="inlinecode"><span class="id" title="var">n</span></span> is even
     then Collatz holds for <span class="inlinecode"><span class="id" title="var">n</span></span>, and (3) if Collatz holds for <span class="inlinecode">(3</span> <span class="inlinecode">×</span> <span class="inlinecode"><span class="id" title="var">n</span>)</span>
-    <span class="inlinecode">+</span> <span class="inlinecode">1</span> and <span class="inlinecode"><span class="id" title="var">n</span></span> is even then Collatz holds for <span class="inlinecode"><span class="id" title="var">n</span></span>. 
+    <span class="inlinecode">+</span> <span class="inlinecode">1</span> and <span class="inlinecode"><span class="id" title="var">n</span></span> is even then Collatz holds for <span class="inlinecode"><span class="id" title="var">n</span></span>. This Coq definition
+    directly corresponds to the three rules we wrote informally above. 
 <div class="paragraph"> </div>
 
  For particular numbers, we can now prove that the Collatz sequence
@@ -348,7 +349,7 @@ If you succeed in proving this conjecture, you've got a bright
   <td class="infrule">le n (S m)</td>
   <td></td>
 </tr>
-</table></center> These rules say that there are two ways to show that one
+</table></center> These rules say that there are two ways to show that a
     number is less than or equal to another: either observe that they
     are the same number, or, if the second has the form <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">m</span></span>, give
     evidence that the first is less than or equal to <span class="inlinecode"><span class="id" title="var">m</span></span>. 
@@ -367,7 +368,7 @@ If you succeed in proving this conjecture, you've got a bright
 <div class="doc">
 This definition is a bit simpler and more elegant than the Boolean function
     <span class="inlinecode"><span class="id" title="var">leb</span></span> we defined in <a href="Basics.html"><span class="inlineref">Basics</span></a>. As usual, <span class="inlinecode"><span class="id" title="var">le</span></span> and <span class="inlinecode"><span class="id" title="var">leb</span></span> are
-    equivalent, and there is an exercise about that. 
+    equivalent, and there is an exercise about that later. 
 </div>
 <div class="code">
 
@@ -443,7 +444,7 @@ For example, suppose we define a "parent of" relation on a group
 
 <div class="doc">
 In this example, <span class="inlinecode"><span class="id" title="var">Sage</span></span> is a parent of both <span class="inlinecode"><span class="id" title="var">Cleo</span></span> and
-    <span class="inlinecode"><span class="id" title="var">Ridley</span></span> and <span class="inlinecode"><span class="id" title="var">Cleo</span></span> is a parent of <span class="inlinecode"><span class="id" title="var">Moss</span></span>. 
+    <span class="inlinecode"><span class="id" title="var">Ridley</span></span>; and <span class="inlinecode"><span class="id" title="var">Cleo</span></span> is a parent of <span class="inlinecode"><span class="id" title="var">Moss</span></span>. 
 <div class="paragraph"> </div>
 
  The <span class="inlinecode"><span class="id" title="var">parent_of</span></span> relation is not transitive, but we can define
@@ -478,7 +479,7 @@ Here is a derivation showing that Sage is an ancestor of Moss:
 
 <div class="doc">
 Computing the transitive closure can be undecidable even for
-    a relation R that is decidable (e.g., parent_of above), so in
+    a relation R that is decidable (e.g., the <span class="inlinecode"><span class="id" title="var">cms</span></span> relation below), so in
     general we can't expect to define transitive closure as a boolean
     function. Fortunately, Coq allows us to define transitive closure
     as an inductive relation.
@@ -664,21 +665,7 @@ This <span class="inlinecode"><span class="id" title="var">cms</span></span> rel
 </span>
 <div class="paragraph"> </div>
 
- In Coq <span class="inlinecode"><span class="id" title="var">Perm3</span></span> is given the following inductive definition: 
-</div>
-<div class="code">
-
-<span class="id" title="keyword">Inductive</span> <a id="Perm3" class="idref" href="#Perm3"><span class="id" title="definition, inductive"><span id="Perm3_ind" class="id"><span id="Perm3_sind" class="id">Perm3</span></span></span></a> {<a id="X:50" class="idref" href="#X:50"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>} : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="var">X</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="var">X</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
-&nbsp;&nbsp;| <a id="perm3_swap12" class="idref" href="#perm3_swap12"><span class="id" title="constructor">perm3_swap12</span></a> (<a id="a:53" class="idref" href="#a:53"><span class="id" title="binder">a</span></a> <a id="b:54" class="idref" href="#b:54"><span class="id" title="binder">b</span></a> <a id="c:55" class="idref" href="#c:55"><span class="id" title="binder">c</span></a> : <a class="idref" href="IndProp1.html#X:50"><span class="id" title="variable">X</span></a>) :<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="IndProp1.html#Perm3:51"><span class="id" title="inductive">Perm3</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a><a class="idref" href="IndProp1.html#a:53"><span class="id" title="variable">a</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="IndProp1.html#b:54"><span class="id" title="variable">b</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="IndProp1.html#c:55"><span class="id" title="variable">c</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a><a class="idref" href="IndProp1.html#b:54"><span class="id" title="variable">b</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="IndProp1.html#a:53"><span class="id" title="variable">a</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="IndProp1.html#c:55"><span class="id" title="variable">c</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a><br/>
-&nbsp;&nbsp;| <a id="perm3_swap23" class="idref" href="#perm3_swap23"><span class="id" title="constructor">perm3_swap23</span></a> (<a id="a:56" class="idref" href="#a:56"><span class="id" title="binder">a</span></a> <a id="b:57" class="idref" href="#b:57"><span class="id" title="binder">b</span></a> <a id="c:58" class="idref" href="#c:58"><span class="id" title="binder">c</span></a> : <a class="idref" href="IndProp1.html#X:50"><span class="id" title="variable">X</span></a>) :<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="IndProp1.html#Perm3:51"><span class="id" title="inductive">Perm3</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a><a class="idref" href="IndProp1.html#a:56"><span class="id" title="variable">a</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="IndProp1.html#b:57"><span class="id" title="variable">b</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="IndProp1.html#c:58"><span class="id" title="variable">c</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a><a class="idref" href="IndProp1.html#a:56"><span class="id" title="variable">a</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="IndProp1.html#c:58"><span class="id" title="variable">c</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="IndProp1.html#b:57"><span class="id" title="variable">b</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a><br/>
-&nbsp;&nbsp;| <a id="perm3_trans" class="idref" href="#perm3_trans"><span class="id" title="constructor">perm3_trans</span></a> (<a id="l<sub>1</sub>:59" class="idref" href="#l<sub>1</sub>:59"><span class="id" title="binder">l<sub>1</sub></span></a> <a id="l<sub>2</sub>:60" class="idref" href="#l<sub>2</sub>:60"><span class="id" title="binder">l<sub>2</sub></span></a> <a id="l<sub>3</sub>:61" class="idref" href="#l<sub>3</sub>:61"><span class="id" title="binder">l<sub>3</sub></span></a> : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="IndProp1.html#X:50"><span class="id" title="variable">X</span></a>) :<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="IndProp1.html#Perm3:51"><span class="id" title="inductive">Perm3</span></a> <a class="idref" href="IndProp1.html#l<sub>1</sub>:59"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="IndProp1.html#l<sub>2</sub>:60"><span class="id" title="variable">l<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="IndProp1.html#Perm3:51"><span class="id" title="inductive">Perm3</span></a> <a class="idref" href="IndProp1.html#l<sub>2</sub>:60"><span class="id" title="variable">l<sub>2</sub></span></a> <a class="idref" href="IndProp1.html#l<sub>3</sub>:61"><span class="id" title="variable">l<sub>3</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="IndProp1.html#Perm3:51"><span class="id" title="inductive">Perm3</span></a> <a class="idref" href="IndProp1.html#l<sub>1</sub>:59"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="IndProp1.html#l<sub>3</sub>:61"><span class="id" title="variable">l<sub>3</sub></span></a>.<br/>
-</div>
-
-<div class="doc">
-This definition says:
+ This definition says:
 <ul class="doclist">
 <li> If <span class="inlinecode"><span class="id" title="var">l<sub>2</sub></span></span> can be obtained from <span class="inlinecode"><span class="id" title="var">l<sub>1</sub></span></span> by swapping the first and
         second elements, then <span class="inlinecode"><span class="id" title="var">l<sub>2</sub></span></span> is a permutation of <span class="inlinecode"><span class="id" title="var">l<sub>1</sub></span></span>.
@@ -695,6 +682,20 @@ This definition says:
 
 <div class="paragraph"> </div>
 
+ In Coq <span class="inlinecode"><span class="id" title="var">Perm3</span></span> is given the following inductive definition: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Inductive</span> <a id="Perm3" class="idref" href="#Perm3"><span class="id" title="definition, inductive"><span id="Perm3_ind" class="id"><span id="Perm3_sind" class="id">Perm3</span></span></span></a> {<a id="X:50" class="idref" href="#X:50"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>} : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="var">X</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="var">X</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;| <a id="perm3_swap12" class="idref" href="#perm3_swap12"><span class="id" title="constructor">perm3_swap12</span></a> (<a id="a:53" class="idref" href="#a:53"><span class="id" title="binder">a</span></a> <a id="b:54" class="idref" href="#b:54"><span class="id" title="binder">b</span></a> <a id="c:55" class="idref" href="#c:55"><span class="id" title="binder">c</span></a> : <a class="idref" href="IndProp1.html#X:50"><span class="id" title="variable">X</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="IndProp1.html#Perm3:51"><span class="id" title="inductive">Perm3</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a><a class="idref" href="IndProp1.html#a:53"><span class="id" title="variable">a</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="IndProp1.html#b:54"><span class="id" title="variable">b</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="IndProp1.html#c:55"><span class="id" title="variable">c</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a><a class="idref" href="IndProp1.html#b:54"><span class="id" title="variable">b</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="IndProp1.html#a:53"><span class="id" title="variable">a</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="IndProp1.html#c:55"><span class="id" title="variable">c</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a><br/>
+&nbsp;&nbsp;| <a id="perm3_swap23" class="idref" href="#perm3_swap23"><span class="id" title="constructor">perm3_swap23</span></a> (<a id="a:56" class="idref" href="#a:56"><span class="id" title="binder">a</span></a> <a id="b:57" class="idref" href="#b:57"><span class="id" title="binder">b</span></a> <a id="c:58" class="idref" href="#c:58"><span class="id" title="binder">c</span></a> : <a class="idref" href="IndProp1.html#X:50"><span class="id" title="variable">X</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="IndProp1.html#Perm3:51"><span class="id" title="inductive">Perm3</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a><a class="idref" href="IndProp1.html#a:56"><span class="id" title="variable">a</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="IndProp1.html#b:57"><span class="id" title="variable">b</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="IndProp1.html#c:58"><span class="id" title="variable">c</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a><a class="idref" href="IndProp1.html#a:56"><span class="id" title="variable">a</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="IndProp1.html#c:58"><span class="id" title="variable">c</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="IndProp1.html#b:57"><span class="id" title="variable">b</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a><br/>
+&nbsp;&nbsp;| <a id="perm3_trans" class="idref" href="#perm3_trans"><span class="id" title="constructor">perm3_trans</span></a> (<a id="l<sub>1</sub>:59" class="idref" href="#l<sub>1</sub>:59"><span class="id" title="binder">l<sub>1</sub></span></a> <a id="l<sub>2</sub>:60" class="idref" href="#l<sub>2</sub>:60"><span class="id" title="binder">l<sub>2</sub></span></a> <a id="l<sub>3</sub>:61" class="idref" href="#l<sub>3</sub>:61"><span class="id" title="binder">l<sub>3</sub></span></a> : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="IndProp1.html#X:50"><span class="id" title="variable">X</span></a>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="IndProp1.html#Perm3:51"><span class="id" title="inductive">Perm3</span></a> <a class="idref" href="IndProp1.html#l<sub>1</sub>:59"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="IndProp1.html#l<sub>2</sub>:60"><span class="id" title="variable">l<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="IndProp1.html#Perm3:51"><span class="id" title="inductive">Perm3</span></a> <a class="idref" href="IndProp1.html#l<sub>2</sub>:60"><span class="id" title="variable">l<sub>2</sub></span></a> <a class="idref" href="IndProp1.html#l<sub>3</sub>:61"><span class="id" title="variable">l<sub>3</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="IndProp1.html#Perm3:51"><span class="id" title="inductive">Perm3</span></a> <a class="idref" href="IndProp1.html#l<sub>1</sub>:59"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="IndProp1.html#l<sub>3</sub>:61"><span class="id" title="variable">l<sub>3</sub></span></a>.<br/>
+</div>
+
+<div class="doc">
 <a id="lab238"></a><h4 class="section">Exercise: 1 star, standard, optional (perm)</h4>
  According to this definition, is <span class="inlinecode">[1;2;3]</span> a permutation of
     itself? 
@@ -716,7 +717,7 @@ This definition says:
 
 <div class="paragraph"> </div>
 
-      (1) <span class="inlinecode"><span class="id" title="var">even</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">true</span></span> (using the boolean recursive function <span class="inlinecode"><span class="id" title="var">even</span></span>), or
+      (1) <span class="inlinecode"><span class="id" title="var">even</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">true</span></span> (using the recursive boolean function <span class="inlinecode"><span class="id" title="var">even</span></span>), or
 
 <div class="paragraph"> </div>
 
@@ -767,10 +768,9 @@ This definition says:
 <div class="paragraph"> </div>
 
  (Defining evenness in this way may seem a bit confusing,
-    since we have already seen another perfectly good way of doing
-    it -- "<span class="inlinecode"><span class="id" title="var">n</span></span> is even if it is equal to the result of doubling some
-    number". It makes a convenient running example because it is
-    simple and compact, but we will soon return to more compelling
+    since we have already seen two perfectly good ways of doing
+    it. It makes a convenient running example because it is
+    simple and compact, but we will soon return to the more compelling
     examples above.) 
 <div class="paragraph"> </div>
 
@@ -856,9 +856,9 @@ In an <span class="inlinecode"><span class="id" title="keyword">Inductive</span>
     unnamed <span class="inlinecode"><span class="id" title="var">nat</span></span> argument is an index. 
 <div class="paragraph"> </div>
 
- We can think of the inductive definition of <span class="inlinecode"><span class="id" title="var">ev</span></span> as defining
-    a Coq property <span class="inlinecode"><span class="id" title="var">ev</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">nat</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>, together with two "evidence
-    constructors": 
+ Beyond this syntactic distinction, we can think of the inductive
+    definition of <span class="inlinecode"><span class="id" title="var">ev</span></span> as defining a Coq property <span class="inlinecode"><span class="id" title="var">ev</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">nat</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>,
+    together with two "evidence constructors": 
 </div>
 <div class="code">
 
@@ -969,7 +969,7 @@ So the informal derivation trees we drew above are not too far
     from what's happening formally.  Formally we're using the evidence
     constructors to build <i>evidence trees</i>, similar to the finite trees we
     built using the constructors of data types such as nat, list,
-    binary trees storing numbers, etc. 
+    binary trees, etc. 
 <div class="paragraph"> </div>
 
 <a id="lab242"></a><h4 class="section">Exercise: 1 star, standard (Perm3)</h4>
@@ -1318,7 +1318,7 @@ Now it is obvious that we are trying to prove another instance
 
  The behavior of <span class="inlinecode"><span class="id" title="tactic">induction</span></span> on evidence is the same as its
     behavior on data: It causes Coq to generate one subgoal for each
-    constructor that could have used to build that evidence, while
+    constructor that could have been used to build that evidence, while
     providing an induction hypothesis for each recursive occurrence of
     the property in question.
 
@@ -1782,7 +1782,7 @@ Hint: The next two can easily be proved without using <span class="inlinecode"><
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2024-12-13&nbsp;16:19&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2024-12-18&nbsp;15:23&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -99,8 +99,8 @@
 <div class="paragraph"> </div>
 
     Both of these sequences eventually reach <span class="inlinecode">1</span>.  The question posed
-    by Collatz was: Is the sequence starting from <i>any</i> natural number
-    guaranteed to reach <span class="inlinecode">1</span> eventually? 
+    by Collatz was: Is the sequence starting from <i>any</i> positive
+    natural number guaranteed to reach <span class="inlinecode">1</span> eventually? 
 <div class="paragraph"> </div>
 
 <a id="lab265"></a><h3 class="section"> </h3>
@@ -633,7 +633,7 @@ This Collatz step relation can be used in conjunction with the
 
 <div class="paragraph"> </div>
 
-      (1) <span class="inlinecode"><span class="id" title="var">even</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">true</span></span> (using the boolean recursive function <span class="inlinecode"><span class="id" title="var">even</span></span>), or
+      (1) <span class="inlinecode"><span class="id" title="var">even</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">true</span></span> (using the recursive boolean function <span class="inlinecode"><span class="id" title="var">even</span></span>), or
 
 <div class="paragraph"> </div>
 
@@ -718,9 +718,9 @@ We put off discussing syntax so far, but there are both
 
 <div class="paragraph"> </div>
 
- We can think of the inductive definition of <span class="inlinecode"><span class="id" title="var">ev</span></span> as defining
-    a Coq property <span class="inlinecode"><span class="id" title="var">ev</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">nat</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>, together with two "evidence
-    constructors": 
+ Beyond this syntactic distinction, we can think of the inductive
+    definition of <span class="inlinecode"><span class="id" title="var">ev</span></span> as defining a Coq property <span class="inlinecode"><span class="id" title="var">ev</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">nat</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>,
+    together with two "evidence constructors": 
 </div>
 <div class="code">
 
@@ -819,7 +819,7 @@ So the informal derivation trees we drew above are not too far
     from what's happening formally.  Formally we're using the evidence
     constructors to build <i>evidence trees</i>, similar to the finite trees we
     built using the constructors of data types such as nat, list,
-    binary trees storing numbers, etc. 
+    binary trees, etc. 
 </div>
 
 <div class="doc">
