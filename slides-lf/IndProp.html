@@ -62,63 +62,11 @@ Note that this definition is <i>polymorphic</i>: Regular
 <div class="paragraph"> </div>
 
 <a id="lab296"></a><h3 class="section"> </h3>
- We connect regular expressions and strings by defining when a
-    regular expression <i>matches</i> some string.
-    Informally this looks as follows:
-
+ We connect regular expressions and strings by defining when
+    a string <span class="inlinecode"><span class="id" title="var">s</span></span> <i>matches</i> a regular expression <span class="inlinecode"><span class="id" title="var">re</span></span>, which we write as
+    <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode">=~</span> <span class="inlinecode"><span class="id" title="var">re</span></span>: 
 <div class="paragraph"> </div>
 
-<ul class="doclist">
-<li> The expression <span class="inlinecode"><span class="id" title="var">EmptySet</span></span> does not match any string.
-
-<div class="paragraph"> </div>
-
-
-</li>
-<li> The expression <span class="inlinecode"><span class="id" title="var">EmptyStr</span></span> matches the empty string <span class="inlinecode">[]</span>.
-
-<div class="paragraph"> </div>
-
-
-</li>
-<li> The expression <span class="inlinecode"><span class="id" title="var">Char</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> matches the one-character string <span class="inlinecode">[<span class="id" title="var">x</span>]</span>.
-
-<div class="paragraph"> </div>
-
-
-</li>
-<li> If <span class="inlinecode"><span class="id" title="var">re<sub>1</sub></span></span> matches <span class="inlinecode"><span class="id" title="var">s<sub>1</sub></span></span>, and <span class="inlinecode"><span class="id" title="var">re<sub>2</sub></span></span> matches <span class="inlinecode"><span class="id" title="var">s<sub>2</sub></span></span>,
-        then <span class="inlinecode"><span class="id" title="var">App</span></span> <span class="inlinecode"><span class="id" title="var">re<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">re<sub>2</sub></span></span> matches <span class="inlinecode"><span class="id" title="var">s<sub>1</sub></span></span> <span class="inlinecode">++</span> <span class="inlinecode"><span class="id" title="var">s<sub>2</sub></span></span>.
-
-<div class="paragraph"> </div>
-
-
-</li>
-<li> If at least one of <span class="inlinecode"><span class="id" title="var">re<sub>1</sub></span></span> and <span class="inlinecode"><span class="id" title="var">re<sub>2</sub></span></span> matches <span class="inlinecode"><span class="id" title="var">s</span></span>,
-        then <span class="inlinecode"><span class="id" title="var">Union</span></span> <span class="inlinecode"><span class="id" title="var">re<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">re<sub>2</sub></span></span> matches <span class="inlinecode"><span class="id" title="var">s</span></span>.
-
-<div class="paragraph"> </div>
-
-
-</li>
-<li> Finally, if we can write some string <span class="inlinecode"><span class="id" title="var">s</span></span> as the concatenation
-        of a sequence of strings <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">s_1</span></span> <span class="inlinecode">++</span> <span class="inlinecode">...</span> <span class="inlinecode">++</span> <span class="inlinecode"><span class="id" title="var">s_k</span></span>, and the
-        expression <span class="inlinecode"><span class="id" title="var">re</span></span> matches each one of the strings <span class="inlinecode"><span class="id" title="var">s_i</span></span>,
-        then <span class="inlinecode"><span class="id" title="var">Star</span></span> <span class="inlinecode"><span class="id" title="var">re</span></span> matches <span class="inlinecode"><span class="id" title="var">s</span></span>.
-
-<div class="paragraph"> </div>
-
-        In particular, the sequence of strings may be empty, so
-        <span class="inlinecode"><span class="id" title="var">Star</span></span> <span class="inlinecode"><span class="id" title="var">re</span></span> always matches the empty string <span class="inlinecode">[]</span> no matter what
-        <span class="inlinecode"><span class="id" title="var">re</span></span> is. 
-</li>
-</ul>
-
-<div class="paragraph"> </div>
-
-<a id="lab297"></a><h3 class="section"> </h3>
- We can easily translate this intuition into a set of rules,
-    where we write <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode">=~</span> <span class="inlinecode"><span class="id" title="var">re</span></span> to say that <span class="inlinecode"><span class="id" title="var">s</span></span> matches <span class="inlinecode"><span class="id" title="var">re</span></span>:
 <center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">&nbsp;&nbsp;</td>
@@ -217,7 +165,7 @@ Note that this definition is <i>polymorphic</i>: Regular
 </table></center>
 <div class="paragraph"> </div>
 
-<a id="lab298"></a><h3 class="section"> </h3>
+<a id="lab297"></a><h3 class="section"> </h3>
  This directly corresponds to the following <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span> definition.
     We use the notation <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode">=~</span> <span class="inlinecode"><span class="id" title="var">re</span></span> in  place of <span class="inlinecode"><span class="id" title="var">exp_match</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">re</span></span>.
     (By "reserving" the notation before defining the <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span>,
@@ -245,48 +193,11 @@ Note that this definition is <i>polymorphic</i>: Regular
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">H<sub>2</sub></span> : <span class="id" title="var">s<sub>2</sub></span> =~ (<span class="id" title="var">Star</span> <span class="id" title="var">re</span>))<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: (<span class="id" title="var">s<sub>1</sub></span> ++ <span class="id" title="var">s<sub>2</sub></span>) =~ (<span class="id" title="var">Star</span> <span class="id" title="var">re</span>)<br/>
 <br/>
-&nbsp;&nbsp;<span class="id" title="keyword">where</span> &quot;s =~ re" := (<span class="id" title="var">exp_match</span> <span class="id" title="var">s</span> <span class="id" title="var">re</span>).<br/><hr class='doublespaceincode'/>
- <!-- /quiz -->
-</div><div class="quiz">
-
-
-<div class="doc">
-Notice that this clause in our informal definition...
-
-<div class="paragraph"> </div>
-
-<ul class="doclist">
-<li> "The expression <span class="inlinecode"><span class="id" title="var">EmptySet</span></span> does not match any string."
-
-</li>
-</ul>
-
-<div class="paragraph"> </div>
-
-    ... is not explicitly reflected in the above definition.  Do we
-    need to add something?
-
-<div class="paragraph"> </div>
-
-   (1) Yes, we should add a rule for this.
-
-<div class="paragraph"> </div>
-
-   (2) No, one of the other rules already covers this case.
-
-<div class="paragraph"> </div>
-
-   (3) No, the <i>lack</i> of a rule actually gives us the behavior we
-       want.
-
-<div class="paragraph"> </div>
-
-
+&nbsp;&nbsp;<span class="id" title="keyword">where</span> &quot;s =~ re" := (<span class="id" title="var">exp_match</span> <span class="id" title="var">s</span> <span class="id" title="var">re</span>).<br/>
 </div>
-</div> <!-- /quiz -->
 
 <div class="doc">
-<a id="lab299"></a><h3 class="section"> </h3>
+<a id="lab298"></a><h3 class="section"> </h3>
 
 </div>
 <div class="code">
@@ -320,7 +231,7 @@ Notice that this clause in our informal definition...
 </div>
 
 <div class="doc">
-<a id="lab300"></a><h3 class="section"> </h3>
+<a id="lab299"></a><h3 class="section"> </h3>
  Something more interesting: 
 </div>
 <div class="code">
@@ -333,13 +244,13 @@ Notice that this clause in our informal definition...
 </div>
 
 <div class="doc">
-<a id="lab301"></a><h3 class="section"> </h3>
+<a id="lab300"></a><h3 class="section"> </h3>
  Naturally, proofs about <span class="inlinecode"><span class="id" title="var">exp_match</span></span> often require
     induction (on evidence!). 
 <div class="paragraph"> </div>
 
  For example, suppose we want to prove the following intuitive
-    result: If a regular expression <span class="inlinecode"><span class="id" title="var">re</span></span> matches some string <span class="inlinecode"><span class="id" title="var">s</span></span>, then
+    result: If a string <span class="inlinecode"><span class="id" title="var">s</span></span> matches a regular expression <span class="inlinecode"><span class="id" title="var">re</span></span>, then
     all elements of <span class="inlinecode"><span class="id" title="var">s</span></span> must occur as character literals somewhere in
     <span class="inlinecode"><span class="id" title="var">re</span></span>.
 
@@ -362,7 +273,7 @@ Notice that this clause in our informal definition...
 </div>
 
 <div class="doc">
-<a id="lab302"></a><h3 class="section"> </h3>
+<a id="lab301"></a><h3 class="section"> </h3>
 
 </div>
 <div class="code">
@@ -382,7 +293,7 @@ Notice that this clause in our informal definition...
 </div>
 
 <div class="doc">
-<a id="lab303"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="var">remember</span></span> Tactic</h2>
+<a id="lab302"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="var">remember</span></span> Tactic</h2>
 
 <div class="paragraph"> </div>
 
@@ -421,7 +332,7 @@ Here is a naive first attempt at setting up the
 </div>
 
 <div class="doc">
-<a id="lab304"></a><h3 class="section"> </h3>
+<a id="lab303"></a><h3 class="section"> </h3>
  We can get through the first case... 
 </div>
 <div class="code">
@@ -445,7 +356,7 @@ Here is a naive first attempt at setting up the
 </div>
 
 <div class="doc">
-<a id="lab305"></a><h3 class="section"> </h3>
+<a id="lab304"></a><h3 class="section"> </h3>
  The problem here is that <span class="inlinecode"><span class="id" title="tactic">induction</span></span> over a Prop hypothesis
     only works properly with hypotheses that are "completely
     general," i.e., ones in which all the arguments are variables,
@@ -475,7 +386,7 @@ This works, but it makes the statement of the lemma a bit ugly.
 </div>
 
 <div class="doc">
-<a id="lab306"></a><h3 class="section"> </h3>
+<a id="lab305"></a><h3 class="section"> </h3>
  The tactic <span class="inlinecode"><span class="id" title="var">remember</span></span> <span class="inlinecode"><span class="id" title="var">e</span></span> <span class="inlinecode"><span class="id" title="keyword">as</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">eqn</span>:<span class="id" title="var">Eq</span></span> causes Coq to (1) replace all
     occurrences of the expression <span class="inlinecode"><span class="id" title="var">e</span></span> by the variable <span class="inlinecode"><span class="id" title="var">x</span></span>, and (2) add
     an equation <span class="inlinecode"><span class="id" title="var">Eq</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">e</span></span> to the context.  Here's how we can use it
@@ -504,7 +415,7 @@ We now have <span class="inlinecode"><span class="id" title="var">Eq</span></spa
 </div>
 
 <div class="doc">
-<a id="lab307"></a><h3 class="section"> </h3>
+<a id="lab306"></a><h3 class="section"> </h3>
  The <span class="inlinecode"><span class="id" title="var">Eq</span></span> is contradictory in most cases, allowing us to
     conclude immediately. 
 </div>
@@ -543,7 +454,7 @@ Note that the induction hypothesis <span class="inlinecode"><span class="id" tit
 </div>
 
 <div class="doc">
-<a id="lab308"></a><h3 class="section"> </h3>
+<a id="lab307"></a><h3 class="section"> </h3>
  The remainder of this section in the full version of the chapter
     develops an extended exercise on regular expressions, leading up
     to a proof of the well-known "pumping lemma."
@@ -557,7 +468,7 @@ Note that the induction hypothesis <span class="inlinecode"><span class="id" tit
 </div>
 
 <div class="doc">
-<a id="lab309"></a><h1 class="section">Case Study: Improving Reflection (optional, covered later in the course)</h1>
+<a id="lab308"></a><h1 class="section">Case Study: Improving Reflection (optional, covered later in the course)</h1>
 
 <div class="paragraph"> </div>
 
@@ -603,7 +514,7 @@ The first subcase (where <span class="inlinecode"><span class="id" title="var">n
     time. 
 <div class="paragraph"> </div>
 
-<a id="lab310"></a><h3 class="section"> </h3>
+<a id="lab309"></a><h3 class="section"> </h3>
  We can streamline this sort of reasoning by defining an inductive
     proposition that yields a better case-analysis principle for <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=?</span>
     <span class="inlinecode"><span class="id" title="var">m</span></span>.  Instead of generating the assumption <span class="inlinecode">(<span class="id" title="var">n</span></span> <span class="inlinecode">=?</span> <span class="inlinecode"><span class="id" title="var">m</span>)</span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">true</span></span>, which
@@ -650,7 +561,7 @@ Notice that the only way to produce evidence for <span class="inlinecode"><span 
 (The right-to-left implication is left as an exercise.) 
 <div class="paragraph"> </div>
 
-<a id="lab311"></a><h3 class="section"> </h3>
+<a id="lab310"></a><h3 class="section"> </h3>
  We can think of <span class="inlinecode"><span class="id" title="var">reflect</span></span> as a variant of the usual "if and only
     if" connective; the advantage of <span class="inlinecode"><span class="id" title="var">reflect</span></span> is that, by destructing
     a hypothesis or lemma of the form <span class="inlinecode"><span class="id" title="var">reflect</span></span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span>, we can perform
@@ -659,7 +570,7 @@ Notice that the only way to produce evidence for <span class="inlinecode"><span 
     subgoal and <span class="inlinecode">¬</span> <span class="inlinecode"><span class="id" title="var">P</span></span> in the second). 
 <div class="paragraph"> </div>
 
-<a id="lab312"></a><h3 class="section"> </h3>
+<a id="lab311"></a><h3 class="section"> </h3>
  Let's use <span class="inlinecode"><span class="id" title="var">reflect</span></span> to produce a smoother proof of
     <span class="inlinecode"><span class="id" title="var">filter_not_empty_In</span></span>.
 
@@ -676,7 +587,7 @@ Notice that the only way to produce evidence for <span class="inlinecode"><span 
 </div>
 
 <div class="doc">
-<a id="lab313"></a><h3 class="section"> </h3>
+<a id="lab312"></a><h3 class="section"> </h3>
  The proof of <span class="inlinecode"><span class="id" title="var">filter_not_empty_In</span></span> now goes as follows.  Notice
     how the calls to <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> and <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> in the earlier proof of
     this theorem are combined here into a single call to
@@ -701,7 +612,7 @@ Notice that the only way to produce evidence for <span class="inlinecode"><span 
 </div>
 
 <div class="doc">
-<a id="lab314"></a><h3 class="section"> </h3>
+<a id="lab313"></a><h3 class="section"> </h3>
  This small example shows reflection giving us a small gain in
     convenience; in larger developments, using <span class="inlinecode"><span class="id" title="var">reflect</span></span> consistently
     can often lead to noticeably shorter and clearer proof scripts.
