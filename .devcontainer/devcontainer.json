@@ -3,6 +3,7 @@
   "build": {
     "dockerfile": "minimal.Dockerfile"
   },
+  "workspaceFolder" : "/workspaces/mpi-sp-pap-2024-25.github.io/exercises",
   "customizations": {
     "vscode": {
       "extensions": ["maximedenes.vscoq"],
@@ -19,7 +20,7 @@
           "**/.*.cache": true
         },
         "coq.loadCoqProject": true,
-        "coq.coqProjectRoot": "exercises/.",
+        "coq.coqProjectRoot": ".",
         "[coq]": {
           "editor.tabSize": 2,
           "editor.insertSpaces": true
